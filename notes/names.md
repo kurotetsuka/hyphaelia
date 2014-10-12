@@ -1,5 +1,6 @@
 ## possible names for project
 
+mycelium based?
 microsporidia based?
 microspora based?
 spore (mushroom) based?
@@ -11,6 +12,9 @@ derusporidia ?
 trautospora
 ectospora
 megaspora
+
+### mycelium based
+mycelia
 
 ### descriptive
 distributed trustnet transmission protocol(s?)

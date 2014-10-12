@@ -1,8 +1,9 @@
-## components of the projects
+## components of the project
 
-dttp : client
-dttp-ui : client gui frontend ( gtk? qt? vala? )
+dttp : minimal client cli frontend
+fancy name : fancy client cli frontend
+dttp-ui : minimal client gui frontend ( gtk? qt? vala? )
 dttpd : hub daemon
-dttpctl : hub cli frontend
-dttpctl-ui : hub gui frontend
+dttpdctl : hub cli frontend
+dttpdctl-ui : hub gui frontend
 

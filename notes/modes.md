@@ -1,7 +1,7 @@
 # initial distribution
-process called polination
- - seeding = pushes to initial hubs
- - dispersion = hubs pushing to other hubs
+process called pollination
+ - seeding : pushing to initial hubs
+ - dispersion : hubs pushing to other hubs
 
 
 

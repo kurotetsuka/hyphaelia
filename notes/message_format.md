@@ -3,7 +3,6 @@
 ## examples
 
 ### unencrypted message
-
 #### broacast
 ```json
 {
@@ -16,10 +15,10 @@
 	salt: "",
 	signature: "",}
 
-### broadcast alternate design
+#### broadcast alternate design
 ```json
 {
-	dttp: "v0.0.1a",
+	dttpv: "v0.0.1a",
 	meta: "re:54fc89,", // reply to short hash of previous message
 	data: "hey guys, check this out: [cool site](www.cool-site.com)",
 	class: "markdown",
