@@ -1,0 +1,29 @@
+// mappings of dttp classes to mimetypes
+{
+	//markdown
+	"markdown":"text/markdown",
+
+	//plain text
+	"plain":"text/plain",
+
+	//unspecified binary data
+	"bin":null,
+
+	//json
+	"json":"application/json",
+
+	//png
+	"png":"",
+
+	//mp4
+	"mp4":"",
+
+	//
+	"":"",
+
+	//
+	"":"",
+
+	//
+	"":null,
+}
