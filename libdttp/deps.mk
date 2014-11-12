@@ -1,6 +1,6 @@
 #dependencies
 
-bin/dttp: \
+bin/dttpc: \
 	bin/libdttp.rlib
 
 bin/dttpd: \

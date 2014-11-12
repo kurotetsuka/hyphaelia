@@ -1,11 +1,14 @@
 #lists
 
 binaries = \
-	bin/dttp \
+	bin/dttpc \
 	bin/dttpd \
 
-libraries = \
-	bin/libdttp.rlib \
+libs = \
+	bin/libdttp.rlib
+
+dylibs = \
+	bin/libdttp.so
 
 ## i need to do this properly with $(find src -name *.rs)
 sources = \
