@@ -1,13 +1,12 @@
-# core message format
+# mote message format
 
 ## examples
 
 ### unencrypted message
-#### broacast
 ```json
 {
-	// dttp version 0.0.1 alpha
-	"dttpv": "0.0.1a",
+	// dttp version 0.0.1 plain
+	"dttpv": "0.0.1",
 
 	"meta": "awesome site bros",
 
@@ -16,7 +15,8 @@
 	"class": "markdown", //alternatively mimetype:"text/markdown"
 
 	//auth or author?
-	"auth": "kurotetsuka <kurotetsuka@gmail.com>::0x1234abcd",
+	// name (comment) <address> :: fingerprint
+	"auth": "kurotetsuka <kurotetsuka@gmail.com> :: 1234abcd",
 
 	//2014-09-23 20:30:46 in +0h time zone
 	// dt or datetime or date or time?
@@ -25,7 +25,7 @@
 	//64-bit (is that big enough?) uint
 	"salt": "a3f0",
 
-	//pgp signature of [ meta, data, auth, dt, salt]
+	//pgp signature of [ meta, data, dt, salt]
 	// with pgp id key
 	// key may or may not match known id key of user ( auth field )
 	"sig": "",}
@@ -34,7 +34,7 @@
 ```json
 {
 	"dttpv": "0.0.1a",
-	"meta": "re:54fc89a", // reply to short hash of previous message
+	"meta": "re:54fc89a", // reply to short hash of previous message's meta field
 	"data": "man, that's awesome lol.",
 	"class": "markdown",
 	"auth": "kurotetsuka <kurotetsuka@gmail.com>",
@@ -43,8 +43,12 @@
 	"sig": "",}
 
 ### partially encrypted message
+`gamma` represents the encryption teir
+
 ```json
 {
+	// dttp version 0.0.1 gamma
+	"dttpv": "0.0.1-g",
 	"meta": "",
 	"data": "1234aAwofiejfweifOIAIJFE832u92JFO", //b64 encoded byte-block
 	"class": "markdown",

@@ -1,13 +1,33 @@
 ## components of the project
 
+### spec stuff
+ - dttp-spec : distrubuted trustnet transmission protocols
+ - hyphaelia-spec : leveraging of dttp messages to create a message-thread protocol
+
+### library stuff
+ - libdttp : library for dealing with dttp things
+
 ### hub stuff
-dttpd : hub daemon
-dttpdctl : hub cli frontend
-dttpdctl-ui : hub gui frontend
+ - dttpd : hub daemon
+ - dttpdctl : hub cli frontend
+ - dttpdctl-ui : hub gui frontend
 
 ### user (client) stuff
-dttp : minimal client cli frontend
-hyphic : fancy client cli frontend
-hyphael : minimal client gui frontend ( gtk? qt? vala? )
-hyphaelia-web : web front-end
+ - dttpc : minimal client cli frontend
+ - dttp-shell : client shell frontend
+ - hyphic : fancy client cli frontend
+ - hyphaeta : minimal client gui frontend ( gtk? qt? vala? )
+ - hyphaelia-web : web front-end to a hub
+
+### user (client) stuff
+ - dttp-rest : rest api for accessing a hub
+
+### rfc stuff ( future work )
+ - dttp-rfcs : rfcs for the design of dttp
+ - hyphaelia-rfcs : rfcs for the architecture of hyphaelia
+
+### future ideas and stuff
+ - package manager that uses dttp instead of http
+	 - dependency information uses votes for the min/max version of a dependency
+ - 
 
