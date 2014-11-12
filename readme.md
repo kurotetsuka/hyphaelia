@@ -1,6 +1,6 @@
-## hyphaelia :: a decentralized trustable communication platform ##
+## hyphaelia :: a decentralized trustable message-thread platform ##
 
-By: [kurotetsuka](https://github.com/kurotetsuka)  
+By: [kurotetsuka](https://github.com/kurotetsuka)
 
 The various components of this work are released under different licenses.
 
@@ -9,4 +9,3 @@ All theoretical components are released under the MIT license. This includes the
 All library components are released under the GNU LGPLv3 license. This includes the rust dttp library implementation, contained in the [libdttp](https://github.com/kurotetsuka/libdttp) repository. See [legal/gnu-lgpl-v3.0.md](legal/gnu-lgpl-v3.0.md) for details.
 
 All application components are released under the GNU GPLv3 license. This includes the dttp client-only program, contained in the [dttpc](https://github.com/kurotetsuka/dttpc) repository, the dttp hub daemon implementation, contained in the [dttpd](https://github.com/kurotetsuka/dttpd) repository, the rust rest-dttp adapter, contained in the [rest-dttp-adapter](https://github.com/kurotetsuka/dttp-rest-adapter) repository, and the hyphaelia web front-end, contained in the [hyphaelia-web](https://github.com/kurotetsuka/hyphaelia-web) repository. See [legal/gnu-gpl-3.0.md](legal/gnu-gpl-3.0.md) for details.
-
