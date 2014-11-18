@@ -19,6 +19,14 @@ pub struct Auth {
 	pub email: Option<String>,
 	pub id: Option<[u8, ..4]>,
 }
+impl Auth {
+	pub fn new() -> Auth {
+		Auth{
+			user: None,
+			comment: None,
+			email: None,
+			id: None}}
+}
 
 pub struct Datetime {
 	pub year: u64,
