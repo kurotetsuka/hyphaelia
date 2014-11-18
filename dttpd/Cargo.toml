@@ -1,0 +1,8 @@
+[package]
+name = "dttpd"
+version = "0.0.1"
+authors = ["kurotetsuka <kurotetsuka@gmail.com>"]
+
+[dependencies.dttp]
+version = "^0.0.1"
+git = "https://github.com/kurotetsuka/libdttp.git"
