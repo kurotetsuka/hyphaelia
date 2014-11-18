@@ -17,7 +17,7 @@ pub struct Auth {
 	pub user: Option<String>,
 	pub comment: Option<String>,
 	pub email: Option<String>,
-	pub id: [u8, ..4],
+	pub id: Option<[u8, ..4]>,
 }
 
 pub struct Datetime {
