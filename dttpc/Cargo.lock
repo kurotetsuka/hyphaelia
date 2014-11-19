@@ -1,0 +1,12 @@
+[root]
+name = "dttpc"
+version = "0.0.1"
+dependencies = [
+ "dttp 0.0.1 (git+https://github.com/kurotetsuka/libdttp.git)",
+]
+
+[[package]]
+name = "dttp"
+version = "0.0.1"
+source = "git+https://github.com/kurotetsuka/libdttp.git#f90d81382d9e39598311ae515fbbcb109f82816c"
+
