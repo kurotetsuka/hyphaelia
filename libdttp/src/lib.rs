@@ -1,10 +1,16 @@
 #![crate_name="dttp"]
 #![crate_type="lib"]
 
-//modules
+// rustc feature enables
+#![feature(globs)]
+
+// library imports
+extern crate serialize;
+
+// modules
 pub mod hub;
 pub mod mote;
 
-//tests
+// tests
 #[test]
 fn it_works(){}
