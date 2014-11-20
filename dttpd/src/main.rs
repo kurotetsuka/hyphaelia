@@ -1,13 +1,17 @@
 #![crate_name="dttpd"]
 #![crate_type="bin"]
 
-//local imports
+// library imports
 extern crate dttp;
 
-//local uses
-//use dttp::mote::Auth;
+// local uses
 use dttp::hub::Hub;
 
+// entry function
 fn main(){
+	println!("test \
+		test \
+		test");
+
 	let hub = Hub::new();
 	hub.say_hi()}

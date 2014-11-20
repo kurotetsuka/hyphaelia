@@ -11,4 +11,11 @@ build:
 	cargo build
 
 test:
-	echo asdf
+	cargo run
+
+install: check-build
+
+
+#checks
+
+check-build:
