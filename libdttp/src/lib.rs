@@ -2,6 +2,7 @@
 #![crate_type="lib"]
 
 //modules
+pub mod hub;
 pub mod mote;
 
 //tests
