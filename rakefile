@@ -1,0 +1,40 @@
+# general tasks
+task :default => [ :build ]
+task :freshen => [ :clean, :build]
+
+# clean
+task :clean => [
+	:clean_libdttp, :clean_dttpc, :clean_dttpd]
+
+task :clean_libdttp do
+	%x[ cd libdttp && cargo clean ]
+end
+task :clean_dttpc do
+	%x[ cd dttpc && cargo clean ]
+end
+task :clean_dttpd do
+	%x[ cd dttpd && cargo clean ]
+end
+
+# build
+task :build => [
+	:build_libdttp, :build_dttpc, :build_dttpd]
+
+task :build_libdttp do
+	%x[ cd libdttp && cargo build ]
+end
+task :build_dttpc do
+	%x[ cd dttpc && cargo build ]
+end
+task :build_dttpd do
+	%x[ cd dttpd && cargo build ]
+end
+
+# deployment/testing
+#task :test => [ :gen, :deploy]
+#task :undeploy do
+#
+#end
+#task :deploy do
+#
+#end
