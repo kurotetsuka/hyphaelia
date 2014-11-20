@@ -5,8 +5,9 @@
 extern crate dttp;
 
 //local uses
-use dttp::mote::Auth;
+//use dttp::mote::Auth;
+use dttp::hub::Hub;
 
 fn main(){
-	let auth = Auth::new();
-	println!("dttp daemon says hi :)");}
+	let hub = Hub::new();
+	hub.say_hi()}

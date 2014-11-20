@@ -9,3 +9,6 @@ clean:
 #commands
 build:
 	cargo build
+
+test:
+	echo asdf
