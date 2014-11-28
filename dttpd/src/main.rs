@@ -5,8 +5,8 @@
 extern crate dttp;
 
 // local uses
-use dttp::mote::Mote;
-use dttp::hub::Hub;
+use dttp::Mote;
+use dttp::Hub;
 
 // entry function
 fn main(){
