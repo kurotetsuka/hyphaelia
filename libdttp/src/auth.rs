@@ -11,12 +11,20 @@ pub struct Auth {
 	pub id: Option<u32>,
 }
 impl Auth {
-	pub fn new() -> Auth {
+	pub fn null() -> Auth {
+		Auth {
+			user: None,
+			comment: None,
+			email: None,
+			id: None,}}
+	pub fn new_test() -> Auth {
 		Auth {
 			user: Some( "kurotetsuka".to_string()),
 			comment: None,
 			email: Some( "kurotetsuka@gmail.com".to_string()),
 			id: Some( 0x0a1a20c0)}}
+	pub fn from_str( _: &str) -> Auth {
+		Auth::null()}
 }
 impl fmt::Show for Auth {
 	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {

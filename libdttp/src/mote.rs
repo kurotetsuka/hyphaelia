@@ -6,6 +6,7 @@ use serialize::base64::*;
 
 // local uses
 use auth::*;
+use dt::*;
 
 /// class that defines the types of data carried by a mote
 pub enum Class {
@@ -35,27 +36,9 @@ impl fmt::Show for Class {
 	}
 }
 
-/// class that defines release date of the mote
-pub struct Datetime {
-	pub year: u16,
-	pub day: u16,
-	pub milli: u32,
-}
-impl Datetime {
-	pub fn new( year: u16, day: u16, milli: u32) -> Datetime {
-		Datetime {
-			year: year,
-			day: day,
-			milli: milli}}
-}
-impl fmt::Show for Datetime {
-	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
-		write!( formatter, "{:03x}.{:03x}.{:07x}",
-			self.year, self.day, self.milli)}
-}
-
 /// a unit of signed communication
 pub struct Mote {
+	// a string describing the data
 	pub meta: String,
 	// the type of data
 	pub class: Class,
@@ -71,11 +54,20 @@ pub struct Mote {
 	pub data: Vec<u8>,
 }
 impl Mote {
+	pub fn new() -> Mote {
+		Mote {
+			meta: String::new(),
+			class: Raw,
+			auth: Auth::null(),
+			datetime: Datetime::null(),
+			salt: 0x00000000,
+			sig: 0x0000000000000000,
+			data: Vec::new()}}
 	pub fn new_test() -> Mote {
 		Mote {
 			meta: "test test :)".to_string(),
 			class: Markdown,
-			auth: Auth::new(),
+			auth: Auth::new_test(),
 			datetime: Datetime::new( 1964, 256, 43200_000),
 			salt: 0x0ab1cf28,
 			sig: 0x0000000000000000,
