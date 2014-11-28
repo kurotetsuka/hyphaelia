@@ -1,6 +1,7 @@
 //library uses
 
 //local uses
+use auth::*;
 use mote::*;
 
 pub struct Hub {

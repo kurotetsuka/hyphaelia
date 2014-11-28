@@ -8,6 +8,7 @@
 extern crate serialize;
 
 // modules
+pub mod auth;
 pub mod hub;
 pub mod mote;
 
