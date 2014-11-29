@@ -1,0 +1,36 @@
+# general tasks
+task :default => [ :gen ]
+task :freshen => [ :clean, :gen]
+task :clean do
+	%x[ rm -rf gen/*]
+end
+task :test => [ :gen, :deploy]
+
+# generation
+task :gen => [ :gen_dirs, :gen_images, :gen_libs, :gen_html]
+task :gen_dirs do
+	%x[ mkdir -p gen/css gen/img gen/include gen/lib gen/js]
+end
+task :gen_images do
+	%x[ tool/gen_icon.sh]
+	%x[ cp res/* gen/img/]
+end
+task :gen_libs do
+	%x[ mkdir -p gen/lib/ink]
+	%x[ cp -r lib/ink-3.1.1/css lib/ink-3.1.1/fonts lib/ink-3.1.1/js gen/lib/ink/]
+	%x[ cp lib/jquery-1.11.1.min.js gen/lib/]
+end
+task :gen_html do
+	%x[ cp -r src/* gen]
+end
+
+# deployment
+task :undeploy do
+	%x[ sudo rm -rf /srv/http/*]
+end
+task :deploy do
+	%x[ sudo rm -rf /srv/http/*]
+	%x[ sudo mkdir -p /srv/http/]
+	%x[ sudo cp -r gen/* /srv/http/]
+	%x[ sudo chmod og+rx -R /srv/http/]
+end

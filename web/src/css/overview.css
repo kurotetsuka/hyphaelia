@@ -1,0 +1,60 @@
+html, body {
+	height: 100%;
+	background: #ededed;}
+
+header h1 small {
+	color: #4c4c4c;}
+header h1 small:before {
+	content: "|";
+	margin: 0 0.5em;
+	font-size: 1.6em;}
+#ectocat_icon {
+	width: 2.0em;
+	vertical-align: middle;}
+#search-button {
+	min-width: 5em;}
+
+/* search form stuff */
+@media all and (min-width: 960px) and (max-width: 1120px) {
+	.tagline {
+		display: none;}
+}
+@media all and (min-width: 0px) and (max-width: 720px) {
+	.tagline {
+		display: none;}
+}
+
+article header{
+	padding: 0;
+	overflow: hidden;}
+
+article footer {
+	background: none;}
+
+article {
+	padding-bottom: 2em;
+	border-bottom: 1px solid #ccc;}
+
+.date {
+	float: right;}
+
+summary {
+	font-weight: 700;
+	line-height: 1.5;}
+
+.wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -120px;
+	overflow: auto;}
+
+.push, footer {
+	height: 120px;
+	margin-top: 0;}
+
+footer {
+	background: #ccc;
+	border: 0;}
+footer * {
+	line-height: inherit;}

@@ -1,0 +1,30 @@
+html, body {
+	height: 100%;
+	background: #ededed;}
+
+header h1 small:before  {
+	content: "|";
+	margin: 0 0.5em;
+	font-size: 1.6em;}
+
+#hyph_icon {
+	width: 8em;}
+#search-button {
+	min-width: 5em;}
+
+.wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -120px;
+	overflow: auto;}
+
+.push, footer {
+	height: 120px;
+	margin-top: 0;}
+
+footer {
+	background: #ccc;
+	border: 0;}
+footer * {
+	line-height: inherit;}
