@@ -1,3 +1,6 @@
+require 'dotenv'
+require_relative 'src/rest_api'
+
 # general tasks
 task :default => [ :gen ]
 task :freshen => [ :clean, :gen]
@@ -7,7 +10,9 @@ end
 task :test => [ :gen, :deploy]
 
 # generation
-task :gen => [ :gen_dirs, :gen_images, :gen_libs, :gen_html]
+task :gen => [ :gen_dirs, :gen_images, :gen_libs, :gen_html] do
+	%x[ chmod og+rx -R gen/]
+end
 task :gen_dirs do
 	%x[ mkdir -p gen/css gen/img gen/include gen/lib gen/js]
 end
@@ -21,16 +26,29 @@ task :gen_libs do
 	%x[ cp lib/jquery-1.11.1.min.js gen/lib/]
 end
 task :gen_html do
-	%x[ cp -r src/* gen]
+	%x[ cp -r html/* gen]
 end
 
 # deployment
-task :undeploy do
-	%x[ sudo rm -rf /srv/http/*]
+task :load_env do
+	env = Dotenv::Environment.new( "config/dev.env")
+	env.load
+	env.apply!
 end
-task :deploy do
-	%x[ sudo rm -rf /srv/http/*]
-	%x[ sudo mkdir -p /srv/http/]
-	%x[ sudo cp -r gen/* /srv/http/]
-	%x[ sudo chmod og+rx -R /srv/http/]
+task :undeploy => [ :load_env] do
+	%x[ rm -rf #{ENV['HYPH_install_dir']}*]
+end
+task :deploy => [ :load_env] do
+	%x[ rm -rf #{ENV['HYPH_install_dir']}*]
+	#%x[ mkdir -p #{ENV['HYPH_install_dir']}]
+	%x[ cp -r gen/* #{ENV['HYPH_install_dir']}]
+end
+
+# rest api stuff
+task :launch_api do
+	Hyph::RestApi.set_dbcreds(
+		ENV['HYPH_db_user'],
+		ENV['HYPH_db_pass'])
+	Hyph::RestApi.db_test
+	Hyph::RestApi.run!
 end
