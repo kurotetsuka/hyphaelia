@@ -3,3 +3,5 @@
 name = "dttp"
 version = "0.0.1"
 authors = ["kurotetsuka <kurotetsuka@gmail.com>"]
+
+[dependencies]

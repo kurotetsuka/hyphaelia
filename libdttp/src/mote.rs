@@ -3,6 +3,7 @@ use std::fmt;
 
 use serialize::base64;
 use serialize::base64::*;
+use serialize::json;
 
 // local uses
 use auth::*;
@@ -48,21 +49,21 @@ pub struct Mote {
 	pub datetime: Datetime,
 	// pregen'd salt
 	pub salt: u64,
-	// attached signature
-	pub sig: u64,
 	// the data field
 	pub data: Vec<u8>,
+	// attached signature
+	pub sig: Vec<u8>,
 }
 impl Mote {
-	pub fn new() -> Mote {
+	pub fn null() -> Mote {
 		Mote {
 			meta: String::new(),
 			class: Raw,
 			auth: Auth::null(),
 			datetime: Datetime::null(),
 			salt: 0x00000000,
-			sig: 0x0000000000000000,
-			data: Vec::new()}}
+			data: Vec::new(),
+			sig: Vec::new(),}}
 	pub fn new_test() -> Mote {
 		Mote {
 			meta: "test test :)".to_string(),
@@ -70,9 +71,24 @@ impl Mote {
 			auth: Auth::new_test(),
 			datetime: Datetime::new( 1964, 256, 43200_000),
 			salt: 0x0ab1cf28,
-			sig: 0x0000000000000000,
-			data: "test test yo yo bro".as_bytes().to_vec()}}
+			data: "test test yo yo bro".as_bytes().to_vec(),
+			sig: vec!( 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00),}}
+
+	/*fn to_msg ( &self) -> MoteMsg {
+		let b64_config = base64::Config {
+			char_set: Standard,
+			pad: true,
+			line_length: None };
+		MoteMsg {
+			meta: self.meta.to_string(),
+			class: self.class.to_string(),
+			auth: self.auth.to_string(),
+			datetime: self.datetime.to_string(),
+			salt: self.salt.to_string(),
+			data: self.data.as_slice().to_base64( b64_config),
+			sig: self.sig.as_slice().to_base64( b64_config),}}*/
 }
+
 impl fmt::Show for Mote {
 	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
 		let b64_config = base64::Config {
@@ -80,32 +96,15 @@ impl fmt::Show for Mote {
 			pad: true,
 			line_length: None };
 		write!( formatter,
-			"{}, {}, {}, {}, {:08x}, {:08x}, {:s}",
+			"{}, {}, {}, {}, {:08x}, {:s}, {:s}",
 			self.meta, self.class, self.auth,
-			self.datetime, self.salt, self.sig,
-			self.data.as_slice().to_base64( b64_config))
-	}
+			self.datetime, self.salt,
+			self.data.as_slice().to_base64( b64_config),
+			self.sig.as_slice().to_base64( b64_config),)}
 }
 
-/// a mote, prepared for serialization
-#[deriving( Decodable, Encodable)]
-pub struct MoteMsg {
-	pub meta: String,
-	// the type of data
-	pub class: String,
-	// the party signing the mote
-	pub auth: String,
-	// the release date of the mote
-	pub datetime: String,
-	// pregen'd salt
-	pub salt: String,
-	// attached signature
-	pub sig: String,
-	// the data field
-	pub data: String,
+impl json::ToJson for Mote {
+	fn to_json( &self) -> json::Json {
+		
 }
-impl fmt::Show for MoteMsg {
-	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
-		write!( formatter, "")
-	}
-}
+
