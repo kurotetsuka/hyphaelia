@@ -1,5 +1,6 @@
 require 'dotenv'
 require_relative 'src/rest_api'
+require_relative 'src/web_app'
 
 # general tasks
 task :default => [ :gen ]
@@ -44,7 +45,12 @@ task :deploy => [ :load_env] do
 	%x[ cp -r gen/* #{ENV['HYPH_install_dir']}]
 end
 
+# launch webserver
+task :launch_app => :gen do
+	Hyph::WebApp.run!
+end
+
 # rest api stuff
-task :launch do
+task :launch_api do
 	Hyph::RestApi.run!
 end
