@@ -16,16 +16,23 @@ module Hyph
 			env.load
 			env.apply!
 			#set sinatra options
+			set :server, %w[thin mongrel webrick]
 			#set :bind, 'localhost'
 			set :bind, '0.0.0.0'
 			set :port, 8080
 			set :views, settings.root + '/../views'
+			set :public_dir, settings.root + '/../build'
 		end
 
-		# sinatra stuff
+		# main pages
 		get '/' do
-			@name = "jake"
+			@head = erb :head
 			erb :index
+		end
+
+		#error pages
+		not_found do
+			'This is nowhere to be found.'
 		end
 	end
 end
