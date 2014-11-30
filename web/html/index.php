@@ -75,42 +75,30 @@
 		registration proces.
 		</p>
 
-	<form class="ink-form vertical-space">
+	<form class="ink-form">
+    <div class="column-group horizontal-gutters">
 
-		<div class="column-group vertical-gutters">
-			<div class="all-33 tiny-order-1 small-order-1 medium-order-1 large-1 xlarge-order-1">
-			<div class="column">
-
-				<div class="control-group required">
-					<label for="name">Username</label>
-					<div class="control required all-100 small-100 tiny-100">
-						<input type="text" name="name" id="name" placeholder="This field is required">
-					</div>				
-
-					<label for="password">Password</label>
-					<div class="control required all-100 small-100 tiny-100">
-						<input type="text" name="password" id="password" placeholder="This field is required">
-					</div>				
-				</div>
-
-				<div class="control-group">
-					<label for="email">Email</label>
-					<div class="control">
-						<input type="text" name="email" id="email">
-					</div>
-
-					<label for="keyID">KeyID</label>
-					<div class="control">
-						<input type="text" name="keyID" id="keyID">
-					</div>
-				</div>
-
-				<div>
-					<button class="ink-button green">Register</button>
-				</div>
-			</div>
-		</div>
+    	<div class="control-group all-60 small-90 tiny-90">
+    		<label for="name">Username</label>
+      	<span><input type="text" name="name" id="name" placeholder="Enter a username..."></span>
+      	<br><label for="password">Password</label>
+      	<span><input type="text" name="password" id="name" placeholder="Enter a password..."></span>
+      	<br><label for="email">Email &nbsp; &nbsp; &nbsp; &nbsp; </label>
+      	<span><input type="text" name="email" id="name" placeholder="Enter a valid email..."></span>
+      	<br><br><label for="keyID">Key ID &nbsp; &nbsp; &nbsp; </label>
+      	<span><input type="text" name="keyID" id="name" placeholder="Optional"></span>
+      </div>
+    
+      <div class="control-group all-40 small-100 tiny-100">
+      	<label for="name">Already registered?</label>
+     		<div class="control">
+      		<span><input type="text" name="name" id="name" placeholder="Username"></span>
+      		<span><input type="text" name="password" id="password" placeholder="Password"></span>
+      	</div>
+     	
+    </div>
 	</form>
+</div>
 </div>
 
 
