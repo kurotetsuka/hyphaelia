@@ -1,4 +1,13 @@
 #!/bin/bash
 ## little script for getting the repository all set up
 
-gem install dotenv sinatra thin json
+pacman -S \
+	httpd \
+	mariadb \
+	ruby \
+
+gem install \
+	dotenv \
+	sinatra \
+	thin \
+	json \

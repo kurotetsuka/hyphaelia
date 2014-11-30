@@ -45,10 +45,6 @@ task :deploy => [ :load_env] do
 end
 
 # rest api stuff
-task :launch_api do
-	Hyph::RestApi.set_dbcreds(
-		ENV['HYPH_db_user'],
-		ENV['HYPH_db_pass'])
-	Hyph::RestApi.db_test
+task :launch do
 	Hyph::RestApi.run!
 end
