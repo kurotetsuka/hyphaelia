@@ -14,6 +14,7 @@ pub use dt::Datetime;
 pub use hub::Hub;
 pub use key::PublicKey;
 pub use key::SecretKey;
+pub use key::KeyPair;
 pub use mote::Mote;
 
 // modules

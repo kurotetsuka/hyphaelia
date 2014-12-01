@@ -37,6 +37,18 @@ impl Datetime {
 			year: ( now.tm_year + 1900).to_u16().unwrap(),
 			day: now.tm_yday.to_u16().unwrap(),
 			milli: millis,}}
+
+	pub fn to_bytes( &self) -> Vec<u8> {
+		let mut result = Vec::new();
+		result.push( ( self.year >> 8) as u8);
+		result.push( ( self.year >> 0) as u8);
+		result.push( ( self.day >> 8) as u8);
+		result.push( ( self.day >> 0) as u8);
+		result.push( ( self.milli >> 24) as u8);
+		result.push( ( self.milli >> 16) as u8);
+		result.push( ( self.milli >> 08) as u8);
+		result.push( ( self.milli >> 00) as u8);
+		return result;}
 }
 
 impl fmt::Show for Datetime {

@@ -1,5 +1,6 @@
 // library uses
 use std::fmt;
+use std::clone;
 
 // local uses
 
@@ -16,13 +17,24 @@ impl Auth {
 			user: None,
 			comment: None,
 			email: None,
-			id: None,}}
+			id: None,
+		}}
+	pub fn new(
+			user: Option<String>, comment: Option<String>,
+			email: Option<String>, id: Option<u32>) -> Auth {
+		Auth {
+			user: user,
+			comment: comment,
+			email: email,
+			id: id,
+		}}
 	pub fn new_test() -> Auth {
 		Auth {
 			user: Some( "kurotetsuka".to_string()),
 			comment: None,
 			email: Some( "kurotetsuka@gmail.com".to_string()),
-			id: Some( 0x0a1a20c0)}}
+			id: Some( 0x0a1a20c0),
+		}}
 	pub fn from_str( _: &str) -> Auth {
 		Auth::null()}
 }
@@ -94,4 +106,19 @@ impl fmt::Show for Auth {
 					id),
 			( None, None, None, None) =>
 				write!( formatter, ":null:"),}}
+}
+impl clone::Clone for Auth {
+	fn clone( &self) -> Auth {
+		Auth {
+			user: self.user.clone(),
+			comment: self.comment.clone(),
+			email: self.email.clone(),
+			id: self.id.clone(),
+		}}
+
+	fn clone_from( &mut self, source: &Auth){
+		self.user = source.user.clone();
+		self.comment = source.comment.clone();
+		self.email = source.email.clone();
+		self.id = source.id.clone();}
 }

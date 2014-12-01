@@ -1,5 +1,7 @@
 // library uses
 use std::fmt;
+use std::collections::TreeMap;
+use std::rand::Rng;
 
 use serialize::base64;
 use serialize::base64::*;
@@ -8,6 +10,7 @@ use serialize::json;
 // local uses
 use auth::*;
 use dt::*;
+use key::*;
 
 /// class that defines the types of data carried by a mote
 pub enum Class {
@@ -68,25 +71,30 @@ impl Mote {
 		Mote {
 			meta: "test test :)".to_string(),
 			class: Markdown,
-			auth: Auth::new_test(),
+			auth: Auth::null(),
 			datetime: Datetime::new( 1964, 256, 43200_000),
 			salt: 0x0ab1cf28,
 			data: "test test yo yo bro".as_bytes().to_vec(),
 			sig: vec!( 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00),}}
 
-	/*fn to_msg ( &self) -> MoteMsg {
-		let b64_config = base64::Config {
-			char_set: Standard,
-			pad: true,
-			line_length: None };
-		MoteMsg {
-			meta: self.meta.to_string(),
-			class: self.class.to_string(),
-			auth: self.auth.to_string(),
-			datetime: self.datetime.to_string(),
-			salt: self.salt.to_string(),
-			data: self.data.as_slice().to_base64( b64_config),
-			sig: self.sig.as_slice().to_base64( b64_config),}}*/
+	pub fn salt< R: Rng >( &mut self, rng: &mut R){
+		self.salt = rng.next_u64();}
+
+	pub fn sign< Key: SecretKey >( &mut self, auth: &Auth, key: &Key){
+		//generate plainbytes to sign
+		let mut plain : Vec<u8> = Vec::new();
+		//push meta bytes
+		plain.push_all( self.meta.as_slice().as_bytes());
+		//push datetime bytes
+		plain.push_all( self.datetime.to_bytes().as_slice());
+		//push data bytes
+		plain.push_all( self.data.as_slice());
+		//push salt
+		for &offset in [ 56, 48, 40, 32, 24, 16, 08, 00].iter() {
+			plain.push( ( self.salt >> offset) as u8);}
+		//set signature fields
+		self.auth = ( *auth).clone();
+		self.sig = key.sign( plain.as_slice());}
 }
 
 impl fmt::Show for Mote {
@@ -105,6 +113,21 @@ impl fmt::Show for Mote {
 
 impl json::ToJson for Mote {
 	fn to_json( &self) -> json::Json {
-		
+		let mut mote_map = TreeMap::new();
+		mote_map.insert(
+			"meta".to_string(), self.meta.to_string());
+		mote_map.insert(
+			"class".to_string(), self.class.to_string());
+		mote_map.insert(
+			"auth".to_string(), self.auth.to_string());
+		mote_map.insert(
+			"datetime".to_string(), self.datetime.to_string());
+		mote_map.insert(
+			"salt".to_string(), self.salt.to_string());
+		mote_map.insert(
+			"data".to_string(), self.data.to_string());
+		mote_map.insert(
+			"sig".to_string(), self.sig.to_string());
+		return mote_map.to_json();}
 }
 
