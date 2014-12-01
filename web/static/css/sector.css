@@ -1,0 +1,8 @@
+#sector-nav li {
+	width: 100%;
+	text-align: center;
+}
+#sector-nav li .fa {
+	width: 100%;
+	size: 20em;
+}

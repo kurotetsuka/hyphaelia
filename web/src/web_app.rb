@@ -22,7 +22,7 @@ module Hyph
 			set :bind, '0.0.0.0'
 			set :port, 8080
 			set :views, settings.root + '/../views'
-			set :public_dir, settings.root + '/../build'
+			set :public_dir, settings.root + '/../static'
 		end
 		configure :development do
 			register Sinatra::Reloader

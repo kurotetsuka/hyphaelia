@@ -6,30 +6,27 @@ require_relative 'src/web_app'
 task :default => [ :gen ]
 task :freshen => [ :clean, :gen ]
 task :clean do
-	%x[ rm -rf build/*]
+	%x[ rm -rf static/*]
 end
 task :test => [ :launch_app ]
 
 # generation
-task :gen => [ :gen_dirs, :gen_images, :gen_libs, :gen_html ] do
-	%x[ chmod og+rx -R build/]
+task :gen => [ :gen_dirs, :gen_images, :gen_libs ] do
+	%x[ chmod og+rx -R static/]
 end
 task :gen_dirs do
-	%x[ mkdir -p build/img build/lib]
+	%x[ mkdir -p static/img static/lib]
 end
 task :gen_images do
 	%x[ tool/gen_icon.sh]
-	%x[ cp res/* build/img/]
+	%x[ cp res/* static/img/]
 end
 task :gen_libs do
-	%x[ mkdir -p build/lib/ink]
+	%x[ mkdir -p static/lib/ink]
 	%x[ cp -r \
 		lib/ink-3.1.1/css lib/ink-3.1.1/fonts lib/ink-3.1.1/js \
-		build/lib/ink/]
-	%x[ cp lib/jquery-1.11.1.min.js build/lib/]
-end
-task :gen_html do
-	%x[ cp -r html/* build/]
+		static/lib/ink/]
+	%x[ cp lib/jquery-1.11.1.min.js static/lib/]
 end
 
 # deployment
@@ -44,7 +41,7 @@ end
 task :deploy => [ :load_env ] do
 	%x[ rm -rf #{ENV['HYPH_install_dir']}/*]
 	#%x[ mkdir -p #{ENV['HYPH_install_dir']}]
-	%x[ cp -r build/* #{ENV['HYPH_install_dir']}]
+	%x[ cp -r static/* #{ENV['HYPH_install_dir']}]
 end
 
 # launch webserver
