@@ -25,7 +25,7 @@ module Hyph
 		end
 
 		# sinatra stuff
-		get '/' do
+		get '/motes' do
 			content_type :json
 			response['Access-Control-Allow-Origin'] = '*'
 			asdf = {

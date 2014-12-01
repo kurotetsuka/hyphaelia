@@ -4,6 +4,7 @@
 require 'dotenv'
 require 'erubis'
 require 'sinatra'
+require "sinatra/reloader"
 
 # local imports
 
@@ -23,11 +24,23 @@ module Hyph
 			set :views, settings.root + '/../views'
 			set :public_dir, settings.root + '/../build'
 		end
+		configure :development do
+			register Sinatra::Reloader
+		end
 
 		# main pages
 		get '/' do
 			@head = erb :head
 			erb :index
+		end
+
+
+		# main pages
+		get '/s/:sector' do
+			@sector = params[:sector]
+			if @sector == "null"
+				erb :motes
+			end
 		end
 
 		#error pages

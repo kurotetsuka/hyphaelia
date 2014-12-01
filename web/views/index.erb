@@ -5,6 +5,7 @@
 	<link href="/css/index.css" rel="stylesheet">
 </head>
 <body>
+
 	<!-- page content start -->
 	<!--[if lte IE 9 ]>
 	<div class="ink-alert basic" role="alert">
@@ -16,42 +17,129 @@
 	</div>
 	<![endif]-->
 
-	<div class="ink-grid">
-		<div class="column-group push-center">
-			<div class="xlarge-60 large-70 medium-80 small-90 tiny-100">
+	<div class="ink-grid gutters">
+		<div class="column-group">
+			<div class="xlarge-70 large-70 medium-80 small-90 tiny-100 push-center gutters">
 				<!-- title -->
-				<div class="column">
-					<h1 class="title"><a href="/">Hyphaelia.io</a></h1>
-					<span class="tagline">
+				<div class="align-center">
+					<h1 id="title"><a href="/">Hyphaelia.io</a></h1>
+					<p id="tagline">
 						The Secure, Distributed Communication Platform
-					</span>
+					</p>
 				</div>
 				<!-- nav links -->
-				<div></div>
-				<!-- about section -->
 				<div class="column-group">
-					<h2><a href="/">About</a></h2>
-					<div class="xlarge-50 large-50 medium-50 small-50 tiny-50">
-						about paragraph 1
+					<nav class="ink-navigation ink-grid">
+						<ul class="pagination pills black">
+							<li><a href="/#about">About</a></li>
+							<li><a href="/#register">Register</a></li>
+							<li><a href="/#login">Login</a></li>
+						</ul>
+					</nav>
+				</div>
+				<!-- sector nav -->
+				<div class="column-group">
+					<nav class="ink-navigation ink-grid">
+						<ul class="pagination pills black">
+							<li><a href="#">About</a></li>
+							<li><a href="#">Register</a></li>
+							<li><a href="#">Browse</a></li>
+						</ul>
+					</nav>
+				</div>
+				<!-- about section -->
+				<a name="about"></a>
+				<h2 id="about">About</h2>
+				<div class="column-group">
+					<div class="all-50">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 					</div>
-					<div class="xlarge-50 large-50 medium-50 small-50 tiny-50">
-						about paragraph 2
+					<div class="all-50">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 					</div>
 				</div>
-				<!-- login/register -->
-				<div class="column-group">
-					<div class="xlarge-50 large-50 medium-50 small-50 tiny-50">
-						login
+				<!-- login / register -->
+				<div class="column-group gutters">
+					<div class="align-center">
+						<h3>Register / Login</h3>
 					</div>
-					<div class="xlarge-50 large-50 medium-50 small-50 tiny-50">
-						register
+					<div class="column-group push-center">
+						<div class="all-60">
+							To take full advantage of Hyphaelia's diverse intellectual community you must first <strong>register</strong>, or <strong>login</strong> if you have completed the registration process.
+						</div>
+					</div>
+					<div id="register-form" class="all-50">
+						<a name="register"></a>
+						<h4 id="register-header">Wanna join?</h4>
+						<!-- registration form -->
+						<form class="ink-form">
+							<div class="control-group">
+								<label for="register-username">Username</label> 
+								<div class="control">
+									<input name="username" id="register-username" type="text" placeholder="Enter a username">
+								</div>
+								<p class="tip">
+									Up to 32 alphanumeric characters ( plus '-' and '_' )
+								</p>
+							</div>
+							<div class="control-group">
+								<label for="register-email">Email</label> 
+								<div class="control">
+									<input name="email" id="register-email" type="text" placeholder="Enter a valid email">
+								</div>
+								<p class="tip">
+									Please enter an email ( optional ).
+								</p>
+							</div>
+							<div class="control-group">
+								<label for="register-password">Password</label> 
+								<div class="control">
+									<input name="password" id="register-password" type="text" placeholder="Enter a password">
+								</div>
+								<p class="tip">
+									Up to 32 alphanumeric characters ( plus '-' and '_' )
+								</p>
+							</div>
+							<div class="control-group">
+								<label for="register-passconfirm">Confirm Password</label> 
+								<div class="control">
+									<input name="passconfirm" id="register-passconfirm" type="text" placeholder="Confirm your password choice">
+								</div>
+								<p class="tip">
+									Up to 32 alphanumeric characters ( plus '-' and '_' )
+								</p>
+							</div>
+							<div class="control-group">
+								<label for="register-username">PGP Key ID</label> 
+								<div class="control">
+									<input name="username" id="register-username" type="text" placeholder="Enter your PGP key ID">
+								</div>
+								<p class="tip">
+									If you don't hava PGP key, don't worry, you can register one later.
+								</p>
+							</div>
+						</form>
+					</div>
+					<!-- login/register separator line -->
+					<div id="login-form" class="all-50">
+						<a name="login"></a>
+						<h4 id="login-header">Already in?</h4>
+						<!-- login form -->
+						<form class="ink-form">
+							<div class="control-group">
+								<label for="login-username">Username</label> 
+								<div class="control">
+									<input name="username" id="login-username" type="text" placeholder="Enter a username">
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- content stuff -->
 
 	<!-- page content end -->
+
 </body>
 </html>

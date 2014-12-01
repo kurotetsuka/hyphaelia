@@ -17,26 +17,26 @@
 	</div>
 	<![endif]-->
 <nav class="ink-navigation ink-grid ie7">
-        <ul class="menu horizontal black push-left medium-push-center small-push-center tiny-push-center">
-            <li class="hide-all show-tiny show-small show-medium"></li>
-            <li><a href="#">Welcome to Hyphaelia [username]</a></li>
-        </ul>
-        <ul class="menu horizontal black push-right hide-small hide-tiny hide-medium">
-            <li class="active">
-                <a href="#" class="fa fa-rocket"> Username</a>
-            </li>                
-            <li><span>
-                <a href="#"class="fa fa-envelope"> Inbox</a>
-              </span>
-            </li>
-            <li>
-                <a href="#" class="fa fa-cog"> Preferences</a>
-            </li>           
-            <li>
-                <a href="#">Login</a>
-            </li>                      
-        </ul>
-    </nav>
+		<ul class="menu horizontal black push-left medium-push-center small-push-center tiny-push-center">
+			<li class="hide-all show-tiny show-small show-medium"></li>
+			<li><a href="#">Welcome to Hyphaelia [username]</a></li>
+		</ul>
+		<ul class="menu horizontal black push-right hide-small hide-tiny hide-medium">
+			<li class="active">
+				<a href="#" class="fa fa-rocket"> Username</a>
+			</li>				
+			<li><span>
+				<a href="#"class="fa fa-envelope"> Inbox</a>
+			  </span>
+			</li>
+			<li>
+				<a href="#" class="fa fa-cog"> Preferences</a>
+			</li>		   
+			<li>
+				<a href="#">Login</a>
+			</li>					  
+		</ul>
+	</nav>
 	<div class="wrap">
 		<div class="ink-grid vertical-space">
 			<a href="/index.php">
@@ -46,12 +46,12 @@
 		</div>
 			<!-- content stuff -->
 <nav class="ink-navigation ink-grid">
-    <ul class="pagination pills black">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Register</a></li>
-        <li><a href="#">Browse</a></li>
-        <li><a href="#">About</a></li>
-    </ul>
+	<ul class="pagination pills black">
+		<li class="active"><a href="#">Home</a></li>
+		<li><a href="#">Register</a></li>
+		<li><a href="#">Browse</a></li>
+		<li><a href="#">About</a></li>
+	</ul>
 </nav>
 <div class="ink-grid vertical-space">
 	<h3 style="margin-bottom:5px;margin-top:30px;">What is <i>Hyphaelia</i></h3>
@@ -76,27 +76,27 @@
 		</p>
 
 	<form class="ink-form">
-    <div class="column-group horizontal-gutters">
+	<div class="column-group horizontal-gutters">
 
-    	<div class="control-group all-60 small-90 tiny-90">
-    		<label for="name">Username</label>
-      	<span><input type="text" name="name" id="name" placeholder="Enter a username..."></span>
-      	<br><label for="password">Password</label>
-      	<span><input type="text" name="password" id="name" placeholder="Enter a password..."></span>
-      	<br><label for="email">Email &nbsp; &nbsp; &nbsp; &nbsp; </label>
-      	<span><input type="text" name="email" id="name" placeholder="Enter a valid email..."></span>
-      	<br><br><label for="keyID">Key ID &nbsp; &nbsp; &nbsp; </label>
-      	<span><input type="text" name="keyID" id="name" placeholder="Optional"></span>
-      </div>
-    
-      <div class="control-group all-40 small-100 tiny-100">
-      	<label for="name">Already registered?</label>
-     		<div class="control">
-      		<span><input type="text" name="name" id="name" placeholder="Username"></span>
-      		<span><input type="text" name="password" id="password" placeholder="Password"></span>
-      	</div>
-     	
-    </div>
+		<div class="control-group all-60 small-90 tiny-90">
+			<label for="name">Username</label>
+	  	<span><input type="text" name="name" id="name" placeholder="Enter a username..."></span>
+	  	<br><label for="password">Password</label>
+	  	<span><input type="text" name="password" id="name" placeholder="Enter a password..."></span>
+	  	<br><label for="email">Email &nbsp; &nbsp; &nbsp; &nbsp; </label>
+	  	<span><input type="text" name="email" id="name" placeholder="Enter a valid email..."></span>
+	  	<br><br><label for="keyID">Key ID &nbsp; &nbsp; &nbsp; </label>
+	  	<span><input type="text" name="keyID" id="name" placeholder="Optional"></span>
+	  </div>
+	
+	  <div class="control-group all-40 small-100 tiny-100">
+	  	<label for="name">Already registered?</label>
+	 		<div class="control">
+	  		<span><input type="text" name="name" id="name" placeholder="Username"></span>
+	  		<span><input type="text" name="password" id="password" placeholder="Password"></span>
+	  	</div>
+	 	
+	</div>
 	</form>
 </div>
 </div>
