@@ -39,10 +39,10 @@ task :load_env do
 	env.apply!
 end
 task :undeploy => [ :load_env ] do
-	%x[ rm -rf #{ENV['HYPH_install_dir']}*]
+	%x[ rm -rf #{ENV['HYPH_install_dir']}/*]
 end
 task :deploy => [ :load_env ] do
-	%x[ rm -rf #{ENV['HYPH_install_dir']}*]
+	%x[ rm -rf #{ENV['HYPH_install_dir']}/*]
 	#%x[ mkdir -p #{ENV['HYPH_install_dir']}]
 	%x[ cp -r build/* #{ENV['HYPH_install_dir']}]
 end

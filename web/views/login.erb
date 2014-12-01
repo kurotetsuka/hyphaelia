@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<%= @head %>
+	<link href="/css/login.css" rel="stylesheet">
+</head>
+<body>
+
+	<!-- page content start -->
+	<!--[if lte IE 9 ]>
+	<div class="ink-alert basic" role="alert">
+		<button class="ink-dismiss">&times;</button>
+		<p>
+			<strong>Get a better browser, son.</strong>
+			( <a href="http://browsehappy.com/">upgrade to a modern browser</a> to improve your web experience, and make this page look half-decent. )
+		</p>
+	</div>
+	<![endif]-->
+
+	<div class="ink-grid">
+		<div class="space"></div>
+		<div class="column-group">
+			<!-- login section -->
+			<div id="login-form" class="all-50 medium-65 small-75 tiny-90 push-center">
+				<a name="login"></a>
+				<div class="align-center">
+					<h1 id="hyph-header">Welcome to <a href="/">Hyphaelia!</a></h1>
+					<h3 id="login-header">Already in?</h3>
+				</div>
+				<!-- login form -->
+				<form class="ink-form">
+					<div class="control-group">
+						<div class="control all-60 push-center">
+							<input name="username" id="login-username" type="text" placeholder="Username">
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="control all-60 push-center">
+							<input name="password" id="login-password" type="text" placeholder="Password">
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="control push-center all-40">
+							<button class="ink-button green all-100">Login</button>
+						</div>
+					</div>
+				</form>
+				<!-- login form end -->
+				<div class="space"></div>
+				<div class="align-center">
+					<h3 id="register-header">Wanna join us?</h3>
+					<a href="/#register">Register here</a>
+				</div>
+			</div>
+			<!-- login section end -->
+		</div>
+	</div>
+	<!-- page content end -->
+</body>
+</html>

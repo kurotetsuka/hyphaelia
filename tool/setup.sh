@@ -1,13 +1,14 @@
 #!/bin/bash
 ## little script for getting the repository all set up
 
-pacman -S \
-	httpd \
+sudo pacman -S \
 	mariadb \
 	ruby \
 
 gem install \
+	erubis \
 	dotenv \
-	sinatra \
-	thin \
 	json \
+	sinatra \
+	sinatra-contrib \
+	thin \

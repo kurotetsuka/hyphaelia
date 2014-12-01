@@ -18,11 +18,12 @@
 	<![endif]-->
 
 	<div class="ink-grid gutters">
+		<!-- nav section -->
 		<div class="column-group">
 			<div class="xlarge-70 large-70 medium-80 small-90 tiny-100 push-center gutters">
 				<!-- title -->
 				<div class="align-center">
-					<h1 id="title"><a href="/">Hyphaelia.io</a></h1>
+					<h1 id="title"><a href="/">Hyphaelia</a></h1>
 					<p id="tagline">
 						The Secure, Distributed Communication Platform
 					</p>
@@ -33,113 +34,105 @@
 						<ul class="pagination pills black">
 							<li><a href="/#about">About</a></li>
 							<li><a href="/#register">Register</a></li>
-							<li><a href="/#login">Login</a></li>
+							<li><a href="/login">Login</a></li>
+							<li><a href="/s/null">Browse</a></li>
 						</ul>
 					</nav>
 				</div>
-				<!-- sector nav -->
-				<div class="column-group">
-					<nav class="ink-navigation ink-grid">
-						<ul class="pagination pills black">
-							<li><a href="#">About</a></li>
-							<li><a href="#">Register</a></li>
-							<li><a href="#">Browse</a></li>
-						</ul>
-					</nav>
-				</div>
-				<!-- about section -->
+			</div>
+		</div>
+		<div class="space"></div>
+		<!-- about section -->
+		<div class="column-group">
+			<div class="xlarge-70 large-70 medium-80 small-90 tiny-100 push-center gutters">
 				<a name="about"></a>
-				<h2 id="about">About</h2>
-				<div class="column-group">
-					<div class="all-50">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</div>
-					<div class="all-50">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</div>
-				</div>
-				<!-- login / register -->
+				<h2 id="about-heading">What's this Hyphaelia thing?</h2>
 				<div class="column-group gutters">
-					<div class="align-center">
-						<h3>Register / Login</h3>
+					<div class="all-50">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 					</div>
-					<div class="column-group push-center">
-						<div class="all-60">
-							To take full advantage of Hyphaelia's diverse intellectual community you must first <strong>register</strong>, or <strong>login</strong> if you have completed the registration process.
-						</div>
-					</div>
-					<div id="register-form" class="all-50">
-						<a name="register"></a>
-						<h4 id="register-header">Wanna join?</h4>
-						<!-- registration form -->
-						<form class="ink-form">
-							<div class="control-group">
-								<label for="register-username">Username</label> 
-								<div class="control">
-									<input name="username" id="register-username" type="text" placeholder="Enter a username">
-								</div>
-								<p class="tip">
-									Up to 32 alphanumeric characters ( plus '-' and '_' )
-								</p>
-							</div>
-							<div class="control-group">
-								<label for="register-email">Email</label> 
-								<div class="control">
-									<input name="email" id="register-email" type="text" placeholder="Enter a valid email">
-								</div>
-								<p class="tip">
-									Please enter an email ( optional ).
-								</p>
-							</div>
-							<div class="control-group">
-								<label for="register-password">Password</label> 
-								<div class="control">
-									<input name="password" id="register-password" type="text" placeholder="Enter a password">
-								</div>
-								<p class="tip">
-									Up to 32 alphanumeric characters ( plus '-' and '_' )
-								</p>
-							</div>
-							<div class="control-group">
-								<label for="register-passconfirm">Confirm Password</label> 
-								<div class="control">
-									<input name="passconfirm" id="register-passconfirm" type="text" placeholder="Confirm your password choice">
-								</div>
-								<p class="tip">
-									Up to 32 alphanumeric characters ( plus '-' and '_' )
-								</p>
-							</div>
-							<div class="control-group">
-								<label for="register-username">PGP Key ID</label> 
-								<div class="control">
-									<input name="username" id="register-username" type="text" placeholder="Enter your PGP key ID">
-								</div>
-								<p class="tip">
-									If you don't hava PGP key, don't worry, you can register one later.
-								</p>
-							</div>
-						</form>
-					</div>
-					<!-- login/register separator line -->
-					<div id="login-form" class="all-50">
-						<a name="login"></a>
-						<h4 id="login-header">Already in?</h4>
-						<!-- login form -->
-						<form class="ink-form">
-							<div class="control-group">
-								<label for="login-username">Username</label> 
-								<div class="control">
-									<input name="username" id="login-username" type="text" placeholder="Enter a username">
-								</div>
-							</div>
-						</form>
+					<div class="all-50">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 					</div>
 				</div>
 			</div>
 		</div>
+		<!-- login / register sections -->
+		<div class="column-group">
+			<div class="xlarge-90 large-90 medium-95 small-100 tiny-100 push-center half-vertical-gutters horizontal-gutters">
+				<div class="column-group gutters">
+					<!-- login / register intro  -->
+					<div class="all-100 push-center">
+						<div class="align-center">
+							<h2>Register</h2>
+						</div>
+						<div class="column-group gutters">
+							<div class="all-65 small-75 tiny-85 push-center">
+								To take full advantage of Hyphaelia's diverse intellectual community you must first <strong><a href="/#register">register</a></strong>. If you've already completed the registration process, feel free to <strong><a href="/login">login</a></strong>.
+							</div>
+						</div>
+					</div>
+					<!-- register section -->
+					<div id="register-form" class="all-70 medium-80 small-85 tiny-90 push-center">
+						<a name="register"></a>
+						<h3 id="register-header">Wanna join us?</h3>
+						<!-- registration form -->
+						<form class="ink-form">
+							<div class="column-group gutters">
+								<!-- register username input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-username"><strong>Username</strong></label>
+									<div class="control">
+										<input name="username" id="register-username" type="text" placeholder="Enter a username">
+									</div>
+								</div>
+								<!-- register email input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-email"><strong>Email</strong></label>
+									<div class="control">
+										<input name="email" id="register-email" type="email" placeholder="Enter your email">
+									</div>
+								</div>
+								<!-- register password input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-password"><strong>Password</strong></label>
+									<div class="control">
+										<input name="password" id="register-password" type="password" placeholder="Enter a password">
+									</div>
+								</div>
+								<!-- register password confirm input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-passconfirm"><strong>Confirm Password</strong></label>
+									<div class="control">
+										<input name="passconfirm" id="register-passconfirm" type="password" placeholder="Confirm password">
+									</div>
+								</div>
+								<!-- register pgp key input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-username"><strong>PGP Key ID</strong></label>
+									<div class="control">
+										<input name="username" id="register-username" type="text" placeholder="Enter your PGP key ID">
+									</div>
+									<p class="tip">
+										If you don't hava PGP key, don't worry, you can register one later.
+									</p>
+								</div>
+								<!-- register submit button -->
+								<div class="control-group all-80 push-center push-middle">
+									<div class="control push-center all-40">
+										<button class="ink-button green all-100">Register</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- register form end -->
+					</div>
+					<!-- register section end -->
+				</div>
+			</div>
+		</div>
+		<!-- login / register sections end -->
 	</div>
-
 	<!-- page content end -->
-
 </body>
 </html>

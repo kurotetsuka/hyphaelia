@@ -34,18 +34,22 @@ module Hyph
 			erb :index
 		end
 
+		# main pages
+		get '/login' do
+			@head = erb :head
+			erb :login
+		end
 
 		# main pages
 		get '/s/:sector' do
+			@head = erb :head
 			@sector = params[:sector]
-			if @sector == "null"
-				erb :motes
-			end
+			erb :sector
 		end
 
 		#error pages
 		not_found do
-			'This is nowhere to be found.'
+			'This is an amazing 404 page!'
 		end
 	end
 end
