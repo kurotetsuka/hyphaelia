@@ -8,10 +8,12 @@
 extern crate serialize;
 extern crate time;
 
-//reexports
+// reexports
 pub use auth::Auth;
 pub use dt::Datetime;
 pub use hub::Hub;
+pub use hub::mode::Mode;
+pub use hub::remote::RemoteHub;
 pub use key::PublicKey;
 pub use key::SecretKey;
 pub use mote::Mote;
@@ -22,6 +24,7 @@ pub mod dt;
 pub mod hub;
 pub mod key;
 pub mod mote;
+pub mod protocol;
 
 // tests
 #[test]
