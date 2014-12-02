@@ -5,6 +5,7 @@ use time::now_utc;
 // local uses
 
 /// class that defines a date
+#[deriving( Hash)]
 pub struct Datetime {
 	pub year: u16,
 	pub day: u16,

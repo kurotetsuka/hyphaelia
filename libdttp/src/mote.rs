@@ -1,11 +1,9 @@
 // library uses
 use std::fmt;
-use std::collections::TreeMap;
 use std::rand::Rng;
 
 use serialize::base64;
 use serialize::base64::*;
-use serialize::json;
 
 // local uses
 use auth::*;
@@ -13,6 +11,7 @@ use dt::*;
 use key::*;
 
 /// class that defines the types of data carried by a mote
+#[deriving( Hash)]
 pub enum Class {
 	// text classes
 	Plain,
@@ -41,6 +40,7 @@ impl fmt::Show for Class {
 }
 
 /// a unit of signed communication
+#[deriving( Hash)]
 pub struct Mote {
 	// a string describing the data
 	pub meta: String,
@@ -67,15 +67,38 @@ impl Mote {
 			salt: 0x00000000,
 			data: Vec::new(),
 			sig: Vec::new(),}}
-	pub fn new_test() -> Mote {
+	pub fn new_bin(
+			meta: String, class: Class,
+			datetime: Datetime, data: Vec<u8>) -> Mote {
 		Mote {
-			meta: "test test :)".to_string(),
-			class: Markdown,
+			meta: meta,
+			class: class,
 			auth: Auth::null(),
-			datetime: Datetime::new( 1964, 256, 43200_000),
-			salt: 0x0ab1cf28,
-			data: "test test yo yo bro".as_bytes().to_vec(),
-			sig: vec!( 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00),}}
+			datetime: datetime,
+			salt: 0x00000000,
+			data: data,
+			sig: Vec::new(),}}
+	pub fn new_text(
+			meta: String, class: Class,
+			datetime: Datetime, data: String) -> Mote {
+		Mote {
+			meta: meta,
+			class: class,
+			auth: Auth::null(),
+			datetime: datetime,
+			salt: 0x00000000,
+			data: data.into_bytes(),
+			sig: Vec::new(),}}
+
+	pub fn set_meta( &mut self, meta: String){
+		self.meta = meta;}
+
+	pub fn set_data( &mut self, class: Class, data: Vec<u8>){
+		self.class = class;
+		self.data = data;}
+
+	pub fn set_text( &mut self, class: Class, data: String){
+		self.set_data( class, data.into_bytes());}
 
 	pub fn salt< R: Rng >( &mut self, rng: &mut R){
 		self.salt = rng.next_u64();}
@@ -95,6 +118,20 @@ impl Mote {
 		//set signature fields
 		self.auth = ( *auth).clone();
 		self.sig = key.sign( plain.as_slice());}
+
+	pub fn to_msg( &self) -> MoteMsg {
+		let b64_config = base64::Config {
+			char_set: Standard,
+			pad: true,
+			line_length: None };
+		MoteMsg {
+			meta: self.meta.to_string(),
+			class: self.class.to_string(),
+			auth: self.auth.to_string(),
+			datetime: self.datetime.to_string(),
+			salt: format!( "{:08x}", self.salt),
+			data: self.data.as_slice().to_base64( b64_config),
+			sig: self.sig.as_slice().to_base64( b64_config),}}
 }
 
 impl fmt::Show for Mote {
@@ -111,23 +148,22 @@ impl fmt::Show for Mote {
 			self.sig.as_slice().to_base64( b64_config),)}
 }
 
-impl json::ToJson for Mote {
-	fn to_json( &self) -> json::Json {
-		let mut mote_map = TreeMap::new();
-		mote_map.insert(
-			"meta".to_string(), self.meta.to_string());
-		mote_map.insert(
-			"class".to_string(), self.class.to_string());
-		mote_map.insert(
-			"auth".to_string(), self.auth.to_string());
-		mote_map.insert(
-			"datetime".to_string(), self.datetime.to_string());
-		mote_map.insert(
-			"salt".to_string(), self.salt.to_string());
-		mote_map.insert(
-			"data".to_string(), self.data.to_string());
-		mote_map.insert(
-			"sig".to_string(), self.sig.to_string());
-		return mote_map.to_json();}
+/// a mote, prepared for transmittal
+#[deriving( Hash)]
+#[deriving( Encodable, Decodable)]
+pub struct MoteMsg {
+	// a string describing the data
+	pub meta: String,
+	// the type of data
+	pub class: String,
+	// the party signing the mote
+	pub auth: String,
+	// the release date of the mote
+	pub datetime: String,
+	// pregen'd salt
+	pub salt: String,
+	// the data field
+	pub data: String,
+	// attached signature
+	pub sig: String,
 }
-
