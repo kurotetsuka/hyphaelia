@@ -6,3 +6,50 @@
 	width: 100%;
 	size: 20em;
 }
+#upvote {
+	margin-left: 40px;
+	padding-top: 2px;
+	padding-bottom: 4px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-top-width: 0px;
+}
+#downvote {
+	margin-left: 0px;
+	padding-top: 2px;
+	padding-bottom: 4px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-top-width: 0px;
+}
+#post_title {
+	border-style: bold;
+	border-radius: 4px;
+	padding-right: 10px;
+	border-right: 0px;
+	margin-right: 0px;
+}
+#post_more {
+	border-style: bold;
+	margin-left: 0px;
+	border-left: 0px;
+	border-radius: 4px;
+}
+#trusted {
+	font-size: small;
+	padding-top: 1px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+}
+#respect {
+	font-size: small;
+	padding-top: 1px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+}
+#author {
+	padding-right: 20px;
+	border-right: 2px;
+}

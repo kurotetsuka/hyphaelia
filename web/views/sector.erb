@@ -43,7 +43,7 @@
 							</li>
 							<li>
 								<a href="#">
-									<span class="fa fa-chevron-down"></span></a>
+									<span class="fa fa-carat-down"></span></a>
 									<ul class="submenu dropdown">
 										<li><a href="#">Settings</a></li>
 										<li><a href="#">Logout</a></li>
@@ -100,20 +100,34 @@
 			<div class="all-80">
 				<div class="ink-grid">
 					<div class="column-group horizontal-gutters">
-						<div class="all-60">
-							<div>post view
-								<ul>
-									<a href="#"><li>Posts go here, but prettier</li></a>
-									<button class="ink-button green">Hipster post about penguins or something</button>
-								</ul>
-							</div>
+						<div class="all-60" id="postview">
+							<button class="ink-button" id="post_title">
+								<span class="fa fa-file-text-o"></span>
+								&nbsp; [Title/description of post]
+								<button class="ink-button" id="post_more">
+									<span class="fa fa-ellipsis-v"></span>
+								</button>
+							</button>
+							<br>
+							<button class="ink-button" id="upvote">
+								<span class="fa fa-chevron-up"></span>
+							</button>
+							<button class="ink-button" id="downvote">
+								<span class="fa fa-chevron-down"></span>
+							</button>
 						</div>
-						<div class="all-40">
-							<div>author
-								<ul>
-									<a href="#"><li>Author info goes here, but prettier</li></a>
-								</ul>
-							</div>
+						<div class="all-40" id="authorview">	
+							<button class="ink-button" id="author">
+								<span class="fa fa-user"></span>
+								&nbsp; [Author of post]
+							</button>
+							<br>
+							<button class="ink-button" id="respect">
+								Respect: 654
+							</button>
+							<button class="ink-button" id="trusted">
+								Trusted: 123
+							</button>
 						</div>
 					</div>
 				</div>
