@@ -100,34 +100,26 @@
 			<div class="all-80">
 				<div class="ink-grid">
 					<div class="column-group horizontal-gutters">
-						<div class="all-60" id="postview">
-							<button class="ink-button" id="post_title">
-								<span class="fa fa-file-text-o"></span>
-								&nbsp; [Title/description of post]
-								<button class="ink-button" id="post_more">
-									<span class="fa fa-ellipsis-v"></span>
-								</button>
-							</button>
-							<br>
-							<button class="ink-button" id="upvote">
-								<span class="fa fa-chevron-up"></span>
-							</button>
-							<button class="ink-button" id="downvote">
-								<span class="fa fa-chevron-down"></span>
-							</button>
+						<div class="all-60" id="post_view">
+							<nav class="ink-navigation">
+								<ul class="menu horizontal grey">
+									<li class="heading active" id="post_type">
+										<span class="fa fa-file-text-o"></span>
+									</li>
+									<li id="post_title">
+										[Title/short description of post]
+									</li>
+									<li id="post_more">
+										<span class="fa fa-ellipsis-v"></span>
+										<ul class="submenu">
+											<li><a href="#">Post Info</a></li>
+											<li><a href="#">Report</a></li>
+										</ul>
+									</li>
+								</ul>
+							</nav>
 						</div>
-						<div class="all-40" id="authorview">	
-							<button class="ink-button" id="author">
-								<span class="fa fa-user"></span>
-								&nbsp; [Author of post]
-							</button>
-							<br>
-							<button class="ink-button" id="respect">
-								Respect: 654
-							</button>
-							<button class="ink-button" id="trusted">
-								Trusted: 123
-							</button>
+						<div class="all-40" id="author_view">
 						</div>
 					</div>
 				</div>
