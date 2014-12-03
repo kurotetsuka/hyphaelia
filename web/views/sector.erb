@@ -15,7 +15,7 @@
 	</div>
 	<![endif]-->
 
-	<div class="ink-grid">
+	<div class="ink-grid" id="main-grid">
 		<!-- header -->
 		<div class="column-group">
 			<!-- welcome -->
@@ -23,7 +23,7 @@
 				<div class="push-left hide-small hide-tiny">
 					<nav class="ink-navigation">
 						<ul class="menu horizontal black">
-							<li><a href="#">Welcome to Hyphaelia!</a></li>
+							<li><a href="/">Welcome to Hyphaelia!</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -33,21 +33,21 @@
 					<nav class="ink-navigation">
 						<ul class="menu horizontal black">
 							<li><a href="#">
-								<span class="fa fa-rocket">&nbsp; Username</span>
+								<i class="fa fa-rocket"></i>&nbsp; Username
 							</a></li>
 							<li><a href="#">
-								<span class="fa fa-envelope"></span></a>
-							</li>
-							<li><a href="#">
-								<span class="fa fa-cog"></span></a>
-							</li>
+								<i class="fa fa-envelope"></i>
+							</a></li>
 							<li>
 								<a href="#">
-									<span class="fa fa-carat-down"></span></a>
-									<ul class="submenu dropdown">
-										<li><a href="#">Settings</a></li>
-										<li><a href="#">Logout</a></li>
-										<li><a href="#">Help</a></li>
+									<i class="fa fa-cog"></i>
+									<i class="fa fa-caret-down"></i>
+								</a>
+								<ul class="submenu">
+									<li><a href="#">Settings</a></li>
+									<li><a href="#">Logout</a></li>
+									<li><a href="#">Help</a></li>
+								</ul>
 							</li>
 						</ul>
 					</nav>
@@ -56,89 +56,102 @@
 			<!-- end user menu -->
 			<div class="vertical-space"></div>
 			<!-- hub / sector / ranking method nav -->
-			<div class="push-left">
-				<h1>Kurohub :: nullsec :: top</h1>
+			<div class="">
+				<h1>kurohub :: nullsec :: top</i></h1>
 			</div>
 			<!-- end hub / sector / ranking method nav -->
 		</div>
 		<!-- end header -->
 
+		<!-- main content -->
 		<div class="column-group">
 			<!-- sector nav sidebar -->
-			<div class="control all-10 small-10 tiny-10 push-left">
+			<div class="all-10 small-10 tiny-10" id="sector-navbar">
 				<nav id="sector-nav" class="ink-navigation">
 					<ul class="menu horizontal black">
-						<li><a href="/s/null">
-							<span class="fa fa-rocket fa-lg fa-fw"></span>
+						<li class="active"><a href="/s/null">
+							<i class="fa fa-circle-thin fa-lg fa-fw"></i>
 							Null
 						</a></li>
-						<li><a href="/s/env">
-							<span class="fa fa-leaf fa-lg fa-fw"></span>
-							Enviro
-						</a></li>
-						<li><a href="/s/pol/">
-							<span class="fa fa-institution fa-lg fa-fw"></span>
-							Politics
+						<li><a href="/s/tech">
+							<i class="fa fa-laptop fa-lg fa-fw"></i>
+							Tech
 						</a></li>
 						<li><a href="/s/sci">
-							<span class="fa fa-flask fa-lg fa-fw"></span>
+							<i class="fa fa-flask fa-lg fa-fw"></i>
 							Science
 						</a></li>
-						<li><a href="#">
-							<span class="fa fa-trophy fa-lg fa-fw"></span>
-							Sports
-						</a></li>
 						<li><a href="/s/tec">
-							<span class="fa fa-terminal fa-lg fa-fw"></span>
-							Tech
+							<i class="fa fa-coffee fa-lg fa-fw"></i>
+							Culture
+						</a></li>
+						<li><a href="/s/pol">
+							<i class="fa fa-institution fa-lg fa-fw"></i>
+							Politic
+						</a></li>
+						<li><a href="/s/econ">
+							<i class="fa fa-btc fa-lg fa-fw"></i>
+							Econ
+						</a></li>
+						<li><a href="/s/code">
+							<i class="fa fa-terminal fa-lg fa-fw"></i>
+							Code
+						</a></li>
+						<li><a href="/s/env">
+							<i class="fa fa-leaf fa-lg fa-fw"></i>
+							Enviro
+						</a></li>
+						<li><a href="/s/sport">
+							<i class="fa fa-trophy fa-lg fa-fw"></i>
+							Sport
+						</a></li>
+						<li><a href="/s/games">
+							<i class="fa fa-gamepad fa-lg fa-fw"></i>
+							Games
 						</a></li>
 					</ul>
 				</nav>
 			</div>
 			<!-- end sector nav sidebar -->
+			<div class="all-5"></div>
 			<!-- motes view -->
-			<div class="all-80">
-				<div class="ink-grid">
-					<div class="column-group horizontal-gutters">
-						<div class="all-60" id="postview">
-							<button class="ink-button" id="post_title">
-								<span class="fa fa-file-text-o"></span>
-								&nbsp; [Title/description of post]
-								<button class="ink-button" id="post_more">
-									<span class="fa fa-ellipsis-v"></span>
-								</button>
-							</button>
-							<br>
-							<button class="ink-button" id="upvote">
-								<span class="fa fa-chevron-up"></span>
-							</button>
-							<button class="ink-button" id="downvote">
-								<span class="fa fa-chevron-down"></span>
-							</button>
-						</div>
-						<div class="all-40" id="authorview">	
-							<button class="ink-button" id="author">
-								<span class="fa fa-user"></span>
-								&nbsp; [Author of post]
-							</button>
-							<br>
-							<button class="ink-button" id="respect">
-								Respect: 654
-							</button>
-							<button class="ink-button" id="trusted">
-								Trusted: 123
-							</button>
-						</div>
-					</div>
+			<div class="column-group all-85">
+				<div class="all-65" id="postview">
+					<button class="ink-button" id="post-title">
+						<i class="fa fa-file-text-o"></i>
+						&nbsp; [Title/description of post]
+						<button class="ink-button" id="post-more">
+							<i class="fa fa-ellipsis-v"></i>
+						</button>
+					</button>
+					<br>
+					<button class="ink-button" id="upvote">
+						<i class="fa fa-chevron-up"></i>
+					</button>
+					<button class="ink-button" id="downvote">
+						<i class="fa fa-chevron-down"></i>
+					</button>
+				</div>
+				<div class="all-35" id="authorview">
+					<button class="ink-button" id="author">
+						<i class="fa fa-user"></i>
+						&nbsp; [Author of post]
+					</button>
+					<br>
+					<button class="ink-button" id="respect">
+						Respect: +.65
+					</button>
+					<button class="ink-button" id="trusted">
+						Trusted: .12
+					</button>
 				</div>
 			</div>
 			<!-- end motes view -->
-			<!-- hyphaelia.io watermark -->
-			<div id="hyph-watermark" class="all-10">
-
-			</div>
-			<!-- end hyphaelia.io watermark -->
+			<!-- hyphaelia.io watermark - ->
+			<div id="hyph-watermark" class="all-10"></div>
+			<!- - end hyphaelia.io watermark -->
 		</div>
+		<!-- end main content -->
 	</div>
 </body>
 </html>

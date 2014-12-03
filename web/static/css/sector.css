@@ -1,10 +1,12 @@
+#sector-navbar {
+	min-width: 5.4em;
+}
 #sector-nav li {
 	width: 100%;
 	text-align: center;
 }
 #sector-nav li .fa {
 	width: 100%;
-	size: 20em;
 }
 #upvote {
 	margin-left: 40px;
@@ -22,14 +24,14 @@
 	padding-left: 10px;
 	border-top-width: 0px;
 }
-#post_title {
+#post-title {
 	border-style: bold;
 	border-radius: 4px;
 	padding-right: 10px;
 	border-right: 0px;
 	margin-right: 0px;
 }
-#post_more {
+#post-more {
 	border-style: bold;
 	margin-left: 0px;
 	border-left: 0px;
@@ -50,6 +52,6 @@
 	padding-bottom: 5px;
 }
 #author {
-	padding-right: 20px;
+	padding-right: 10px;
 	border-right: 2px;
 }
