@@ -12,7 +12,6 @@ extern crate time;
 pub use auth::Auth;
 pub use dt::Datetime;
 pub use hub::Hub;
-pub use hub::mode::Mode;
 pub use hub::remote::RemoteHub;
 pub use key::PublicKey;
 pub use key::SecretKey;
