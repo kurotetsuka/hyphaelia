@@ -16,6 +16,10 @@ module Hyph
 			env = Dotenv::Environment.new( "config/dev.env")
 			env.load
 			env.apply!
+			#set db options
+			set :db_name, ENV['HYPH_db_name']
+			set :db_user, ENV['HYPH_db_user']
+			set :db_pass, ENV['HYPH_db_pass']
 			#set sinatra options
 			set :server, %w[thin mongrel webrick]
 			#set :bind, 'localhost'
@@ -36,6 +40,11 @@ module Hyph
 
 		# main pages
 		get '/login' do
+			sqlclient = Mysql2::Client.new(
+				:host => "localhost",
+				:database => settings.db_name,
+				:username => settings.db_user,
+				:password => settings.db_pass)
 			@head = erb :head
 			erb :login
 		end
