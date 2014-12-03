@@ -1,0 +1,20 @@
+
+ - elevator pitch
+ - name origin
+	 - hyphae
+ - dttp core concepts
+	 - mote, hub, sector
+ - hyphaelia extensions
+	 - respect votes, trust votes, thread
+ - overlay network design
+ - dttp daemon operation modes
+ - tech
+	 - rust, ruby
+	 - pgp, sinatra, ffi
+ - in the next six months
+	 - request for funding
+	 - call for contributors
+ - ideas for the future
+	 - linux rpm-based package manager that uses dttp instead of http
+		 - dependency info comes from votes
+	 - distributed cryptocoin-based marketplace
