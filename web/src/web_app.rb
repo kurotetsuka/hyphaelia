@@ -41,6 +41,12 @@ module Hyph
 		end
 
 		# main pages
+		get '/register' do
+			@head = erb :head
+			erb :register
+		end
+
+		# main pages
 		get '/s/:sector' do
 			@head = erb :head
 			@sector = params[:sector]

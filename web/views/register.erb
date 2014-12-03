@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<%= @head %>
+	<link href="/css/login.css" rel="stylesheet">
+</head>
+<body>
+
+	<!-- page content start -->
+	<!--[if lte IE 9 ]>
+	<div class="ink-alert basic" role="alert">
+		<button class="ink-dismiss">&times;</button>
+		<p>
+			<strong>Get a better browser, son.</strong>
+			( <a href="http://browsehappy.com/">upgrade to a modern browser</a> to improve your web experience, and make this page look half-decent. )
+		</p>
+	</div>
+	<![endif]-->
+
+	<div class="ink-grid">
+		<div class="space"></div>
+		<div class="column-group">
+			<!-- register section -->
+			<div id="login-form" class="all-50 medium-65 small-75 tiny-90 push-center">
+				<a name="login"></a>
+				<div class="align-center">
+					<h1 id="hyph-header">Join <a href="/">Hyphaelia!</a></h1>
+				</div><br>
+				<!-- register section -->
+					<div id="register-form" class="all-70 medium-80 small-85 tiny-90 push-center">
+						<a name="register"></a>
+						<h3 id="register-header">Wanna join us?</h3>
+						<!-- registration form -->
+						<form class="ink-form">
+							<div class="column-group gutters">
+								<!-- register username input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-username"><strong>Username</strong></label>
+									<div class="control">
+										<input name="username" id="register-username" type="text" placeholder="Enter a username">
+									</div>
+								</div>
+								<!-- register email input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-email"><strong>Email</strong></label>
+									<div class="control">
+										<input name="email" id="register-email" type="email" placeholder="Enter your email">
+									</div>
+								</div>
+								<!-- register password input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-password"><strong>Password</strong></label>
+									<div class="control">
+										<input name="password" id="register-password" type="password" placeholder="Enter a password">
+									</div>
+								</div>
+								<!-- register password confirm input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-passconfirm"><strong>Confirm Password</strong></label>
+									<div class="control">
+										<input name="passconfirm" id="register-passconfirm" type="password" placeholder="Confirm password">
+									</div>
+								</div>
+								<!-- register pgp key input -->
+								<div class="control-group all-50 small-80 tiny-80 push-center">
+									<label for="register-username"><strong>PGP Key ID</strong></label>
+									<div class="control">
+										<input name="username" id="register-username" type="text" placeholder="Enter your PGP key ID">
+									</div>
+									<p class="tip">
+										If you don't hava PGP key, don't worry, you can register one later.
+									</p>
+								</div>
+								<!-- register submit button -->
+								<div class="control-group all-80 push-center push-middle">
+									<div class="control push-center all-40">
+										<button class="ink-button green all-100">Register</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- register form end -->
+			</div>
+			<!-- register section end -->
+		</div>
+	</div>
+	<!-- page content end -->
+</body>
+</html>
