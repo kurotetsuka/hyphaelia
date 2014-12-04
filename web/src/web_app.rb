@@ -18,6 +18,7 @@ module Hyph
 			env.load
 			env.apply!
 			#set db options
+			set :db_host, ENV['HYPH_db_host']
 			set :db_name, ENV['HYPH_db_name']
 			set :db_user, ENV['HYPH_db_user']
 			set :db_pass, ENV['HYPH_db_pass']
@@ -48,6 +49,7 @@ module Hyph
 
 		post '/login' do
 			client = Mysql2::Client.new(
+				:host => settings.db_host,
 				:database => settings.db_name,
 				:username => settings.db_user,
 				:password => settings.db_pass)

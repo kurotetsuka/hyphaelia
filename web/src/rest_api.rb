@@ -16,6 +16,7 @@ module Hyph
 			env.load
 			env.apply!
 			#set db options
+			set :db_host, ENV['HYPH_db_host']
 			set :db_name, ENV['HYPH_db_name']
 			set :db_user, ENV['HYPH_db_user']
 			set :db_pass, ENV['HYPH_db_pass']
