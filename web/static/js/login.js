@@ -11,8 +11,6 @@ $(function login()) {
 	username = u;
 	password = p;
 
-	obj.addEventListener('error', function(event)){
-		alert('Login unsuccessful, please try again.');
-	});
+	
 
 }

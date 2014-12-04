@@ -21,14 +21,10 @@ $(function register()) {
 			return false;
 		}
 	}
-
-	obj.addEventListener('load', function(event)){
-		alert('You have successfully registered!');
-	});
-	
 	obj.addEventListener('error', function(event)){
-		alert('Oops! Something went wrong, please try again.');
-	});
+		document.getElementByID('error-msg').innerHTML = 
+			"Something went wrong, please try again.";
+	}
 
 	obj.open('POST', '');
 
