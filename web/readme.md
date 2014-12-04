@@ -14,10 +14,8 @@ There are a few gem dependencies. I didn't bother setting up a gemfile, sorry. t
 gem install erubis dotenv json sinatra sinatra-contrib thin
 ```
 
-To initialize the database, run `tool/db_init.sh`. The default user used by the script is `hyph`, with the password `hyph`. Make sure to start the mysql daemon beforehand.
+To initialize the database, run `rake db_init`.
 
 To run the rest api, run `rake launch_api`. The rest api must be launched for much of the functionality of the app to work.
 
 To run the web app, run `rake launch_app`. By default it runs on port 8080, so navigate to [`localhost:8080/`](http://localhost:8080/) to have a look at it.
-
-
