@@ -44,12 +44,27 @@ task :deploy => [ :load_env ] do
 	%x[ cp -r static/* #{ENV['HYPH_install_dir']}]
 end
 
+# database stuff
+task :db_init => [ :load_env ] do
+	%x[ mysql \
+		-u #{ENV['HYPH_db_user']} -p#{ENV['HYPH_db_pass']} \
+		< src/create_tables.sql ]
+	%x[ mysql \
+		-u #{ENV['HYPH_db_user']} -p#{ENV['HYPH_db_pass']} \
+		< src/init_tables.sql ]
+end
+task :db_kill => [ :load_env ] do
+	%x[ echo "drop database if exists hyph;" | mysql \
+		-u #{ENV['HYPH_db_user']} -p#{ENV['HYPH_db_pass']} ]
+end
+task :db_reset => [ :db_kill, :db_init ]
+
 # launch webserver
 task :launch_app => :gen do
 	Hyph::WebApp.run!
 end
 
-# rest api stuff
+# launch rest api
 task :launch_api do
 	Hyph::RestApi.run!
 end

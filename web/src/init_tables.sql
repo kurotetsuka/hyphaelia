@@ -10,25 +10,17 @@ insert into Auths values (
 
 insert into Motes values (
 	0, 'test test :)', 'markdown', 'kurotetsuka', '7de.150.2932e00',
-	'cac3f6a6ce8ca2eb', 'dGVzdCB0ZXN0IHlvIHlvIGJybw==', 'AAAAAAAAAAA=')
+	'cac3f6a6ce8ca2eb', 'dGVzdCB0ZXN0IHlvIHlvIGJybw==', 'AAAAAAAAAAA=');
 insert into Motes values (
 	1, 'test test 2 :)', 'markdown', 'salij', '7de.150.2933e00',
-	'cac3f6a6ce8ca2eb', 'dGVzdCB0ZXN0IHlvIHlvIGJybw==', 'AAAAAAAAAAA=')
+	'cac3f6a6ce8ca2eb', 'dGVzdCB0ZXN0IHlvIHlvIGJybw==', 'AAAAAAAAAAA=');
 insert into Motes values (
 	2, 'test test 3 :)', 'markdown', 'randy', '7de.150.2934e00',
-	'cac3f6a6ce8ca2eb', 'dGVzdCB0ZXN0IHlvIHlvIGJybw==', 'AAAAAAAAAAA=')
-
-create table Claims (
-	sector varchar(20),
-	hash bigint,
-	claim_dt varchar( 16),
-	revok_dt varchar( 16),
-	unrevok_dt varchar( 16)
-);
+	'cac3f6a6ce8ca2eb', 'dGVzdCB0ZXN0IHlvIHlvIGJybw==', 'AAAAAAAAAAA=');
 
 insert into Claims values (
-	'tech', 0, '7de.151.2932e00', null, null)
+	'tech', 0, '7de.151.2932e00', null, null);
 insert into Claims values (
-	'sci', 1, '7de.152.2932e00', null, null)
+	'sci', 1, '7de.152.2932e00', null, null);
 insert into Claims values (
-	'cult', 2, '7de.153.2932e00', null, null)
+	'cult', 2, '7de.153.2932e00', null, null);
