@@ -18,9 +18,107 @@
 	</div>
 	<![endif]-->
 
+<div class="ink-grid" id="main-grid">
+		<!-- header -->
+		<div class="column-group">
+			<!-- welcome -->
+			<div class="all-100">
+				<div class="push-left hide-small hide-tiny">
+					<nav class="ink-navigation">
+						<ul class="menu horizontal black">
+							<li><a href="/">Hyphaelia</a></li>
+						</ul>
+					</nav>
+				</div>
+				<!-- end welcome -->
+				<!-- user menu -->
+				<div class="push-right">
+					<nav class="ink-navigation">
+						<ul class="menu horizontal black">
+							<li><a href="#">
+								<i class="fa fa-rocket"></i>&nbsp; Username
+							</a></li>
+							<li><a href="#">
+								<i class="fa fa-envelope"></i>
+							</a></li>
+							<li>
+								<a href="#">
+									<i class="fa fa-cog"></i>
+									<i class="fa fa-chevron-down small"></i>
+								</a>
+								<ul class="submenu">
+									<li><a href="#">Settings</a></li>
+									<li><a href="#">Logout</a></li>
+									<li><a href="#">Help</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav><br>
+				</div>
+			</div>
+			<!-- end user menu -->
+			<div class="vertical-space"></div>
+			<!-- hub / sector / ranking method nav -->
+			<div class="">
+				<h1>Submit a Post</i></h1>
+			</div>
+			<!-- end hub / sector / ranking method nav -->
+		</div>
+		<!-- end header -->
+
 	<div class="ink-grid">
 		<div class="space"></div>
-		<div class="column-group">
+		<div class="column-group all-90 horizontal-gutters">
+
+			<form class="ink-form">
+				<div class="control-group">
+					<label for="title">Title</label>
+					<div class="control">
+						<input id="title" type="text" placeholder="Title/short description of post" style="width:300px;">
+					</div>
+				</div>
+
+				<fieldset>
+					<div class="control-group">
+						<p class="label">Select the appropriate sector:</p>
+						<ul class="control unstyled">
+							<li><input type="radio" id="tech" value="">
+								<label for="" >Tech</label>
+							</li>
+							<li><input type="radio" id="science" value="">
+								<label for="" >Science</label>
+							</li>
+							<li><input type="radio" id="culture" value="">
+								<label for="" >Culture</label>
+							</li>
+							<li><input type="radio" id="politics" value="">
+								<label for="" >Politics</label>
+							</li>
+							<li><input type="radio" id="econ" value="">
+								<label for="" >Econ</label>
+							</li>
+							<li><input type="radio" id="code" value="">
+								<label for="" >Code</label>
+							</li>
+							<li><input type="radio" id="enviro" value="">
+								<label for="" >Enviro</label>
+							</li>
+							<li><input type="radio" id="sport" value="">
+								<label for="" >Sport</label>
+							</li>
+							<li><input type="radio" id="games" value="">
+								<label for="" >Games</label>
+							</li>
+						</ul>
+					</div>
+				</fieldset>
+
+				<label for="body">Body Text (Optional)</label>
+				<div class="control-group all-50">
+					<input id="body" type="text" placeholder="Type something about your content here..." style="width:300px;">
+				</div>
+			</form>
+
 		</div>
 	</div>
 </body>
