@@ -3,6 +3,7 @@ var username;
 var password;
 var email;
 var keyID;
+var obj = new XMLHttpRequest();
 
 $(function register()) {
 
@@ -21,7 +22,17 @@ $(function register()) {
 		}
 	}
 
+	obj.addEventListener('load', function(event)){
+		alert('You have successfully registered!');
+	});
 	
+	obj.addEventListener('error', function(event)){
+		alert('Oops! Something went wrong, please try again.');
+	});
+
+	obj.open('POST', '');
+
+
 	//add to db 
 
 }

@@ -1,6 +1,7 @@
 
 var username;
 var password;
+var obj = new XMLHttpRequest();
 
 $(function login()) {
 
@@ -10,7 +11,8 @@ $(function login()) {
 	username = u;
 	password = p;
 
-	$(function success()){}
-	$(function failure()){}
+	obj.addEventListener('error', function(event)){
+		alert('Login unsuccessful, please try again.');
+	});
 
 }
