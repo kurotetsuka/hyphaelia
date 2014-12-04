@@ -57,5 +57,37 @@ module Hyph
 			sector_motes = [ mote, mote, mote, mote, mote, mote, mote ]
 			sector_motes.to_json()
 		end
+
+		get '/sector/:sec/top' do
+			content_type :json
+			response['Access-Control-Allow-Origin'] = '*'
+
+			mote = {
+				:meta     => "test test :)",
+				:class    => "markdown",
+				:auth     => "kurotetsuka",
+				:datetime => "7de.150.2932e00",
+				:salt     => "cac3f6a6ce8ca2eb",
+				:data     => "dGVzdCB0ZXN0IHlvIHlvIGJybw==",
+				:sig      => "AAAAAAAAAAA="}
+			sector_motes = [ mote, mote, mote, mote, mote, mote, mote ]
+			sector_motes.to_json()
+		end
+
+		get '/sector/:sec/new' do
+			content_type :json
+			response['Access-Control-Allow-Origin'] = '*'
+
+			mote = {
+				:meta     => "test test :)",
+				:class    => "markdown",
+				:auth     => "kurotetsuka",
+				:datetime => "7de.150.2932e00",
+				:salt     => "cac3f6a6ce8ca2eb",
+				:data     => "dGVzdCB0ZXN0IHlvIHlvIGJybw==",
+				:sig      => "AAAAAAAAAAA="}
+			sector_motes = [ mote, mote, mote, mote, mote, mote, mote ]
+			sector_motes.to_json()
+		end
 	end
 end

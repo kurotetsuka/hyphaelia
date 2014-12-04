@@ -40,11 +40,20 @@ module Hyph
 
 		# main pages
 		get '/login' do
+			@head = erb :head
+			erb :login
+		end
+
+		post '/login' do
 			sqlclient = Mysql2::Client.new(
-				:host => "localhost",
+				:host => 'localhost',
 				:database => settings.db_name,
 				:username => settings.db_user,
 				:password => settings.db_pass)
+			post = params[:post]
+			@name = post['name']
+			@pass_hash = post['pass_hash']
+
 			@head = erb :head
 			erb :login
 		end
