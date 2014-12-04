@@ -43,34 +43,36 @@ module Hyph
 
 		# main pages
 		get '/login' do
+			@error = false
 			@head = erb :head
 			erb :login
 		end
 
 		post '/login' do
-			client = Mysql2::Client.new(
-				:host => settings.db_host,
-				:database => settings.db_name,
-				:username => settings.db_user,
-				:password => settings.db_pass)
+			@error = false
 
-			@name = params[ :username]
-			name_esc = client.escape( @name)
+			username = params[ :username]
 			pass = params[ :password]
 
-			results = client.query(
-				"select pass from Auths where name='#{name_esc}'")
-			result = results.first
+			unless username.nil? || pass.nil? || username.empty?
+				client = Mysql2::Client.new(
+					:host => settings.db_host,
+					:database => settings.db_name,
+					:username => settings.db_user,
+					:password => settings.db_pass)
 
-			if result[ "pass"] == pass
-				session[ :user] = @name
-				printf( "login success!\n")
-				redirect '/s/null'
-			else
-				printf(
-					"login error!: result.pass: %s, pass: %s\n",
-					result[ "pass"], pass)
-				@error = true
+				name_esc = client.escape( username)
+
+				results = client.query(
+					"select pass from Auths where name='#{name_esc}'")
+				result = results.first
+
+				if ! result.nil? && result[ "pass"] == pass
+					session[ :user] = username
+					redirect '/s/null'
+				else
+					@error = true
+				end
 			end
 
 			@head = erb :head
@@ -79,6 +81,7 @@ module Hyph
 
 		# main pages
 		get '/register' do
+			@error = false
 			@head = erb :head
 			erb :register
 		end

@@ -3,12 +3,11 @@
 <head>
 	<%= @head %>
 	<link href="/css/login.css" rel="stylesheet">
-	<script type="text/javascript" src="/js/login.js"></script>
 	<script type="text/javascript">
 		window.onload = function(){
 			if <%= @error %> {
 				var error = $("#error-msg");
-				error.attr("class", "show");}
+				error.attr("class", "show");}}
 	</script>
 </head>
 <body>

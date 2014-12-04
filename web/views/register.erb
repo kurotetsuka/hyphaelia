@@ -4,6 +4,10 @@
 	<%= @head %>
 	<link href="/css/register.css" rel="stylesheet">
 	<script type="text/javascript" src="/js/register.js"></script>
+		window.onload = function(){
+			if <%= @error %> {
+				var error = $("#error-msg");
+				error.attr("class", "show");}}
 </head>
 <body>
 
@@ -26,8 +30,8 @@
 				<div class="align-center">
 					<h1 id="hyph-header">Join <a href="/">Hyphaelia!</a></h1>
 					<h3 id="register-header">Wanna join us?</h3>
+					<div id="error-msg" class="hide"></div>
 				</div>
-				<div id="error-msg"></div>
 				<!-- registration form -->
 				<form class="ink-form" id="register-form">
 					<div class="column-group gutters">
