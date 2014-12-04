@@ -11,6 +11,5 @@ function register() {
 	email = $('#register-email');
 
 	var msg = $('#error-msg');
-	msg.html("error message goes here yo");
-	console.log("asdf");
+	msg.html("Please ensure you have entered all fields correctly");
 }
