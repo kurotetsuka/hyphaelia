@@ -10,8 +10,6 @@ $(function login()) {
 	username = u;
 	password = p;
 
-	//validate and verify
-
 	$(function success()){}
 	$(function failure()){}
 
