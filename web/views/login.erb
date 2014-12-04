@@ -4,10 +4,10 @@
 	<%= @head %>
 	<link href="/css/login.css" rel="stylesheet">
 	<script type="text/javascript">
-		window.onload = function(){
-			if <%= @error %> {
+		window.onload() = function(){
+			if( <%= @error %> ){
 				var error = $("#error-msg");
-				error.attr("class", "show");}}
+				error.css("display", "block");}};
 	</script>
 </head>
 <body>
@@ -32,7 +32,7 @@
 				<div class="align-center">
 					<h1 id="hyph-header">Welcome to <a href="/">Hyphaelia</a>!</h1>
 					<h3 id="login-header">Already in?</h3>
-					<div id="error-msg" class="hide">Login Failed!</div>
+					<div id="error-msg">Login Failed!</div>
 				</div>
 				<div class="space"></div>
 				<!-- login form -->

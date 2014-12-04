@@ -4,10 +4,11 @@
 	<%= @head %>
 	<link href="/css/register.css" rel="stylesheet">
 	<script type="text/javascript" src="/js/register.js"></script>
-		window.onload = function(){
-			if <%= @error %> {
+	<script type="text/javascript">
+		if( <%= @error %> == true){
 				var error = $("#error-msg");
-				error.attr("class", "show");}}
+				error.attr("class", "show");}
+	</script>
 </head>
 <body>
 
