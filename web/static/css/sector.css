@@ -24,34 +24,55 @@
 	padding-left: 10px;
 	border-top-width: 0px;
 }
-#post-title {
-	border-style: bold;
-	border-radius: 4px;
+#post-type {
+	padding-top: 10px;
 	padding-right: 10px;
-	border-right: 0px;
-	margin-right: 0px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+#post-title {
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
 }
 #post-more {
-	border-style: bold;
-	margin-left: 0px;
-	border-left: 0px;
-	border-radius: 4px;
+	left: 10px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
 }
 #trusted {
-	font-size: small;
+	font-size: 10px;
 	padding-top: 1px;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-bottom: 5px;
 }
 #respect {
-	font-size: small;
+	font-size: 10px;
 	padding-top: 1px;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-bottom: 5px;
 }
 #author {
+	padding-top: 10px;
 	padding-right: 10px;
-	border-right: 2px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+#author-pic {
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+#author-more {
+	left: 10px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
 }

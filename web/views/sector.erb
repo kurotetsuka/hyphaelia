@@ -41,7 +41,7 @@
 							<li>
 								<a href="#">
 									<i class="fa fa-cog"></i>
-									<i class="fa fa-caret-down"></i>
+									<i class="fa fa-chevron-down"></i>
 								</a>
 								<ul class="submenu">
 									<li><a href="#">Settings</a></li>
@@ -115,35 +115,45 @@
 			<!-- end sector nav sidebar -->
 			<div class="all-5"></div>
 			<!-- motes view -->
-			<div class="column-group all-85">
-				<div class="all-65" id="postview">
-					<button class="ink-button" id="post-title">
-						<i class="fa fa-file-text-o"></i>
-						&nbsp; [Title/description of post]
-						<button class="ink-button" id="post-more">
-							<i class="fa fa-ellipsis-v"></i>
-						</button>
-					</button>
-					<br>
-					<button class="ink-button" id="upvote">
-						<i class="fa fa-chevron-up"></i>
-					</button>
-					<button class="ink-button" id="downvote">
-						<i class="fa fa-chevron-down"></i>
-					</button>
+			<div class="column-group horizontal-gutters">
+				<div class="all-60" id="post_view">
+					<nav class="ink-navigation">
+						<ul class="menu horizontal grey">
+							<li class="heading active" id="post_type">
+								<span class="fa fa-file-text-o"></span>
+							</li>
+							<li id="post_title">
+								[Title/short description of post]
+							</li>
+							<li id="post_more">
+								<span class="fa fa-ellipsis-v"></span>
+								<ul class="submenu">
+									<li><a href="#">Post Info</a></li>
+									<li><a href="#">Report</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
 				</div>
-				<div class="all-35" id="authorview">
-					<button class="ink-button" id="author">
-						<i class="fa fa-user"></i>
-						&nbsp; [Author of post]
-					</button>
-					<br>
-					<button class="ink-button" id="respect">
-						Respect: +.65
-					</button>
-					<button class="ink-button" id="trusted">
-						Trusted: .12
-					</button>
+				<div class="all-40" id="author_view">
+					<nav class="ink-navigation">
+						<ul class="menu horizontal grey">
+							<li class="heading active" id="author_pic">
+								<span class="fa fa-user"></span>
+							</li>
+							<li id="author">
+								[Author of post]
+							</li>
+							<li id="author_more">
+								<span class="fa fa-ellipsis-v"></span>
+								<ul class="submenu">
+									<li><a href="#">Send Message</a></li>
+									<li><a href="#">Author Info</a></li>
+									<li><a href="#">Report</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 			<!-- end motes view -->

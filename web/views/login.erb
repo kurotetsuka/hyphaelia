@@ -3,6 +3,7 @@
 <head>
 	<%= @head %>
 	<link href="/css/login.css" rel="stylesheet">
+	<script src="/js/login.js"></script>
 </head>
 <body>
 
@@ -28,7 +29,7 @@
 					<h3 id="login-header">Already in?</h3>
 				</div>
 				<!-- login form -->
-				<form class="ink-form">
+				<form class="ink-form" id="login-form">
 					<div class="control-group">
 						<div class="control all-60 push-center">
 							<input name="username" id="login-username" type="text" placeholder="Username">
@@ -41,7 +42,7 @@
 					</div>
 					<div class="control-group">
 						<div class="control push-center all-40">
-							<button class="ink-button green all-100">Login</button>
+							<button class="ink-button green all-100" id="login-button" onclick="login()">Login</button>
 						</div>
 					</div>
 				</form>
@@ -49,7 +50,7 @@
 				<div class="space"></div>
 				<div class="align-center">
 					<h3 id="register-header">Wanna join us?</h3>
-					<a href="/#register">Register here</a>
+					<a href="/register">Register here</a>
 				</div>
 			</div>
 			<!-- login section end -->
