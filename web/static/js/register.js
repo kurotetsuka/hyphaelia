@@ -12,7 +12,7 @@ $(function register()) {
 	//keyID = ;
 
 	function validateForm(){
-		var x = document.forms["register-form"]["register-username"].value;
+		var x = document.forms["register-form"]["register-email"].value;
 		var atpos = x.indexOf("@");
 		var dotpos = x.lastIndexOf(".");
 		if(atpost < 1 || dotpos < atpos +2 || dotpos + 2 >= x.length){
@@ -20,6 +20,8 @@ $(function register()) {
 			return false;
 		}
 	}
+
+	
 	//add to db 
 
 }
