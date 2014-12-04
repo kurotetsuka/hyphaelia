@@ -22,6 +22,7 @@ module Hyph
 			set :db_pass, ENV['HYPH_db_pass']
 			#set sinatra options
 			set :server, %w[thin mongrel webrick]
+			enable :sessions
 			#set :bind, 'localhost'
 			set :bind, '0.0.0.0'
 			set :port, 8080
@@ -45,14 +46,23 @@ module Hyph
 		end
 
 		post '/login' do
-			sqlclient = Mysql2::Client.new(
+			client = Mysql2::Client.new(
 				:host => 'localhost',
 				:database => settings.db_name,
 				:username => settings.db_user,
 				:password => settings.db_pass)
-			post = params[:post]
-			@name = post['name']
-			@pass_hash = post['pass_hash']
+
+			post = params[ :post]
+			@name = client.escape( post['username'])
+			name_esc = client.escape( @name)
+			pass = post['password']
+
+			result = client.query(
+				"select pass from Auths where name='#{name_esc}'")
+			if result == pass
+				session[ :user] = @name
+				redirect to( '/s/null')
+			end
 
 			@head = erb :head
 			erb :login
