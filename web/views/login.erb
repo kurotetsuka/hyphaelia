@@ -3,7 +3,13 @@
 <head>
 	<%= @head %>
 	<link href="/css/login.css" rel="stylesheet">
-	<script src="/js/login.js"></script>
+	<script type="text/javascript" src="/js/login.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			if <%= @error %> {
+				var error = $("#error-msg");
+				error.attr("class", "show");}
+	</script>
 </head>
 <body>
 
@@ -25,11 +31,13 @@
 			<div id="login-form" class="all-50 medium-65 small-75 tiny-90 push-center">
 				<a name="login"></a>
 				<div class="align-center">
-					<h1 id="hyph-header">Welcome to <a href="/">Hyphaelia!</a></h1>
+					<h1 id="hyph-header">Welcome to <a href="/">Hyphaelia</a>!</h1>
 					<h3 id="login-header">Already in?</h3>
+					<div id="error-msg" class="hide">Login Failed!</div>
 				</div>
+				<div class="space"></div>
 				<!-- login form -->
-				<form class="ink-form" id="login-form">
+				<form class="ink-form" id="login-form" method="post">
 					<div class="control-group">
 						<div class="control all-60 push-center">
 							<input name="username" id="login-username" type="text" placeholder="Username">
@@ -37,7 +45,7 @@
 					</div>
 					<div class="control-group">
 						<div class="control all-60 push-center">
-							<input name="password" id="login-password" type="text" placeholder="Password">
+							<input name="password" id="login-password" type="password" placeholder="Password">
 						</div>
 					</div>
 					<div class="control-group">

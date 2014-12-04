@@ -3,6 +3,7 @@
 # library imports
 require 'dotenv'
 require 'erubis'
+require 'mysql2'
 require 'sinatra'
 require "sinatra/reloader"
 
@@ -45,29 +46,29 @@ module Hyph
 			erb :login
 		end
 
-		# main pages
-		get '/post' do
-			@head = erb :head
-			erb :post
-		end
-
 		post '/login' do
 			client = Mysql2::Client.new(
-				:host => 'localhost',
 				:database => settings.db_name,
 				:username => settings.db_user,
 				:password => settings.db_pass)
 
-			post = params[ :post]
-			@name = client.escape( post['username'])
+			@name = params[ :username]
 			name_esc = client.escape( @name)
-			pass = post['password']
+			pass = params[ :password]
 
-			result = client.query(
+			results = client.query(
 				"select pass from Auths where name='#{name_esc}'")
-			if result == pass
+			result = results.first
+
+			if result[ "pass"] == pass
 				session[ :user] = @name
-				redirect to( '/s/null')
+				printf( "login success!\n")
+				redirect '/s/null'
+			else
+				printf(
+					"login error!: result.pass: %s, pass: %s\n",
+					result[ "pass"], pass)
+				@error = true
 			end
 
 			@head = erb :head
@@ -85,6 +86,12 @@ module Hyph
 			@head = erb :head
 			@sector = params[:sector]
 			erb :sector
+		end
+
+		# main pages
+		get '/post' do
+			@head = erb :head
+			erb :post
 		end
 
 		#error pages
