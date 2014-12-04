@@ -45,6 +45,12 @@ module Hyph
 			erb :login
 		end
 
+		# main pages
+		get '/post' do
+			@head = erb :head
+			erb :post
+		end
+
 		post '/login' do
 			client = Mysql2::Client.new(
 				:host => 'localhost',

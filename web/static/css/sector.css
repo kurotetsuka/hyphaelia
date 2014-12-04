@@ -17,10 +17,13 @@
 		display: block;
 	}
 }
-.ink-navigation{
+.ink-navigation {
 	padding-bottom: 10px;
+	padding-right: 25px;
 }
-
+.submenu {
+	font-size: 11px;
+}
 #post-view {
 	height: 50px;
 }
