@@ -30,6 +30,7 @@
 					<div id="register-form" class="all-70 medium-80 small-85 tiny-90 push-center">
 						<a name="register"></a>
 						<h3 id="register-header">Wanna join us?</h3>
+						<div id="error-msg"></div>
 						<!-- registration form -->
 						<form class="ink-form" id="register-form">
 							<div class="column-group gutters">
@@ -67,14 +68,14 @@
 									<div class="control">
 										<input name="username" id="register-username" type="text" placeholder="Enter your PGP key ID">
 									</div>
-									<p class="tip">
+									<p class="tip" style="font-size:10px" align="center">
 										If you don't hava PGP key, don't worry, you can register one later.
 									</p>
 								</div>
 								<!-- register submit button -->
 								<div class="control-group all-80 push-center push-middle">
-									<div class="control push-center all-40">
-										<button class="ink-button green all-100" onclick="register()">Register</button>
+									<div class="control push-center all-40" style="right:3px;">
+										<button class="ink-button green all-100" align="center" onclick="register()">Register</button>
 									</div>
 								</div>
 							</div>

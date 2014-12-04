@@ -1,6 +1,7 @@
 
 var username;
 var password;
+var obj = new XMLHttpRequest();
 
 $(function login()) {
 
@@ -10,9 +11,6 @@ $(function login()) {
 	username = u;
 	password = p;
 
-	//validate and verify
-
-	$(function success()){}
-	$(function failure()){}
+	
 
 }
