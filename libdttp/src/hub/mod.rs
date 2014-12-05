@@ -1,5 +1,6 @@
 // library uses
 use std::collections::HashMap;
+use std::io::net::ip::SocketAddr;
 
 // local uses
 //use auth::*;
@@ -13,6 +14,8 @@ pub mod mode;
 pub mod remote;
 
 pub struct Hub {
+	// this hub's address
+	pub port: u16,
 	// this hub's stored motes
 	pub motedb: Vec<Mote>,
 	// this hub's auth-key database
@@ -29,8 +32,9 @@ pub struct Hub {
 	pub modes: HashMap<Mode, bool>,
 }
 impl Hub {
-	pub fn new() -> Hub {
+	pub fn new( port: u16) -> Hub {
 		Hub {
+			port: port,
 			motedb: Vec::new(),
 			remotedb: Vec::new(),
 			modes: HashMap::new(),}}
@@ -38,7 +42,11 @@ impl Hub {
 	pub fn say_hi( &self){
 		println!("dttp daemon says hi :)");}
 
-	pub fn add( &mut self, mote: Mote){
+	pub fn add_remote( &mut self, addr: SocketAddr){
+		let remote = RemoteHub::new( addr);
+		self.remotedb.push( remote);}
+
+	pub fn add_mote( &mut self, mote: Mote){
 		self.motedb.push( mote);}
 
 	pub fn mode_get( &self, mode: &Mode) -> bool {

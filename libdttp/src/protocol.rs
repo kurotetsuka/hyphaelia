@@ -143,7 +143,6 @@ impl fmt::Show for Command {
 				write!( formatter, "take:{}.", json::encode( data)),}}
 }
 
-
 pub enum Response {
 	Okay,
 	OkayResult( Json),
