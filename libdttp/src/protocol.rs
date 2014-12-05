@@ -39,7 +39,7 @@ impl Command {
 		// match have command
 		let cmd = "have:";
 		if string.starts_with( cmd) {
-			let regex = Regex::new( "have:([:xdigit:]{16}).").unwrap();
+			let regex = Regex::new( r"have:([:xdigit:]{16}).").unwrap();
 			let cap = regex.captures( string);
 			if cap.is_none() { return None;}
 			let cap = cap.unwrap();
@@ -56,7 +56,7 @@ impl Command {
 		// match have request
 		let cmd = "have?:";
 		if string.starts_with( cmd) {
-			let regex = Regex::new( "have?:([:xdigit:]{16}).").unwrap();
+			let regex = Regex::new( r"have\?:([:xdigit:]{16}).").unwrap();
 			let cap = regex.captures( string);
 			if cap.is_none() { return None;}
 			let cap = cap.unwrap();
@@ -73,7 +73,7 @@ impl Command {
 		// match get request
 		let cmd = "get?:";
 		if string.starts_with( cmd) {
-			let regex = Regex::new( "get?:([:xdigit:]{16}).").unwrap();
+			let regex = Regex::new( r"get\?:([:xdigit:]{16}).").unwrap();
 			let cap = regex.captures( string);
 			if cap.is_none() { return None;}
 			let cap = cap.unwrap();
@@ -90,7 +90,7 @@ impl Command {
 		// match want request
 		let cmd = "want?:";
 		if string.starts_with( cmd) {
-			let regex = Regex::new( "want?:([:xdigit:]{16}).").unwrap();
+			let regex = Regex::new( r"want\?:([:xdigit:]{16}).").unwrap();
 			let cap = regex.captures( string);
 			if cap.is_none() { return None;}
 			let cap = cap.unwrap();
@@ -107,7 +107,7 @@ impl Command {
 		// match take command
 		let cmd = "take:";
 		if string.starts_with( cmd) {
-			let regex = Regex::new( "take:(.*).").unwrap();
+			let regex = Regex::new( r"take:(.+).").unwrap();
 			let cap = regex.captures( string);
 			if cap.is_none() { return None;}
 			let cap = cap.unwrap();
@@ -132,13 +132,13 @@ impl fmt::Show for Command {
 			&OthersReq =>
 				write!( formatter, "others?"),
 			&HaveDec( ref hash) =>
-				write!( formatter, "have:{:x}.", *hash),
+				write!( formatter, "have:{:016x}.", *hash),
 			&HaveReq( ref hash) =>
-				write!( formatter, "have?:{:x}.", *hash),
+				write!( formatter, "have?:{:016x}.", *hash),
 			&Get( ref hash) =>
-				write!( formatter, "get?:{:x}.", *hash),
+				write!( formatter, "get?:{:016x}.", *hash),
 			&WantReq( ref hash) =>
-				write!( formatter, "want?:{:x}.", *hash),
+				write!( formatter, "want?:{:016x}.", *hash),
 			&Take( ref data) =>
 				write!( formatter, "take:{}.", json::encode( data)),}}
 }
@@ -152,8 +152,53 @@ pub enum Response {
 	ErrorMsg( String),
 }
 impl Response {
-	pub fn from_str( _string: &str) -> Option<Response> {
-		None}
+	pub fn from_str( string: &str) -> Option<Response> {
+		// match okay response
+		let res = "ok.";
+		if string.equiv( &res) {
+			return Some( Okay);}
+
+		// match deny response
+		let res = "no.";
+		if string.equiv( &res) {
+			return Some( Deny);}
+
+		// match error response
+		let res = "err.";
+		if string.equiv( &res) {
+			return Some( Error);}
+
+		// match okay result response
+		let res = "ok:";
+		if string.starts_with( res) {
+			let regex = Regex::new( r"ok:(.+).").unwrap();
+			let cap = regex.captures( string);
+			if cap.is_none() { return None;}
+			let cap = cap.unwrap();
+
+			// parse json
+			let json_str = cap.at( 1);
+			let json : Option<Json> = 
+				json::from_str( json_str).ok();
+			if json.is_none() { return None;}
+			let json = json.unwrap();
+			// return
+			return Some( OkayResult( json));}
+
+		// match error message response
+		let res = "err:";
+		if string.starts_with( res) {
+			let regex = Regex::new( r"err:(.+).").unwrap();
+			let cap = regex.captures( string);
+			if cap.is_none() { return None;}
+			let cap = cap.unwrap();
+
+			// parse message
+			let message = cap.at( 1);
+			return Some( ErrorMsg( message.to_string()));}
+
+		// fallback
+		return None;}
 }
 impl fmt::Show for Response {
 	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -161,7 +206,7 @@ impl fmt::Show for Response {
 			&Okay =>
 				write!( formatter, "ok."),
 			&OkayResult( ref data) =>
-				write!( formatter, "take:{}.", json::encode( data)),
+				write!( formatter, "ok:{}.", json::encode( data)),
 			&Deny =>
 				write!( formatter, "no."),
 			&Error =>
