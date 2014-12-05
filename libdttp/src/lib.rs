@@ -5,6 +5,7 @@
 #![feature(globs)]
 
 // library imports
+extern crate regex;
 extern crate serialize;
 extern crate time;
 

@@ -1,6 +1,8 @@
 // library uses
+use std::num;
 use std::fmt;
 use std::clone;
+use regex::Regex;
 
 // local uses
 
@@ -20,6 +22,7 @@ impl Auth {
 			email: None,
 			id: None,
 		}}
+
 	pub fn new(
 			user: Option<String>, comment: Option<String>,
 			email: Option<String>, id: Option<u32>) -> Auth {
@@ -29,6 +32,7 @@ impl Auth {
 			email: email,
 			id: id,
 		}}
+
 	pub fn new_test() -> Auth {
 		Auth {
 			user: Some( "kurotetsuka".to_string()),
@@ -36,8 +40,35 @@ impl Auth {
 			email: Some( "kurotetsuka@gmail.com".to_string()),
 			id: Some( 0x0a1a20c0),
 		}}
-	pub fn from_str( _: &str) -> Auth {
-		Auth::null()}
+
+	// this needs to be fixed to accept all possible auth strings
+	pub fn from_str( string: &str) -> Option<Auth> {
+		// regex with user, email, and key
+		let regex = Regex::new(
+			r"([:ascii:]+) <(\S+@\S+)> :: ([:xdigit:]{8})");
+		if regex.is_err() { return None;}
+		let regex = regex.unwrap();
+
+		// get captures
+		let cap = regex.captures( string);
+		if cap.is_none() { return None;}
+		let cap = cap.unwrap();
+		if cap.len() < 4 { return None;}
+
+		// parse user
+		let user = cap.at( 1).to_string();
+		// parse email
+		let email = cap.at( 2).to_string();
+		// parse id
+		let id_str = cap.at( 3);
+		println!( "id_str: {}", id_str);
+		let id : Option<u32> =
+			num::from_str_radix( id_str, 16);
+		if id.is_none() { return None;}
+		let id = id.unwrap();
+
+		Some( Auth::new(
+			Some( user), None, Some( email), Some( id)))}
 }
 impl fmt::Show for Auth {
 	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {

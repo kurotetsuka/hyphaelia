@@ -2,11 +2,11 @@
 use std::collections::HashMap;
 
 // local uses
-use auth::*;
+//use auth::*;
 use mote::*;
-//use protocol::*;
 use hub::mode::Mode;
 use hub::remote::RemoteHub;
+//use protocol::*;
 
 // modules
 pub mod mode;
@@ -16,7 +16,7 @@ pub struct Hub {
 	// this hub's stored motes
 	pub motedb: Vec<Mote>,
 	// this hub's auth-key database
-	pub authdb: Vec<Auth>,
+	//pub authdb: Vec<Auth>,
 	// this hub's auth database
 	pub remotedb: Vec<RemoteHub>,
 	// this hub's authorizing party
@@ -32,7 +32,6 @@ impl Hub {
 	pub fn new() -> Hub {
 		Hub {
 			motedb: Vec::new(),
-			authdb: Vec::new(),
 			remotedb: Vec::new(),
 			modes: HashMap::new(),}}
 
@@ -50,3 +49,5 @@ impl Hub {
 	pub fn mode_set( &mut self, mode: Mode, enabled: bool) {
 		self.modes.insert( mode, enabled);}
 }
+
+pub fn launch( _hub: Hub){}

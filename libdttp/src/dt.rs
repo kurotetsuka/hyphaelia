@@ -1,4 +1,5 @@
 // library uses
+use std::num;
 use std::fmt;
 use time::now_utc;
 
@@ -38,6 +39,38 @@ impl Datetime {
 			year: ( now.tm_year + 1900).to_u16().unwrap(),
 			day: now.tm_yday.to_u16().unwrap(),
 			milli: millis,}}
+
+	pub fn from_str( string : &str) -> Option<Datetime> {
+		let mut split = string.split( '.');
+
+		// parse year
+		let year_str = split.next();
+		if year_str.is_none() { return None;}
+		let year_str = year_str.unwrap();
+		let year : Option<u16> =
+			num::from_str_radix( year_str, 16);
+		if year.is_none() { return None;}
+		let year = year.unwrap();
+
+		// parse day
+		let day_str = split.next();
+		if day_str.is_none() { return None;}
+		let day_str = day_str.unwrap();
+		let day : Option<u16> =
+			num::from_str_radix( day_str, 16);
+		if day.is_none() { return None;}
+		let day = day.unwrap();
+
+		// parse milli
+		let milli_str = split.next();
+		if milli_str.is_none() { return None;}
+		let milli_str = milli_str.unwrap();
+		let milli : Option<u32> =
+			num::from_str_radix( milli_str, 16);
+		if milli.is_none() { return None;}
+		let milli = milli.unwrap();
+
+		Some( Datetime::new( year, day, milli))}
 
 	pub fn to_bytes( &self) -> Vec<u8> {
 		let mut result = Vec::new();

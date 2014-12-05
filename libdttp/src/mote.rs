@@ -1,9 +1,11 @@
 // library uses
+use std::num;
 use std::fmt;
 use std::rand::Rng;
 
 use serialize::base64;
 use serialize::base64::*;
+use serialize::json;
 
 // local uses
 use auth::*;
@@ -25,18 +27,27 @@ pub enum Class {
 	//  video classes
 	Mp4,
 }
+impl Class {
+	pub fn from_str( string: &str) -> Option<Class> {
+		match string {
+			"plain" => Some( Plain),
+			"markdown" => Some( Markdown),
+			"json" => Some( Json),
+			"raw" => Some( Raw),
+			"png" => Some( Png),
+			"mp4" => Some( Mp4),
+			_ => None,}}
+}
 impl fmt::Show for Class {
 	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
-		write!( formatter,
-			"{}",
+		write!( formatter, "{}",
 			match *self {
 				Plain => "plain",
 				Markdown => "markdown",
 				Json => "json",
 				Raw => "raw",
 				Png => "png",
-				Mp4 => "mp4"})
-	}
+				Mp4 => "mp4",})}
 }
 
 /// a unit of signed communication
@@ -58,6 +69,7 @@ pub struct Mote {
 	pub sig: Vec<u8>,
 }
 impl Mote {
+	// constructors
 	pub fn null() -> Mote {
 		Mote {
 			meta: String::new(),
@@ -90,20 +102,59 @@ impl Mote {
 			data: data.into_bytes(),
 			sig: Vec::new(),}}
 
-	pub fn set_meta( &mut self, meta: String){
-		self.meta = meta;}
+	pub fn from_str( string: &str) ->Option<Mote> {
+		// parse message into message struct
+		let msg : Option<MoteMsg> = json::decode( string).ok();
+		if msg.is_none() { return None;}
+		let msg = msg.unwrap();
 
-	pub fn set_data( &mut self, class: Class, data: Vec<u8>){
-		self.class = class;
-		self.data = data;}
+		// parse class
+		let class = Class::from_str( msg.class.as_slice());
+		if class.is_none() { return None;}
+		let class = class.unwrap();
 
-	pub fn set_text( &mut self, class: Class, data: String){
-		self.set_data( class, data.into_bytes());}
+		// parse auth
+		let auth = Auth::from_str( msg.auth.as_slice());
+		if auth.is_none() { return None;}
+		let auth = auth.unwrap();
 
-	pub fn salt< R: Rng >( &mut self, rng: &mut R){
+		// parse datetime
+		let datetime = Datetime::from_str( msg.datetime.as_slice());
+		if datetime.is_none() { return None;}
+		let datetime = datetime.unwrap();
+
+		// parse salt
+		let salt: Option<u64> = num::from_str_radix( msg.salt.as_slice(), 16);
+		if salt.is_none() { return None;}
+		let salt = salt.unwrap();
+
+		// parse data
+		let data : Option<Vec<u8>> =
+			msg.data.as_slice().from_base64().ok();
+		if data.is_none() { return None;}
+		let data = data.unwrap();
+
+		// parse sig
+		let sig : Option<Vec<u8>> =
+			msg.sig.as_slice().from_base64().ok();
+		if sig.is_none() { return None;}
+		let sig = sig.unwrap();
+
+		// return
+		Some( Mote {
+			meta: msg.meta,
+			class: class,
+			auth: auth,
+			datetime: datetime,
+			salt: salt,
+			data: data,
+			sig: sig,})}
+
+
+	pub fn salt<R: Rng>( &mut self, rng: &mut R){
 		self.salt = rng.next_u64();}
 
-	pub fn sign< Key: SecretKey >( &mut self, auth: &Auth, key: &Key){
+	pub fn sign<Key: SecretKey>( &mut self, auth: &Auth, key: &Key){
 		//generate plainbytes to sign
 		let mut plain : Vec<u8> = Vec::new();
 		//push meta bytes
