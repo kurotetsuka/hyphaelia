@@ -61,7 +61,6 @@ impl Auth {
 		let email = cap.at( 2).to_string();
 		// parse id
 		let id_str = cap.at( 3);
-		println!( "id_str: {}", id_str);
 		let id : Option<u32> =
 			num::from_str_radix( id_str, 16);
 		if id.is_none() { return None;}
