@@ -48,4 +48,8 @@ fn main(){
 	let mote_msg = mote.to_msg();
 	let mote_json = json::encode( &mote_msg);
 	println!( "mote json: {}", mote_json);
+
+	let mote = Mote::from_str( mote_json.as_slice()).unwrap();
+	println!( "mote decoded hash: {:x}", hash( &mote));
+	println!("mode decoded: {}", mote);
 }
