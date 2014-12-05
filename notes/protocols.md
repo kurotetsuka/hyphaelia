@@ -8,30 +8,30 @@
 
 ### ownership declaration
 ```
-$client:'have:<long hash>,<meta>.'
+$client:'have:<mote spec>.'
 $remote:'ok.'
 ```
 
 ### mote search
 ```
-$client:'have?:<long hash>,<meta>.'
+$client:'have?:<mote spec>.'
 $remote:'no.'
 ```
 
 ```
-$client:'have?:<long hash>,<meta>.'
+$client:'have?:<mote spec>.'
 $remote:'yes.'
 ```
 
 ```
-$client:'have?:<long hash>,<meta>.'
-$remote:'others:[<remote spec>, ..].'
+$client:'have?:<mote spec>.'
+$remote:'others:[<remote spec>,..].'
 ```
 
 ### ownership update
 ```
 $client:'new?:<datetime spec>,count.'
-$remote:'ok:[[<long hash>,<meta>], ..].'
+$remote:'ok:[[<mote spec>],..].'
 ```
 
 ```
@@ -50,7 +50,7 @@ $remote:'ok.'
 ### hub discovery
 ```
 $client:'others?'
-$remote:'ok:[<remote spec>, ..].'
+$remote:'ok:[<remote spec>,..].'
 ```
 
 ```
@@ -60,12 +60,12 @@ $remote:'no.'
 
 ## pushing
 ```
-$client:'want?:<long hash>,<meta>.'
+$client:'want?:<mote spec>.'
 $remote:'no.'
 ```
 
 ```
-$client:'want?:<long hash>,<meta>.'
+$client:'want?:<mote spec>.'
 $remote:'ok.'
 ```
 
@@ -76,27 +76,27 @@ $remote:'ok.'
 
 ## pulling
 ```
-$client:'get?:<long hash>,<meta>.'
+$client:'get?:<mote spec>.'
 $remote:'no.'
 ```
 
 ```
-$client:'get?:<long hash>,<meta>.'
+$client:'get?:<mote spec>.'
 $remote:'ok:{<mote json>}.'
 ```
 
 ## serving
 ```
-$client:'fetch?:<long hash>.'
+$client:'fetch?:<mote spec>.'
 $remote:'no.'
 ```
 
 ```
-$client:'fetch?:<long hash>.'
+$client:'fetch?:<mote spec>.'
 $remote:'ok:{<mote json>}.'
 ```
 
 ```
-$client:'fetch?:<long hash>.'
-$remote:'others:[<remote spec>, ..].'
+$client:'fetch?:<mote spec>.'
+$remote:'others:[<remote spec>,..].'
 ```
