@@ -9,9 +9,9 @@ extern crate dttp;
 extern crate serialize;
 
 // library uses
-use std::hash::hash;
-//use serialize::json;
-use serialize::json::ToJson;
+use std::os;
+use std::num;
+use std::io::net::ip::SocketAddr;
 
 // dttp lib uses
 use dttp::Auth;
@@ -19,14 +19,37 @@ use dttp::Datetime;
 use dttp::Mote;
 use dttp::Hub;
 use dttp::key;
-use dttp::protocol::*;
 
 // entry function
 fn main(){
+	let args = os::args();
+	let mut port = 8960;
+	if args.len() > 1 {
+		let port_arg = args[ 1].as_slice();
+		let port_arg : Option<u16> = 
+			num::from_str_radix( port_arg, 10);
+		if port_arg.is_some() {
+			port = port_arg.unwrap()}}
 
-	let hub = Hub::new();
+	let mut hub = Hub::new( port);
 	hub.say_hi();
 
+	//add bootstrap remotes
+	let bs_list = [
+		"localhost:8960",
+		"localhost:8961",
+		"localhost:8962",
+		"localhost:8963",
+		"localhost:8964"];
+	for &bs in bs_list.iter() {
+		let bs : Option<SocketAddr> = from_str( bs);
+		if bs.is_none() { continue;}
+		hub.add_remote( bs.unwrap());}
+
+	hub.add_mote( test_mote());
+}
+
+fn test_mote() -> Mote {
 	let rng = std::rand::OsRng::new();
 	let mut rng = rng.unwrap();
 
@@ -47,48 +70,5 @@ fn main(){
 		"test test yo yo bro".to_string());
 	mote.salt( &mut rng);
 	mote.sign( &auth, &sec_key);
-	//println!( "mote: {}", mote);
-	//println!( "mote hash: {:x}", hash( &mote));
 
-	let mote_hash = hash( &mote);
-	let mote_msg = mote.to_msg();
-	let mote_json = mote_msg.to_json();
-
-	let cmd = Hello;
-	println!( "cmd: {} : {}", cmd,
-		Command::from_str( cmd.to_string().as_slice()));
-	let cmd = OthersReq;
-	println!( "cmd: {} : {}", cmd,
-		Command::from_str( cmd.to_string().as_slice()));
-	let cmd = HaveDec( mote_hash);
-	println!( "cmd: {} : {}", cmd,
-		Command::from_str( cmd.to_string().as_slice()));
-	let cmd = HaveReq( mote_hash);
-	println!( "cmd: {} : {}", cmd,
-		Command::from_str( cmd.to_string().as_slice()));
-	let cmd = Get( mote_hash);
-	println!( "cmd: {} : {}", cmd,
-		Command::from_str( cmd.to_string().as_slice()));
-	let cmd = WantReq( mote_hash);
-	println!( "cmd: {} : {}", cmd,
-		Command::from_str( cmd.to_string().as_slice()));
-	let cmd = Take( mote_json.clone());
-	println!( "cmd: {} : {}", cmd,
-		Command::from_str( cmd.to_string().as_slice()));
-
-	let res = Okay;
-	println!( "res: {} : {}", res,
-		Response::from_str( res.to_string().as_slice()));
-	let res = OkayResult( mote_json);
-	println!( "res: {} : {}", res,
-		Response::from_str( res.to_string().as_slice()));
-	let res = Deny;
-	println!( "res: {} : {}", res,
-		Response::from_str( res.to_string().as_slice()));
-	let res = Error;
-	println!( "res: {} : {}", res,
-		Response::from_str( res.to_string().as_slice()));
-	let res = ErrorMsg( "asdf".to_string());
-	println!( "res: {} : {}", res,
-		Response::from_str( res.to_string().as_slice()));
-}
+	return mote;}
