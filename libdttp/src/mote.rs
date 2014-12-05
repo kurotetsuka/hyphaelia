@@ -1,11 +1,13 @@
 // library uses
 use std::num;
+use std::collections::TreeMap;
 use std::fmt;
 use std::rand::Rng;
 
 use serialize::base64;
 use serialize::base64::*;
 use serialize::json;
+use serialize::json::ToJson;
 
 // local uses
 use auth::*;
@@ -217,4 +219,16 @@ pub struct MoteMsg {
 	pub data: String,
 	// attached signature
 	pub sig: String,
+}
+impl ToJson for MoteMsg {
+	fn to_json( &self) -> json::Json {
+		let mut map = TreeMap::new();
+		map.insert( "meta".to_string(), self.meta.to_json());
+		map.insert( "class".to_string(), self.class.to_json());
+		map.insert( "auth".to_string(), self.auth.to_json());
+		map.insert( "datetime".to_string(), self.datetime.to_json());
+		map.insert( "salt".to_string(), self.salt.to_json());
+		map.insert( "data".to_string(), self.data.to_json());
+		map.insert( "sig".to_string(), self.sig.to_json());
+		json::Object( map)}
 }
