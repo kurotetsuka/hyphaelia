@@ -1,93 +1,102 @@
 # the communication protocols by which hubs communicate
 
 ## terms
-client = local hub
-daemon = remote hub
+`client` = local hub  
+`remote` = some other hub  
 
 ## tracking stuff
 
 ### ownership declaration
 ```
 $client:'have:<long hash>,<meta>.'
-$daemon:'ok.'
+$remote:'ok.'
 ```
 
 ### mote search
 ```
-$client:'have?:<long hash>.'
-$daemon:'no.'
+$client:'have?:<long hash>,<meta>.'
+$remote:'no.'
 ```
 
 ```
-$client:'have?:<long hash>.'
-$daemon:'yes.'
+$client:'have?:<long hash>,<meta>.'
+$remote:'yes.'
 ```
 
 ```
-$client:'have?:<long hash>.'
-$daemon:'other:<ipaddr/hostname>:<port>.'
+$client:'have?:<long hash>,<meta>.'
+$remote:'others:[<remote spec>, ..].'
 ```
 
 ### ownership update
 ```
-$client:'new?:<datetime spec>'
-$daemon:'ok:[[<long hash>,<meta>],..]'
+$client:'new?:<datetime spec>,count.'
+$remote:'ok:[[<long hash>,<meta>], ..].'
+```
+
+```
+$client:'new?:<datetime spec>,count.'
+$remote:'no.'
 ```
 
 ## bootstrapper stuff
 
 ### registration
 ```
-$client:'hi?'
-$daemon:'hi.'
+$client:'hi?.'
+$remote:'ok.'
 ```
 
 ### hub discovery
 ```
 $client:'others?'
-$daemon:'ok:[<remote spec>, .. ].'
+$remote:'ok:[<remote spec>, ..].'
 ```
 
 ```
 $client:'others?'
-$daemon:'no.'
+$remote:'no.'
 ```
 
 ## pushing
 ```
 $client:'want?:<long hash>,<meta>.'
-$daemon:'no.'
+$remote:'no.'
 ```
 
 ```
 $client:'want?:<long hash>,<meta>.'
-$daemon:'ok.'
-$client:'ok:{<mote json>}.'
+$remote:'ok.'
+```
+
+```
+$client:'take:{<mote json>}.'
+$remote:'ok.'
 ```
 
 ## pulling
 ```
-$client:'get?:<long hash>.'
-$daemon:'no.'
+$client:'get?:<long hash>,<meta>.'
+$remote:'no.'
 ```
 
 ```
-$client:'get?:<long hash>'
-$daemon:'ok:{<mote json>}.'
+$client:'get?:<long hash>,<meta>.'
+$remote:'ok:{<mote json>}.'
 ```
 
 ## serving
 ```
 $client:'fetch?:<long hash>.'
-$daemon:'no.'
+$remote:'no.'
 ```
 
 ```
 $client:'fetch?:<long hash>.'
-$daemon:'ok:{<mote json>}.'
+$remote:'ok:{<mote json>}.'
 ```
 
 ```
 $client:'fetch?:<long hash>.'
-$daemon:'ok:{<mote json>}.'
+$remote:'others:[<remote spec>, ..].'
 ```
