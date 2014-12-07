@@ -3,6 +3,7 @@
 
 // rustc feature enables
 #![feature(globs)]
+#![allow(deprecated)]
 
 // library imports
 extern crate regex;

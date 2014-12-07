@@ -6,7 +6,7 @@ use std::io::timer::sleep;
 use std::sync::{ Arc, Mutex};
 use std::time::duration::Duration;
 
-use serialize::json;
+use serialize::json::Json;
 
 // local uses
 //use auth::*;
@@ -14,6 +14,8 @@ use mote::*;
 //use hub::mode::Mode;
 use hub::remote::RemoteHub;
 use protocol::*;
+use protocol::Command::*;
+use protocol::Response::*;
 
 // modules
 pub mod mode;
@@ -74,6 +76,7 @@ impl Hub {
 		let remotedb_mutex = self.remotedb.clone();
 		spawn( proc(){
 			let others_req_msg = OthersReq.to_string();
+			println!( "starting bootstrap loop");
 			loop {
 				// copy addresses from current remotedb
 				let remotedb = remotedb_mutex.lock();
@@ -117,10 +120,10 @@ impl Hub {
 
 					// handle response
 					match response {
-						OkayResult( json::List( list)) => {
+						OkayResult( Json::Array( list)) => {
 							for ref entry in list.iter() {
 								match *entry {
-									&json::String( ref string) => {
+									&Json::String( ref string) => {
 										let new_addr : Option<SocketAddr> =
 											from_str( string.as_slice());
 										if new_addr.is_some(){

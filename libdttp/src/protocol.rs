@@ -6,6 +6,8 @@ use serialize::json::Json;
 use regex::Regex;
 
 // local uses
+use self::Command::*;
+use self::Response::*;
 
 /*
 pub enum MoteSpec {
@@ -28,12 +30,12 @@ impl Command {
 	pub fn from_str( string: &str) -> Option<Command> {
 		// match hello command
 		let cmd = "hi?";
-		if string.equiv( &cmd) {
+		if string.eq( cmd) {
 			return Some( Hello);}
 
 		// match others request
 		let cmd = "others?";
-		if string.equiv( &cmd) {
+		if string.eq( cmd) {
 			return Some( OthersReq);}
 
 		// match have command
@@ -154,17 +156,17 @@ impl Response {
 	pub fn from_str( string: &str) -> Option<Response> {
 		// match okay response
 		let res = "ok.";
-		if string.equiv( &res) {
+		if string.eq( res) {
 			return Some( Okay);}
 
 		// match deny response
 		let res = "no.";
-		if string.equiv( &res) {
+		if string.eq( res) {
 			return Some( Deny);}
 
 		// match error response
 		let res = "err.";
-		if string.equiv( &res) {
+		if string.eq( res) {
 			return Some( Error);}
 
 		// match okay result response

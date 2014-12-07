@@ -7,12 +7,14 @@ use std::rand::Rng;
 use serialize::base64;
 use serialize::base64::*;
 use serialize::json;
-use serialize::json::ToJson;
+use serialize::json::*;
 
 // local uses
 use auth::*;
 use dt::*;
 use key::*;
+
+use self::Class::*;
 
 /// class that defines the types of data carried by a mote
 #[deriving( Hash)]
@@ -194,7 +196,7 @@ impl fmt::Show for Mote {
 			pad: true,
 			line_length: None };
 		write!( formatter,
-			"{}, {}, {}, {}, {:08x}, {:s}, {:s}",
+			"{}, {}, {}, {}, {:08x}, {}, {}",
 			self.meta, self.class, self.auth,
 			self.datetime, self.salt,
 			self.data.as_slice().to_base64( b64_config),
@@ -230,5 +232,5 @@ impl ToJson for MoteMsg {
 		map.insert( "salt".to_string(), self.salt.to_json());
 		map.insert( "data".to_string(), self.data.to_json());
 		map.insert( "sig".to_string(), self.sig.to_json());
-		json::Object( map)}
+		json::Json::Object( map)}
 }
