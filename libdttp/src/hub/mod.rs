@@ -76,7 +76,6 @@ impl Hub {
 		let remotedb_mutex = self.remotedb.clone();
 		spawn( proc(){
 			let others_req_msg = OthersReq.to_string();
-			println!( "starting bootstrap loop");
 			loop {
 				// copy addresses from current remotedb
 				let remotedb = remotedb_mutex.lock();
@@ -89,12 +88,12 @@ impl Hub {
 				let mut new_remotes : Vec<SocketAddr> = Vec::new();
 				for &addr in remotes_addr.iter() {
 					// connect to remote
-					println!( "attempting to bootstrap against: {}", addr);
+					//println!( "attempting to bootstrap against: {}", addr);
 					let remote_stream =
 						TcpStream::connect_timeout(
 							addr.clone(), Duration::seconds( 20));
 					if remote_stream.is_err() {
-						println!( "failed to connect to {}", addr);
+						//println!( "failed to connect to {}", addr);
 						continue;}
 					let mut remote_stream = remote_stream.unwrap();
 

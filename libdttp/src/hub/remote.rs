@@ -1,5 +1,6 @@
 // library uses
 use std::io::net::ip::SocketAddr;
+use std::fmt;
 
 // local uses
 
@@ -12,4 +13,8 @@ impl RemoteHub {
 		RemoteHub {
 			addr: addr,
 			motedb: Vec::new(),}}
+}
+impl fmt::Show for RemoteHub {
+	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
+		write!( formatter, "(remote {} {})", self.addr, self.motedb)}
 }
