@@ -70,15 +70,33 @@ impl Hub {
 		self.spawn_bootstrap();
 		self.spawn_push();}
 
-	pub fn spawn_daemon( &self){}
+	pub fn spawn_daemon( &self){
+		let port = self.port;
+		let motedb_arc = self.motedb.clone();
+		let remotedb_arc = self.remotedb.clone();
+		spawn( proc(){
+			Hub::daemon( port, motedb_arc, remotedb_arc);});
+		println!( "daemon proc spawned.");}
 
 	pub fn spawn_bootstrap( &self){
-		let remotedb_mutex = self.remotedb.clone();
+		let remotedb_arc = self.remotedb.clone();
 		spawn( proc(){
-			let others_req_msg = OthersReq.to_string();
+			Hub::bootstrap( remotedb_arc);});
+		println!( "bootstrap proc spawned.");}
+
+	pub fn spawn_push( &self){}
+
+	fn daemon( port: u16, motedb_arc: Arc<Mutex<Vec<Mote>>>,
+			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){}
+
+	fn serve( client: TcpStream, motedb_arc: Arc<Mutex<Vec<Mote>>>,
+			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){}
+
+	fn bootstrap( remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
+		let others_req_msg = OthersReq.to_string();
 			loop {
 				// copy addresses from current remotedb
-				let remotedb = remotedb_mutex.lock();
+				let remotedb = remotedb_arc.lock();
 				let mut remotes_addr : Vec<SocketAddr> = Vec::new();
 				for ref remote in remotedb.deref().iter() {
 					remotes_addr.push( remote.addr.clone());}
@@ -136,14 +154,10 @@ impl Hub {
 					// move on
 					continue;}
 
-				let mut remotedb = remotedb_mutex.lock();
+				let mut remotedb = remotedb_arc.lock();
 				for &new_addr in new_remotes.iter() {
 					remotedb.push( RemoteHub::new( new_addr.clone()));}
 				drop( remotedb);
-				sleep( Duration::seconds( 30));}});
-
-		println!( "bootstrap proc spawned.");}
-
-	pub fn spawn_push( &self){}
+				sleep( Duration::seconds( 30));}}
 }
 
