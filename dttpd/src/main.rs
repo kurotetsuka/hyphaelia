@@ -11,7 +11,7 @@ extern crate serialize;
 // library uses
 use std::os;
 use std::num;
-use std::io::net::ip::SocketAddr;
+use std::io::net::ip::{ SocketAddr, ToSocketAddr};
 
 // dttp lib uses
 use dttp::Auth;
@@ -36,13 +36,13 @@ fn main(){
 
 	//add bootstrap remotes
 	let bs_list = [
-		"localhost:8960",
-		"localhost:8961",
-		"localhost:8962",
-		"localhost:8963",
-		"localhost:8964"];
+		("localhost", 8960),
+		("localhost", 8961),
+		("localhost", 8962),
+		("localhost", 8963),
+		("localhost", 8964)];
 	for &bs in bs_list.iter() {
-		let bs : Option<SocketAddr> = from_str( bs);
+		let bs : Option<SocketAddr> = bs.to_socket_addr().ok();
 		if bs.is_none() { continue;}
 		hub.add_remote( bs.unwrap());}
 
