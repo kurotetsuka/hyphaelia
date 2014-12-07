@@ -46,7 +46,14 @@ fn main(){
 		if bs.is_none() { continue;}
 		hub.add_remote( bs.unwrap());}
 
-	hub.add_mote( test_mote());
+	let mote = test_mote();
+	//println!( "mote: {}", mote);
+	//println!( "mote json: {}", 
+	//	serialize::json::encode( &mote.to_msg()));
+	hub.add_mote( mote);
+
+	// launch_hub
+	hub.launch();
 }
 
 fn test_mote() -> Mote {
@@ -65,7 +72,7 @@ fn test_mote() -> Mote {
 
 	let mut mote = Mote::new_text(
 		"test test :)".to_string(),
-		dttp::mote::Markdown,
+		dttp::mote::Class::Markdown,
 		Datetime::new( 1964, 256, 43200_000),
 		"test test yo yo bro".to_string());
 	mote.salt( &mut rng);
