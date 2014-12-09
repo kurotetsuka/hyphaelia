@@ -9,9 +9,10 @@ extern crate dttp;
 extern crate serialize;
 
 // library uses
-use std::os;
-use std::num;
+use std::hash;
 use std::io::net::ip::{ SocketAddr, ToSocketAddr};
+use std::num;
+use std::os;
 
 // dttp lib uses
 use dttp::Auth;
@@ -39,15 +40,15 @@ fn main(){
 		("localhost", 8960),
 		("localhost", 8961),
 		("localhost", 8962),
-		("localhost", 8963),
-		("localhost", 8964)];
+		("localhost", 8963),];
 	for &bs in bs_list.iter() {
 		let bs : Option<SocketAddr> = bs.to_socket_addr().ok();
 		if bs.is_none() { continue;}
 		hub.add_remote( bs.unwrap());}
 
 	let mote = test_mote();
-	//println!( "mote: {}", mote);
+	let mote_hash = hash::hash( &mote);
+	println!( "generated test mote: {:x}::{}", mote_hash, mote);
 	//println!( "mote json: {}", 
 	//	serialize::json::encode( &mote.to_msg()));
 	hub.add_mote( mote);
