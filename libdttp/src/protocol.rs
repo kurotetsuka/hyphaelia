@@ -148,7 +148,7 @@ impl fmt::Show for Command {
 pub enum Response {
 	Okay,
 	OkayResult( Json),
-	//Affirm,
+	Affirm,
 	Deny,
 	Error,
 	ErrorMsg( String),
@@ -159,6 +159,11 @@ impl Response {
 		let res = "ok.";
 		if string.eq( res) {
 			return Some( Okay);}
+
+		// match affirm response
+		let res = "yes.";
+		if string.eq( res) {
+			return Some( Affirm);}
 
 		// match deny response
 		let res = "no.";
@@ -209,6 +214,8 @@ impl fmt::Show for Response {
 				write!( formatter, "ok."),
 			&OkayResult( ref data) =>
 				write!( formatter, "ok:{}.", json::encode( data)),
+			&Affirm =>
+				write!( formatter, "yes."),
 			&Deny =>
 				write!( formatter, "no."),
 			&Error =>
