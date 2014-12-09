@@ -198,7 +198,7 @@ impl fmt::Show for Mote {
 			pad: true,
 			line_length: None };
 		write!( formatter,
-			"{}, {}, {}, {}, {:08x}, {}, {}",
+			"[\"{}\", {}, \"{}\", {}, {:08x}, {}, {}",
 			self.meta, self.class, self.auth,
 			self.datetime, self.salt,
 			self.data.as_slice().to_base64( b64_config),
