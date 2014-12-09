@@ -10,12 +10,17 @@ clean:
 build:
 	cargo build
 
-test:
-	cargo run
+#tests
+test: test-p1
 
-install: check-build
+test-p1: build
+	target/dttpd 8960
 
+test-p2: build
+	target/dttpd 8961
 
-#checks
+test-p3: build
+	target/dttpd 8962
 
-check-build:
+test-p4: build
+	target/dttpd 8963
