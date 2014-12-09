@@ -43,7 +43,7 @@ $remote:'no.'
 
 ### registration
 ```
-$client:'hi?.'
+$client:'hi:<self remote spec>.'
 $remote:'ok.'
 ```
 
