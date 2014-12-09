@@ -1,4 +1,4 @@
-## project ectocat :: open source health information ##
+## Hyphaelia-Web :: Web Front-End to a Hub ##
 
 By: [kurotetsuka](github.com/kurotetsuka)  
 This work is released under the GNU GPL. See [license.md](license.md) and [gnu-gpl-v3.0.md](legal/gnu-gpl-v3.0.md) for details.
