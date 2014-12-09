@@ -111,7 +111,9 @@ impl Mote {
 		let msg : Option<MoteMsg> = json::decode( string).ok();
 		if msg.is_none() { return None;}
 		let msg = msg.unwrap();
+		Mote::from_msg( &msg)}
 
+	pub fn from_msg( msg: &MoteMsg) ->Option<Mote> {
 		// parse class
 		let class = Class::from_str( msg.class.as_slice());
 		if class.is_none() { return None;}
@@ -146,7 +148,7 @@ impl Mote {
 
 		// return
 		Some( Mote {
-			meta: msg.meta,
+			meta: msg.meta.clone(),
 			class: class,
 			auth: auth,
 			datetime: datetime,

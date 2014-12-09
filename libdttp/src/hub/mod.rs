@@ -1,12 +1,15 @@
 // library uses
-use std::io::BufferedReader;
+use std::hash;
+use std::io::{ Acceptor, BufferedReader, Listener};
 use std::io::net::ip::SocketAddr;
-use std::io::net::tcp::TcpStream;
+use std::io::net::tcp::{ TcpListener, TcpStream};
 use std::io::timer::sleep;
 use std::sync::{ Arc, Mutex};
 use std::time::duration::Duration;
 
-use serialize::json::Json;
+use serialize::Decodable;
+use serialize::json;
+use serialize::json::{ Json, ToJson};
 
 // local uses
 //use auth::*;
@@ -20,6 +23,9 @@ use protocol::Response::*;
 // modules
 pub mod mode;
 pub mod remote;
+
+// constants
+static BOOTSTRAP_PAUSE_SECONDS: i64 = 15;
 
 pub struct Hub {
 	// this hub's address
@@ -66,17 +72,19 @@ impl Hub {
 		self.modes.insert( mode, enabled);}*/
 
 	pub fn launch( &self){
-		self.spawn_daemon();
+		self.spawn_server();
 		self.spawn_bootstrap();
 		self.spawn_push();}
 
-	pub fn spawn_daemon( &self){
+	// thread launching functions
+
+	pub fn spawn_server( &self){
 		let port = self.port;
 		let motedb_arc = self.motedb.clone();
 		let remotedb_arc = self.remotedb.clone();
 		spawn( proc(){
-			Hub::daemon( port, motedb_arc, remotedb_arc);});
-		println!( "daemon proc spawned.");}
+			Hub::server( port, motedb_arc, remotedb_arc);});
+		println!( "server proc spawned.");}
 
 	pub fn spawn_bootstrap( &self){
 		let remotedb_arc = self.remotedb.clone();
@@ -84,13 +92,74 @@ impl Hub {
 			Hub::bootstrap( remotedb_arc);});
 		println!( "bootstrap proc spawned.");}
 
-	pub fn spawn_push( &self){}
+	pub fn spawn_push( &self){
+		let motedb_arc = self.motedb.clone();
+		let remotedb_arc = self.remotedb.clone();
+		spawn( proc(){
+			Hub::push( motedb_arc, remotedb_arc);});
+		println!( "server proc spawned.");}
 
-	fn daemon( port: u16, motedb_arc: Arc<Mutex<Vec<Mote>>>,
-			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){}
+	// thread functions
 
-	fn serve( client: TcpStream, motedb_arc: Arc<Mutex<Vec<Mote>>>,
-			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){}
+	fn server( port: u16, motedb_arc: Arc<Mutex<Vec<Mote>>>,
+			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
+		// open server
+		println!( "opening listener on port: {}", port);
+		let listener = TcpListener::bind( ( "localhost", port)).unwrap();
+		let mut acceptor = listener.listen();
+		// wait for incoming streams
+		for stream in acceptor.incoming() {
+			if let Ok( client) = stream {
+				// clone motedb and remotedb handles
+				let motedb_arc = motedb_arc.clone();
+				let remotedb_arc = remotedb_arc.clone();
+				// spawn client handler
+				spawn( proc() {
+					Hub::serve( client, motedb_arc, remotedb_arc);})}}
+		// close server
+		drop( acceptor);}
+
+	fn serve( mut client_stream: TcpStream, motedb_arc: Arc<Mutex<Vec<Mote>>>,
+			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
+		let client_addr = client_stream.peer_name().unwrap();
+		println!( "client connected: {}", client_addr);
+
+		// start reading commands from client
+		let mut reader = BufferedReader::new( client_stream.clone());
+		while let Ok( line) = reader.read_line() {
+			// parse command
+			let line_trimmed = line.as_slice().trim();
+			let command = Command::from_str( line_trimmed);
+			if command.is_none() {
+				println!( "failed to parse command from {}: {}",
+					client_addr, line_trimmed);
+				continue;}
+			let command = command.unwrap();
+
+			// handle command
+			let response : Response = match command {
+				// todo: adjust hello command to contain remote addr
+				Hello => Okay,
+				// request all the remotes we know about
+				OthersReq => Hub::get_others( &remotedb_arc),
+				// record that this remote has the specified mote
+				HaveDec( _hash) => Deny,
+				// reply with whether we have the specified mote
+				HaveReq( hash) => Hub::have_mote( &motedb_arc, hash),
+				// return the given mote ( if we have it )
+				Get( hash) => Hub::get_mote( &motedb_arc, hash),
+				// return whether we want the specified mote
+				WantReq( hash) => Hub::want_mote( &motedb_arc, hash),
+				// accept the given mote into our db
+				Take( json) => Hub::take_mote( &motedb_arc, json),
+			};
+
+			client_stream.write_line(
+				response.to_string().as_slice()).ok();}
+
+		// clean up
+		client_stream.close_write().ok();
+		println!( "client disconnected: {}", client_addr);}
 
 	fn bootstrap( remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
 		let others_req_msg = OthersReq.to_string();
@@ -102,7 +171,7 @@ impl Hub {
 					remotes_addr.push( remote.addr.clone());}
 				drop( remotedb);
 
-				// get new 
+				// get new remotes from existing remotes
 				let mut new_remotes : Vec<SocketAddr> = Vec::new();
 				for &addr in remotes_addr.iter() {
 					// connect to remote
@@ -154,10 +223,83 @@ impl Hub {
 					// move on
 					continue;}
 
+				//write new remotes to db
 				let mut remotedb = remotedb_arc.lock();
+				let size = remotedb.len();
 				for &new_addr in new_remotes.iter() {
-					remotedb.push( RemoteHub::new( new_addr.clone()));}
+					let new_remote = RemoteHub::new( new_addr.clone());
+					if ! remotedb.as_slice().contains( &new_remote) {
+						remotedb.push( new_remote);}}
+				if size != remotedb.len() {
+					println!( "remote list updated: {}", remotedb.as_slice());}
 				drop( remotedb);
-				sleep( Duration::seconds( 30));}}
+
+				//wait for a while until polling
+				sleep( Duration::seconds( BOOTSTRAP_PAUSE_SECONDS));}}
+
+	fn push( _motedb_arc: Arc<Mutex<Vec<Mote>>>,
+			_remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){}
+
+	// command handling functions
+
+	fn get_others(
+			remotedb_arc: &Arc<Mutex<Vec<RemoteHub>>>) -> Response {
+		let remotedb = remotedb_arc.lock();
+		let mut list : Vec<Json> = Vec::new();
+		// push the addr of every remote we know of
+		for remote in remotedb.iter() {
+			list.push( Json::String( remote.to_string()))}
+		drop( remotedb);
+		OkayResult( Json::Array( list))}
+
+	fn have_mote(
+			motedb_arc: &Arc<Mutex<Vec<Mote>>>, hash: u64) -> Response {
+		let motedb = motedb_arc.lock();
+		let mut response = Deny;
+		for mote in motedb.iter() {
+			if hash == hash::hash( mote) {
+				response = Okay;
+				break;}}
+		drop( motedb);
+		response}
+
+	fn get_mote(
+			motedb_arc: &Arc<Mutex<Vec<Mote>>>, hash: u64) -> Response {
+		let motedb = motedb_arc.lock();
+		let mut response = Deny;
+		for mote in motedb.iter() {
+			if hash == hash::hash( mote) {
+				let mote_json = mote.to_msg().to_json();
+				response = OkayResult( mote_json);
+				break;}}
+		drop( motedb);
+		response}
+
+	fn want_mote(
+			motedb_arc: &Arc<Mutex<Vec<Mote>>>, hash: u64) -> Response {
+		let motedb = motedb_arc.lock();
+		let mut response = Deny;
+		for mote in motedb.iter() {
+			if hash == hash::hash( mote) {
+				response = Okay;
+				break;}}
+		drop( motedb);
+		response}
+
+	fn take_mote(
+			motedb_arc: &Arc<Mutex<Vec<Mote>>>, json: Json) -> Response {
+		// decode mote
+		let mut decoder = json::Decoder::new( json);
+		let mote_msg : Option<MoteMsg> =
+			Decodable::decode( &mut decoder).ok();
+		if mote_msg.is_none() { return Error;}
+		let mote = Mote::from_msg( &mote_msg.unwrap());
+		if mote.is_none() { return Error;}
+		let mote = mote.unwrap();
+
+		let mut motedb = motedb_arc.lock();
+		motedb.push( mote);
+		drop( motedb);
+		Okay}
 }
 

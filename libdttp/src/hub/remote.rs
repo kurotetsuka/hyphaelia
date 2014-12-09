@@ -14,6 +14,12 @@ impl RemoteHub {
 			addr: addr,
 			motedb: Vec::new(),}}
 }
+impl PartialEq for RemoteHub {
+	fn eq( &self, other: &RemoteHub) -> bool {
+		self.addr.eq( &other.addr)}
+	fn ne( &self, other: &RemoteHub) -> bool {
+		self.addr.ne( &other.addr)}
+}
 impl fmt::Show for RemoteHub {
 	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
 		write!( formatter, "(remote {} {})", self.addr, self.motedb)}

@@ -148,6 +148,7 @@ impl fmt::Show for Command {
 pub enum Response {
 	Okay,
 	OkayResult( Json),
+	//Affirm,
 	Deny,
 	Error,
 	ErrorMsg( String),
