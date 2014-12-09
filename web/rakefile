@@ -6,7 +6,7 @@ require_relative 'src/web_app'
 task :default => [ :gen ]
 task :freshen => [ :clean, :gen ]
 task :clean do
-	%x[ rm -rf static/*]
+	%x[ rm -rf static/img static/lib]
 end
 task :test => [ :launch_app ]
 
