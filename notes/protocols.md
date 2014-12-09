@@ -66,7 +66,7 @@ $remote:'no.'
 
 ```
 $client:'want?:<mote spec>.'
-$remote:'ok.'
+$remote:'yes.'
 ```
 
 ```
