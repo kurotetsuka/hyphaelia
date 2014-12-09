@@ -258,7 +258,7 @@ impl Hub {
 		let mut response = Deny;
 		for mote in motedb.iter() {
 			if hash == hash::hash( mote) {
-				response = Okay;
+				response = Affirm;
 				break;}}
 		drop( motedb);
 		response}
@@ -278,10 +278,10 @@ impl Hub {
 	fn want_mote(
 			motedb_arc: &Arc<Mutex<Vec<Mote>>>, hash: u64) -> Response {
 		let motedb = motedb_arc.lock();
-		let mut response = Deny;
+		let mut response = Affirm;
 		for mote in motedb.iter() {
 			if hash == hash::hash( mote) {
-				response = Okay;
+				response = Deny;
 				break;}}
 		drop( motedb);
 		response}
