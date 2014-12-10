@@ -123,7 +123,7 @@ impl Hub {
 	fn serve( mut client_stream: TcpStream, motedb_arc: Arc<Mutex<Vec<Mote>>>,
 			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
 		let client_addr = client_stream.peer_name().unwrap();
-		println!( "[sv] client connected: {}", client_addr);
+		println!( "[sv] client {} connected", client_addr);
 
 		// start reading commands from client
 		let mut reader = BufferedReader::new( client_stream.clone());
@@ -160,7 +160,7 @@ impl Hub {
 
 		// clean up
 		client_stream.close_write().ok();
-		println!( "[sv] client disconnected: {}", client_addr);}
+		println!( "[sv] client {} disconnected", client_addr);}
 
 	fn bootstrap( remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
 		let others_req_msg = OthersReq.to_string();
@@ -293,7 +293,7 @@ impl Hub {
 					match response {
 						Affirm => (),
 						Deny => {
-							println!( "[ps] remote {} declined mote {:x}",
+							println!( "[ps] remote {} declined mote {:016x}",
 								remote_addr, mote_hash);
 							continue;}
 						bad => {
@@ -322,10 +322,10 @@ impl Hub {
 					// handle take response
 					match response {
 						Affirm => {
-							println!( "[ps] remote {} accepted mote {:x}",
+							println!( "[ps] remote {} accepted mote {:016x}",
 								remote_addr, mote_hash);}
 						Deny => {
-							println!( "[ps] remote {} denied mote {:x}",
+							println!( "[ps] remote {} denied mote {:016x}",
 								remote_addr, mote_hash);}
 						bad => {
 							println!( "[ps] bad response from {}: {}",
@@ -398,7 +398,7 @@ impl Hub {
 		if mote.is_none() { return Error;}
 		let mote = mote.unwrap();
 		let mote_hash = hash::hash( &mote);
-		println!("[sv] received new mote: {:x} :: {}", mote_hash, mote);
+		println!("[sv] received new mote: {:016x} :: {}", mote_hash, mote);
 
 		let mut motedb = motedb_arc.lock();
 		motedb.push( mote);
