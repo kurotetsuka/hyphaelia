@@ -167,6 +167,7 @@ impl Hub {
 		loop {
 			// copy addresses from current remotedb
 			let remotedb = remotedb_arc.lock();
+			println!( "remote list: {}", remotedb.deref());
 			let mut remotes_addr : Vec<SocketAddr> = Vec::new();
 			for ref remote in remotedb.deref().iter() {
 				remotes_addr.push( remote.addr.clone());}
