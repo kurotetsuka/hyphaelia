@@ -1,0 +1,5 @@
+# boostrap list
+localhost:8190
+localhost:8191
+localhost:8192
+localhost:8193
