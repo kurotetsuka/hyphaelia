@@ -1,7 +1,6 @@
 // library uses
 use std::num;
 use std::fmt;
-use std::io::net::ip::SocketAddr;
 
 use serialize::json;
 use serialize::json::Json;
@@ -20,8 +19,7 @@ pub enum MoteSpec {
 }*/
 
 pub enum Command {
-	Hello,
-	//Hello( SocketAddr),
+	Hello( String),
 	OthersReq,
 	HaveDec( u64),
 	HaveReq( u64),
@@ -37,9 +35,17 @@ impl Command {
 			return Some( OthersReq);}
 
 		// match hello command
-		let cmd = "hi?";
-		if string.eq( cmd) {
-			return Some( Hello);}
+		let cmd = "hi:";
+		if string.starts_with( cmd) {
+			let regex = Regex::new( r"hi:(.+:.+).").unwrap();
+			let cap = regex.captures( string);
+			if cap.is_none() { return None;}
+			let cap = cap.unwrap();
+
+			// parse hostname
+			let hostname = cap.at( 1).to_string();
+			// return
+			return Some( Hello( hostname));}
 
 		// match have command
 		let cmd = "have:";
@@ -132,8 +138,8 @@ impl Command {
 impl fmt::Show for Command {
 	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
 		match self {
-			&Hello =>
-				write!( formatter, "hi?"),
+			&Hello( ref hostname) =>
+				write!( formatter, "hi:{}.", *hostname),
 			&OthersReq =>
 				write!( formatter, "others?"),
 			&HaveDec( ref hash) =>

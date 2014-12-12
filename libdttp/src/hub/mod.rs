@@ -1,7 +1,7 @@
 // library uses
 use std::hash;
 use std::io::{ Acceptor, BufferedReader, Listener};
-use std::io::net::ip::SocketAddr;
+use std::io::net::ip::{ SocketAddr, ToSocketAddr};
 use std::io::net::tcp::{ TcpListener, TcpStream};
 use std::io::timer::sleep;
 use std::sync::{ Arc, Mutex};
@@ -25,11 +25,15 @@ pub mod mode;
 pub mod remote;
 
 // constants
+static PUSH_LOG_DECLINE: bool = false;
 static PUSH_PAUSE_SECONDS: i64 = 10;
 static BOOTSTRAP_PAUSE_SECONDS: i64 = 10;
+static GREET_PAUSE_SECONDS: i64 = 10;
 
 pub struct Hub {
-	// this hub's address
+	// this hub's hostname
+	pub hostname: String,
+	// this hub's port
 	pub port: u16,
 	// this hub's stored motes
 	pub motedb: Arc<Mutex<Vec<Mote>>>,
@@ -47,8 +51,9 @@ pub struct Hub {
 	//pub modes: HashMap<Mode, bool>,
 }
 impl Hub {
-	pub fn new( port: u16) -> Hub {
+	pub fn new( hostname: String, port: u16) -> Hub {
 		Hub {
+			hostname: hostname,
 			port: port,
 			motedb: Arc::new( Mutex::new( Vec::new())),
 			remotedb: Arc::new( Mutex::new( Vec::new())),
@@ -75,7 +80,8 @@ impl Hub {
 	pub fn launch( &self){
 		self.spawn_server();
 		self.spawn_bootstrap();
-		self.spawn_push();}
+		self.spawn_push();
+		self.spawn_greet();}
 
 	// thread launching functions
 
@@ -100,12 +106,21 @@ impl Hub {
 			Hub::push( motedb_arc, remotedb_arc);});
 		println!( "push proc spawned.");}
 
+	pub fn spawn_greet( &self){
+		let hostname = self.hostname.clone();
+		let port = self.port;
+		let remotedb_arc = self.remotedb.clone();
+		spawn( proc(){
+			Hub::greet( hostname, port, remotedb_arc);});
+		println!( "greet proc spawned.");}
+
 	// thread functions
 
 	fn server( port: u16, motedb_arc: Arc<Mutex<Vec<Mote>>>,
 			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
 		// open server
-		let mut listener = TcpListener::bind( ( "0.0.0.0", port)).unwrap();
+		let mut listener = TcpListener::bind(
+			( "localhost", port)).unwrap();
 		println!( "[sv] opened listener on: {}",
 			listener.socket_name().unwrap());
 		let mut acceptor = listener.listen();
@@ -142,7 +157,7 @@ impl Hub {
 			// handle command
 			let response : Response = match command {
 				// todo: adjust hello command to contain remote addr
-				Hello => Okay,
+				Hello( hostname) => Hub::greet_remote( &remotedb_arc, hostname),
 				// request all the remotes we know about
 				OthersReq => Hub::get_others( &remotedb_arc),
 				// record that this remote has the specified mote
@@ -210,6 +225,7 @@ impl Hub {
 				// handle response
 				match response {
 					OkayResult( Json::Array( list)) => {
+						//println!( "[bs] result response from {}: {}", addr, list);
 						for ref entry in list.iter() {
 							match *entry {
 								&Json::String( ref string) => {
@@ -229,13 +245,14 @@ impl Hub {
 
 			//write new remotes to db
 			let mut remotedb = remotedb_arc.lock();
-			let size = remotedb.len();
+			//let size = remotedb.len();
 			for &new_addr in new_remotes.iter() {
 				let new_remote = RemoteHub::new( new_addr.clone());
 				if ! remotedb.as_slice().contains( &new_remote) {
+					println!( "[bs] adding new remote: {}", new_addr);
 					remotedb.push( new_remote);}}
-			if size != remotedb.len() {
-				println!( "[bs] remote list updated: {}", remotedb.as_slice());}
+			//if size != remotedb.len() {
+			//	println!( "[bs] remote list updated: {}", remotedb.as_slice());}
 			drop( remotedb);
 
 			//wait for a while before polling again
@@ -299,14 +316,15 @@ impl Hub {
 					match response {
 						Affirm => (),
 						Deny => {
-							println!( "[ps] remote {} declined mote {:016x}",
-								remote_addr, mote_hash);
+							if PUSH_LOG_DECLINE {
+								println!( "[ps] remote {} declined mote {:016x}",
+									remote_addr, mote_hash);}
 							continue;}
 						bad => {
 							println!( "[ps] bad want response from {}: {}", remote_addr, bad);
 							continue;}}
 
-					//sent take request
+					//send take request
 					let take_req_msg = Take(
 						mote.to_msg().to_json()).to_string();
 					remote_stream.write_line( take_req_msg.as_slice()).ok();
@@ -347,7 +365,81 @@ impl Hub {
 			//wait for a while until polling
 			sleep( Duration::seconds( PUSH_PAUSE_SECONDS));}}
 
+	fn greet( hostname: String, port: u16,
+			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
+		let hello_msg = Hello(
+			format!( "{}:{}", hostname, port)).to_string();
+		loop {
+			// copy addresses from current remotedb
+			let remotedb = remotedb_arc.lock();
+			let mut remotes_addr : Vec<SocketAddr> = Vec::new();
+			for ref remote in remotedb.deref().iter() {
+				remotes_addr.push( remote.addr.clone());}
+			drop( remotedb);
+
+			// push 
+			for &remote_addr in remotes_addr.iter() {
+				// connect to remote
+				//println!( "[gt] greeting {}", remote_addr);
+				let remote_stream =
+					TcpStream::connect_timeout(
+						remote_addr.clone(), Duration::seconds( 10));
+				if let Err( _msg) = remote_stream {
+					//println!( "[gt] failed to connect to {}: {}",
+					//	remote_addr, _msg);
+					continue;}
+				let mut remote_stream = remote_stream.unwrap();
+				let mut reader = BufferedReader::new( remote_stream.clone());
+
+				// send hello request
+				remote_stream.write_line( hello_msg.as_slice()).ok();
+
+				// parse hello response
+				let line = reader.read_line().ok();
+				if line.is_none() {
+					println!( "[gt] failed to read response from {}", remote_addr);
+					continue;}
+				let line = line.unwrap();
+				let line_trimmed = line.as_slice().trim();
+				let response = Response::from_str( line_trimmed);
+				if response.is_none() {
+					println!( "[gt] failed to parse response from {}: {}",
+						remote_addr, line_trimmed);
+					continue;}
+				let response = response.unwrap();
+
+				// handle hello response
+				match response {
+					Okay => (),
+					Deny => {
+						println!( "[gt] remote {} denied greeting", remote_addr);
+						continue;}
+					bad => {
+						println!( "[gt] bad greet response from {}: {}",
+							remote_addr, bad);
+						continue;}}
+
+				// move on to next remote
+				drop( remote_stream);
+				continue;}
+
+			//wait for a while until polling
+			sleep( Duration::seconds( GREET_PAUSE_SECONDS));}}
+
 	// command handling functions
+
+	fn greet_remote( remotedb_arc: &Arc<Mutex<Vec<RemoteHub>>>,
+			hostname: String) -> Response {
+		let addr = hostname.as_slice().to_socket_addr().ok();
+		if addr.is_none() { return Error;}
+		let addr = addr.unwrap();
+		let new_remote = RemoteHub::new( addr);
+		let mut remotedb = remotedb_arc.lock();
+		if ! remotedb.as_slice().contains( &new_remote) {
+			println!("[sv] greeted remote: {}", addr);
+			remotedb.push( new_remote);}
+		drop( remotedb);
+		Okay}
 
 	fn get_others(
 			remotedb_arc: &Arc<Mutex<Vec<RemoteHub>>>) -> Response {
@@ -355,7 +447,7 @@ impl Hub {
 		let mut list : Vec<Json> = Vec::new();
 		// push the addr of every remote we know of
 		for remote in remotedb.iter() {
-			list.push( Json::String( remote.to_string()))}
+			list.push( Json::String( remote.addr.to_string()))}
 		drop( remotedb);
 		OkayResult( Json::Array( list))}
 
