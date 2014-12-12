@@ -14,16 +14,16 @@ build:
 test: test-p1
 
 test-p1: build
-	target/dttpd 192.168.0.38 8960
+	target/dttpd localhost 8960
 
 test-p2: build
-	target/dttpd 192.168.0.38 8961
+	target/dttpd localhost 8961
 
 test-p3: build
-	target/dttpd 192.168.0.38 8962
+	target/dttpd localhost 8962
 
 test-p4: build
-	target/dttpd 192.168.0.38 8963
+	target/dttpd localhost 8963
 
 test-s1: build
 	target/dttpd 104.131.4.184 8960
