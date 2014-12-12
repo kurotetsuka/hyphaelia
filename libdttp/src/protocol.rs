@@ -1,6 +1,8 @@
 // library uses
 use std::num;
 use std::fmt;
+use std::io::net::ip::SocketAddr;
+
 use serialize::json;
 use serialize::json::Json;
 use regex::Regex;
@@ -19,6 +21,7 @@ pub enum MoteSpec {
 
 pub enum Command {
 	Hello,
+	//Hello( SocketAddr),
 	OthersReq,
 	HaveDec( u64),
 	HaveReq( u64),
@@ -28,15 +31,15 @@ pub enum Command {
 }
 impl Command {
 	pub fn from_str( string: &str) -> Option<Command> {
-		// match hello command
-		let cmd = "hi?";
-		if string.eq( cmd) {
-			return Some( Hello);}
-
 		// match others request
 		let cmd = "others?";
 		if string.eq( cmd) {
 			return Some( OthersReq);}
+
+		// match hello command
+		let cmd = "hi?";
+		if string.eq( cmd) {
+			return Some( Hello);}
 
 		// match have command
 		let cmd = "have:";

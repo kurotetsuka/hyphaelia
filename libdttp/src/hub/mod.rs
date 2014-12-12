@@ -25,8 +25,8 @@ pub mod mode;
 pub mod remote;
 
 // constants
-static PUSH_PAUSE_SECONDS: i64 = 15;
-static BOOTSTRAP_PAUSE_SECONDS: i64 = 15;
+static PUSH_PAUSE_SECONDS: i64 = 10;
+static BOOTSTRAP_PAUSE_SECONDS: i64 = 10;
 
 pub struct Hub {
 	// this hub's address
@@ -105,8 +105,9 @@ impl Hub {
 	fn server( port: u16, motedb_arc: Arc<Mutex<Vec<Mote>>>,
 			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
 		// open server
-		println!( "[sv] opening listener on port: {}", port);
-		let listener = TcpListener::bind( ( "localhost", port)).unwrap();
+		let mut listener = TcpListener::bind( ( "0.0.0.0", port)).unwrap();
+		println!( "[sv] opened listener on: {}",
+			listener.socket_name().unwrap());
 		let mut acceptor = listener.listen();
 		// wait for incoming streams
 		for stream in acceptor.incoming() {
@@ -118,12 +119,13 @@ impl Hub {
 				spawn( proc() {
 					Hub::serve( client, motedb_arc, remotedb_arc);})}}
 		// close server
+		println!( "[sv] closing listener");
 		drop( acceptor);}
 
 	fn serve( mut client_stream: TcpStream, motedb_arc: Arc<Mutex<Vec<Mote>>>,
 			remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
 		let client_addr = client_stream.peer_name().unwrap();
-		println!( "[sv] client {} connected", client_addr);
+		//println!( "[sv] client {} connected", client_addr);
 
 		// start reading commands from client
 		let mut reader = BufferedReader::new( client_stream.clone());
@@ -159,15 +161,14 @@ impl Hub {
 				response.to_string().as_slice()).ok();}
 
 		// clean up
-		client_stream.close_write().ok();
-		println!( "[sv] client {} disconnected", client_addr);}
+		//println!( "[sv] client {} disconnected", client_addr);
+		client_stream.close_write().ok();}
 
 	fn bootstrap( remotedb_arc: Arc<Mutex<Vec<RemoteHub>>>){
 		let others_req_msg = OthersReq.to_string();
 		loop {
 			// copy addresses from current remotedb
 			let remotedb = remotedb_arc.lock();
-			println!( "remote list: {}", remotedb.deref());
 			let mut remotes_addr : Vec<SocketAddr> = Vec::new();
 			for ref remote in remotedb.deref().iter() {
 				remotes_addr.push( remote.addr.clone());}
@@ -177,12 +178,12 @@ impl Hub {
 			let mut new_remotes : Vec<SocketAddr> = Vec::new();
 			for &addr in remotes_addr.iter() {
 				// connect to remote
-				//println!( "attempting to bootstrap against: {}", addr);
+				//println!( "[bs] attempting to bootstrap against: {}", addr);
 				let remote_stream =
 					TcpStream::connect_timeout(
 						addr.clone(), Duration::seconds( 10));
-				if remote_stream.is_err() {
-					//println!( "failed to connect to {}", addr);
+				if let Err( _msg) = remote_stream {
+					//println!( "[bs] failed to connect to {}: {}", addr, _msg);
 					continue;}
 				let mut remote_stream = remote_stream.unwrap();
 
@@ -249,6 +250,7 @@ impl Hub {
 			for ref remote in remotedb.deref().iter() {
 				remotes_addr.push( remote.addr.clone());}
 			drop( remotedb);
+			//println!( "[ps] remote addrs: {}", remotes_addr);
 
 			// copy motedb from current motedb
 			let motedb = motedb_arc.lock();
@@ -259,18 +261,21 @@ impl Hub {
 			// push 
 			for &remote_addr in remotes_addr.iter() {
 				// connect to remote
-				//println!( "attempting to bootstrap against: {}", remote_addr);
+				//println!( "[ps] attempting to push to: {}", remote_addr);
 				let remote_stream =
 					TcpStream::connect_timeout(
 						remote_addr.clone(), Duration::seconds( 10));
-				if remote_stream.is_err() {
-					//println!( "failed to connect to {}", remote_addr);
+				if let Err( _msg) = remote_stream {
+					//println!( "[ps] failed to connect to {}: {}",
+					//	remote_addr, _msg);
 					continue;}
 				let mut remote_stream = remote_stream.unwrap();
 				let mut reader = BufferedReader::new( remote_stream.clone());
 
 				for mote in motedb.iter() {
 					let mote_hash = hash::hash( mote);
+					//println!( "[ps] offering {} mote {:016x}",
+					//	remote_addr, mote_hash);
 
 					// send want? request
 					let want_req_msg = WantReq( mote_hash).to_string();
@@ -298,7 +303,7 @@ impl Hub {
 								remote_addr, mote_hash);
 							continue;}
 						bad => {
-							println!( "[ps] bad response from {}: {}", remote_addr, bad);
+							println!( "[ps] bad want response from {}: {}", remote_addr, bad);
 							continue;}}
 
 					//sent take request
@@ -322,14 +327,14 @@ impl Hub {
 
 					// handle take response
 					match response {
-						Affirm => {
+						Okay => {
 							println!( "[ps] remote {} accepted mote {:016x}",
 								remote_addr, mote_hash);}
 						Deny => {
 							println!( "[ps] remote {} denied mote {:016x}",
 								remote_addr, mote_hash);}
 						bad => {
-							println!( "[ps] bad response from {}: {}",
+							println!( "[ps] bad take response from {}: {}",
 								remote_addr, bad);}}
 
 					//move on to next mote
