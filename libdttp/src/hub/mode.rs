@@ -3,7 +3,7 @@
 // local uses
 
 #[deriving( PartialEq, Eq)]
-#[deriving( Hash)]
+#[deriving( Copy, Hash)]
 #[deriving( Encodable, Decodable)]
 pub enum Mode {
 	Track,

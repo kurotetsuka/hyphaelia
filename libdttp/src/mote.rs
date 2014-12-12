@@ -6,6 +6,7 @@ use std::rand::Rng;
 
 use serialize::base64;
 use serialize::base64::*;
+use serialize::base64::Newline::*;
 use serialize::json;
 use serialize::json::*;
 
@@ -17,7 +18,7 @@ use key::*;
 use self::Class::*;
 
 /// class that defines the types of data carried by a mote
-#[deriving( Hash)]
+#[deriving( Copy, Hash)]
 pub enum Class {
 	// text classes
 	Plain,
@@ -179,6 +180,7 @@ impl Mote {
 	pub fn to_msg( &self) -> MoteMsg {
 		let b64_config = base64::Config {
 			char_set: Standard,
+			newline: LF,
 			pad: true,
 			line_length: None };
 		MoteMsg {
@@ -195,6 +197,7 @@ impl fmt::Show for Mote {
 	fn fmt( &self, formatter: &mut fmt::Formatter) -> fmt::Result {
 		let b64_config = base64::Config {
 			char_set: Standard,
+			newline: LF,
 			pad: true,
 			line_length: None };
 		write!( formatter,
