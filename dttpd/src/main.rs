@@ -27,15 +27,18 @@ use dttp::key;
 // entry function
 fn main(){
 	let args = os::args();
+	let mut hostname = "localhost".to_string();
 	let mut port = 8960;
 	if args.len() > 1 {
-		let port_arg = args[ 1].as_slice();
+		hostname = args[ 1].clone();}
+	if args.len() > 2 {
+		let port_arg = args[ 2].as_slice();
 		let port_arg : Option<u16> = 
 			num::from_str_radix( port_arg, 10);
-		if port_arg.is_some() {
-			port = port_arg.unwrap()}}
+		if let Some( port_arg) = port_arg {
+			port = port_arg}}
 
-	let mut hub = Hub::new( port);
+	let mut hub = Hub::new( hostname, port);
 	hub.say_hi();
 
 	//add bootstrap remotes
