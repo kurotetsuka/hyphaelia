@@ -26,9 +26,9 @@ pub mod remote;
 
 // constants
 static PUSH_LOG_DECLINE: bool = false;
-static PUSH_PAUSE_SECONDS: i64 = 10;
-static BOOTSTRAP_PAUSE_SECONDS: i64 = 10;
-static GREET_PAUSE_SECONDS: i64 = 10;
+static PUSH_PAUSE_SECONDS: i64 = 3;
+static BOOTSTRAP_PAUSE_SECONDS: i64 = 3;
+static GREET_PAUSE_SECONDS: i64 = 3;
 
 pub struct Hub {
 	// this hub's hostname
