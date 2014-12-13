@@ -7,7 +7,8 @@ version = "0.2.0"
 
 # clean
 task :clean => [
-	:clean_libdttp, :clean_dttpc, :clean_dttpd]
+	:clean_libdttp, :clean_dttpc, :clean_dttpd,
+	:clean_web, :clean_pkg]
 
 task :clean_libdttp do
 	%x[ cd libdttp && cargo clean ]
@@ -17,6 +18,12 @@ task :clean_dttpc do
 end
 task :clean_dttpd do
 	%x[ cd dttpd && cargo clean ]
+end
+task :clean_web do
+	%x[ cd web && rake clean ]
+end
+task :clean_pkg do
+	%x[ rm -rf pkg/*.tar.gz ]
 end
 
 # build
