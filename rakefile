@@ -2,6 +2,9 @@
 task :default => [ :build ]
 task :freshen => [ :clean, :build]
 
+# vars
+version = "0.2.0"
+
 # clean
 task :clean => [
 	:clean_libdttp, :clean_dttpc, :clean_dttpd]
@@ -28,6 +31,13 @@ task :build_dttpc do
 end
 task :build_dttpd do
 	%x[ cd dttpd && cargo build ]
+end
+
+# package
+task :package do
+	%x[ tar -zcvf pkg/hyphaelia-#{version}.tar.gz \
+		dttpc dttpd libdttp legal notes tool web \
+		license.md rakefile readme.md pkg/.gitignore]
 end
 
 # deployment/testing
