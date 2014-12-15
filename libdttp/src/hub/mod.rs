@@ -89,29 +89,29 @@ impl Hub {
 		let port = self.port;
 		let motedb_arc = self.motedb.clone();
 		let remotedb_arc = self.remotedb.clone();
-		spawn( proc(){
-			Hub::server( port, motedb_arc, remotedb_arc);});
+		spawn( move ||
+			Hub::server( port, motedb_arc, remotedb_arc));
 		println!( "server proc spawned.");}
 
 	pub fn spawn_bootstrap( &self){
 		let remotedb_arc = self.remotedb.clone();
-		spawn( proc(){
-			Hub::bootstrap( remotedb_arc);});
+		spawn( move ||
+			Hub::bootstrap( remotedb_arc));
 		println!( "bootstrap proc spawned.");}
 
 	pub fn spawn_push( &self){
 		let motedb_arc = self.motedb.clone();
 		let remotedb_arc = self.remotedb.clone();
-		spawn( proc(){
-			Hub::push( motedb_arc, remotedb_arc);});
+		spawn( move ||
+			Hub::push( motedb_arc, remotedb_arc));
 		println!( "push proc spawned.");}
 
 	pub fn spawn_greet( &self){
 		let hostname = self.hostname.clone();
 		let port = self.port;
 		let remotedb_arc = self.remotedb.clone();
-		spawn( proc(){
-			Hub::greet( hostname, port, remotedb_arc);});
+		spawn( move ||
+			Hub::greet( hostname, port, remotedb_arc));
 		println!( "greet proc spawned.");}
 
 	// thread functions
@@ -131,8 +131,8 @@ impl Hub {
 				let motedb_arc = motedb_arc.clone();
 				let remotedb_arc = remotedb_arc.clone();
 				// spawn client handler
-				spawn( proc() {
-					Hub::serve( client, motedb_arc, remotedb_arc);})}}
+				spawn( move ||
+					Hub::serve( client, motedb_arc, remotedb_arc))}}
 		// close server
 		println!( "[sv] closing listener");
 		drop( acceptor);}
