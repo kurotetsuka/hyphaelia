@@ -1,0 +1,17 @@
+#!/bin/bash
+## little script for getting the repository all set up
+
+# clone source repos
+git clone git@github.com:kurotetsuka/libdttp libdttp
+git clone git@github.com:kurotetsuka/dttpd dttpd
+git clone git@github.com:kurotetsuka/dttpc dttpc
+git clone git@github.com:kurotetsuka/hyphaelia-web web
+
+# install gem deps
+#gem install \
+#	erubis \
+#	dotenv \
+#	json \
+#	sinatra \
+#	sinatra-contrib \
+#	thin \
