@@ -1,3 +1,0 @@
-# boostrap list
-localhost:8960
-104.131.4.184:8960
