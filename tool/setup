@@ -2,17 +2,24 @@
 ## little script for getting the repository all set up
 
 # parse remote base from args
-remote_base="git@github.com:kurotetsuka"
-if [ $# -gt 0 ]; then
-	remote_base="$1"
-fi
-echo "remote base: $remote_base"
+origin_base="git@github.com:kurotetsuka"
+upstream_base="git@github.com:kurotetsuka"
+[ $# -gt 0 ] && origin_base="$1"
+[ $# -gt 1 ] && upstream_base="$2"
+echo "origin base: $origin_base"
+echo "upstream base: $upstream_base"
 
 # clone source repos
-git clone ${remote_base}/libdttp libdttp
-git clone ${remote_base}/dttpd dttpd
-git clone ${remote_base}/dttpc dttpc
-git clone ${remote_base}/hyphaelia-web web
+git clone ${origin_base}/libdttp libdttp
+git clone ${origin_base}/dttpd dttpd
+git clone ${origin_base}/dttpc dttpc
+git clone ${origin_base}/hyphaelia-web web
+
+# add upstream remotes
+( cd libdttp && git remote add upstream ${upstream_base}/libdttp )
+( cd dttpd && git remote add upstream ${upstream_base}/dttpd )
+( cd dttpc && git remote add upstream ${upstream_base}/dttpc )
+( cd web && git remote add upstream ${upstream_base}/hyphaelia-web )
 
 # install gem deps
 #gem install \
