@@ -1,11 +1,18 @@
 #!/bin/bash
 ## little script for getting the repository all set up
 
+# parse remote base from args
+remote_base="git@github.com:kurotetsuka"
+if [ $# -gt 0 ]; then
+	remote_base="$1"
+fi
+echo "remote base: $remote_base"
+
 # clone source repos
-git clone git@github.com:kurotetsuka/libdttp libdttp
-git clone git@github.com:kurotetsuka/dttpd dttpd
-git clone git@github.com:kurotetsuka/dttpc dttpc
-git clone git@github.com:kurotetsuka/hyphaelia-web web
+git clone ${remote_base}/libdttp libdttp
+git clone ${remote_base}/dttpd dttpd
+git clone ${remote_base}/dttpc dttpc
+git clone ${remote_base}/hyphaelia-web web
 
 # install gem deps
 #gem install \
