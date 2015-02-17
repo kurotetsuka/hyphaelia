@@ -4,24 +4,25 @@
  - Profiling
 
 ## Data modes
- - Pollination
  - Pushing
  - Pulling
  - Serving
- - Onion serving
 
 ## Analysis modes
  - Curation
- - Web-of-Trust analysis
 
 ## Other modes (optional?)
+ - Pollination
+ - Daisy-chain serving
+ - Onion serving
  - Encrypted mote serving
  - Mirroring
  - Archiving
 
-## Hyphaelia-specific modes
+## Hyphaelia extensions
+ - Web-of-Trust analysis
+ - Respect analysis
  - Thread reconstruction
  - Thread ranking
  - Thread serving
  - Trust analysis
- - Respect analysis

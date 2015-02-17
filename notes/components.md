@@ -1,11 +1,11 @@
-## components of the project
+## components of this project
 
 ### spec stuff
  - dttp-spec : distrubuted trustnet transmission protocols
  - hyphaelia-spec : leveraging of dttp to create a message-thread protocol
 
 ### library stuff
- - libdttp :rust library for dealing with dttp
+ - libdttp : rust library for dealing with dttp
 
 ### hub stuff
  - dttpd : hub daemon
@@ -22,7 +22,7 @@
 ### user (client) stuff
  - dttp-rest : rest api for accessing a hub
 
-### rfc stuff ( future work )
+### rfc stuff
  - dttp-rfcs : rfcs for the design of dttp
  - hyphaelia-rfcs : rfcs for the architecture of hyphaelia
 

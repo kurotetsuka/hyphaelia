@@ -3,9 +3,9 @@
 Author: [Kurotetsuka](github.com/kurotetsuka)  
 Version: `1.0.0`  
 Date: `7df210` / `2015-02-16`  
-License: [Creative Commons by Attribution](
-	https://github.com/kurotetsuka/hyphaelia/blob/master/legal/cc-by.md)  
-Source: [`github.com/kurotetsuka/hyphaelia`](
+License: [MIT](
+	https://github.com/kurotetsuka/hyphaelia/blob/master/legal/mit.md)  
+Source: [`github.com/kurotetsuka/hyphaelia/notes/dttpd_proposal.md`](
 	https://github.com/kurotetsuka/hyphaelia/blob/master/notes/dttpd_proposal.md)  
 
 ## Abstract

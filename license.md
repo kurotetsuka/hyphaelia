@@ -1,25 +1,9 @@
-The MIT License (MIT)
-=====================
+## Hyphaelia Project License Information
 
-Copyright © `2014` `kurotetsuka`
+The various components of this work are released under different licenses.
 
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the “Software”), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
+All theoretical components are released under the MIT license. This includes the design and architecture of the system and all the top-level components of this repository. See [legal/mit.md](legal/mit.md) for details.
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+All library components are released under the GNU LGPLv3 license. This includes the rust dttp library implementation, contained in the [libdttp](https://github.com/kurotetsuka/libdttp) repository. See [legal/gnu-lgpl-v3.0.md](legal/gnu-lgpl-v3.0.md) for details.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+All application components are released under the GNU GPLv3 license. This includes the dttp client-only program, contained in the [dttpc](https://github.com/kurotetsuka/dttpc) repository, the dttp hub daemon implementation, contained in the [dttpd](https://github.com/kurotetsuka/dttpd) repository, the rust rest-dttp adapter, contained in the [rest-dttp-adapter](https://github.com/kurotetsuka/dttp-rest-adapter) repository, and the hyphaelia web front-end, contained in the [hyphaelia-web](https://github.com/kurotetsuka/hyphaelia-web) repository. See [legal/gnu-gpl-3.0.md](legal/gnu-gpl-3.0.md) for details.

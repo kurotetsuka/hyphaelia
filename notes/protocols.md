@@ -25,13 +25,13 @@ $remote:'yes.'
 
 ```
 $client:'have?:<mote spec>.'
-$remote:'others:[<remote spec>,..].'
+$remote:'others:[<remote spec>,.. ].'
 ```
 
 ### ownership update
 ```
 $client:'new?:<datetime spec>,count.'
-$remote:'ok:[[<mote spec>],..].'
+$remote:'ok:[<mote spec>,.. ].'
 ```
 
 ```
@@ -50,7 +50,7 @@ $remote:'ok.'
 ### hub discovery
 ```
 $client:'others?'
-$remote:'ok:[<remote spec>,..].'
+$remote:'ok:[<remote spec>,.. ].'
 ```
 
 ```
@@ -93,7 +93,7 @@ $remote:'no.'
 
 ```
 $client:'fetch?:<mote spec>.'
-$remote:'ok:{<mote json>}.'
+$remote:'ok:<mote spec>.'
 ```
 
 ```

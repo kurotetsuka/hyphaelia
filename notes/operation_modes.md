@@ -1,72 +1,78 @@
 # Operation modes of the dttp daemon
 Any subset of these operation modes may be enabled at either initialization or run time. Some modes do depend on the data produced from others, so not every possible combination may be practical. For example, in order to pull a desired mote, the daemon must have some tracking information. It would, however, be possible to enable tracking just long enough to find the desired mote, then disable it. These choices are the responsibility of the administrator.
 
-todo:  
+Todo:  
  - add sector handling stuff
+
 
 ## Metadata modes
 These modes all perform various operations intended to gather data about motes or hubs.
 
 ### Tracking
-keeping track of who has certain motes, and who knows who has certain motes, etc.
+ - Keeping track of who (probably) has certain motes.
 
 ### Bootstrapping
-discovering other hubs, keeping track of them, detecting when hubs leave the network, etc.  
-assisting other's hub discovery by serving above information.
+ - Discovering other hubs, keeping track of them, detecting when hubs leave the network, etc.
+ - Assisting other's hub discovery process by serving above information.
 
 ### Profiling
-benchmarking other hubs  
- - connection speed
- - distance
- - tracking ability
- - storage ability
- - reliability
- - integrity
+ - Benchmarking other hubs.
 
 ## Data modes
 These modes all perform operations on motes.
 
-### Pollination
-Assisting initial distribution process  
- - informing trackers of new mote
- - seeding : pushing to initial hub(s)
- - dispersion : hubs pushing to other hubs
-
 ### Pushing
-continually asking other hubs to pull our new data
+ - Giving our new data to other hubs.
 
 ### Pulling
-grabbing desired motes off of other hubs.
+ - Grabbing new or desired motes off of other hubs.
+
+### Fetching
+ - Searching through the network for a specific desired mote.
 
 ### Serving
-responding to pulls
+ - Responding to pushes, pulls and fetches.
 
-### Onion serving
-acting as a step in onion routing of pulls
 
 ## Analysis modes
 These modes all perform various types of analysis on gathered motes.
 
 ### Curation
-Hubs may wish to remove junk, spam, or old motes from their servers. Additionally, some hubs may need to respond to legal takedown requests. Thus, automatic parameter-based curation may be desired. While this could theoretically enable censorship, the distributed nature of the system makes such censorship an optional, democrative process.
+Hub owners may wish to remove junk, spam, or old motes from their servers. Additionally, some hubs may need to respond to legal takedown requests. Thus, automatic parameter-based curation may be desired. While this could theoretically enable censorship, the distributed nature of the system makes such censorship an optional, democrative process.
 
-### Thread reconstruction
-asdf
+
+## Other modes
+
+### Pollination
+ - Assisting initial mote distribution process.
+	 - informing trackers of new mote
+	 - seeding : pushing to initial hub(s)
+	 - dispersion : hubs pushing to other hubs
+
+### Daisy-chain serving
+ - Acting as a step in an indirect pull.
+
+### Onion serving
+ - Acting as a step in onion routing of pulls.
+
+
+## Hyphaelia extensions
+These modes are all solely intended to serve data to end-users of the Hyphaelia network. They are not expected to be useful to other dttp networks nor other hubs on the Hyphaelia network.
+
+### Encrypted mote serving
+Users may wish to distribute a mote to certain other users, and only them. There are two ways to do this - encrypted mote serving is one and private hubs are the other. In the case of encrypted mote serving, the hub stores the unencrypted mote, and only serves copies that are encrypted for authorized target(s). This implicitly requires the source user to trust the serving hub.
+
+## Hyphaelia extensions
+These modes are all specific to Hyphaelia. Most of them are 
+
+### Thread serving
+Compilation of entire mote-threads for user's perusal.
+
+### Thread ranking
+Ranking of mote-threads according to user's preferences and respect rankings. This requires some knowledge of the user, and thus registration with the hub.
 
 ### Trust analysis
 asdf
 
 ### Respect analysis
 asdf
-
-## Client serving modes
-These modes are all solely intended to serve data to end-users. They are not expected to be useful to other hubs, since any hub could ( and should ) perform this themselves.
-
-### Thread ranking
-Ranking of mote-threads according to user's circles and respect rankings. This requires some knowledge of the user, and thus a prior registration with the daemon.
-
-### Thread serving
-Compilation of entire mote-threads for user's perusal. This requires some thread reconstruction.
-
-### Encrypted mote serving
-Users may wish to distribute a mote only to certain other users, and only them. There are two ways to do this - encrypted mote serving is one and private hubs are the other. The daemon stores the unencrypted mote, and only serves copies that are encrypted for authorized target(s). This requires the source user to implicitly trust the serving hub. Once encrypted, motes may be served and distributed normally

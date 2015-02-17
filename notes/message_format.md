@@ -1,6 +1,6 @@
-# mote message format
+# Mote message format
 
-## examples
+## Examples
 
 ### unencrypted message
 ```json
@@ -29,11 +29,12 @@
 	// with pgp id key
 	// key may or may not match known id key of user ( auth field )
 	"sig": "",}
+```
 
 #### broadcast alternate design
 ```json
 {
-	"dttpv": "0.0.1a",
+	"dttpv": "0.0.1-a",
 	"meta": "re:54fc89a", // reply to short hash of previous message's meta field
 	"data": "man, that's awesome lol.",
 	"class": "markdown",
@@ -41,6 +42,7 @@
 	"dt": "7de917.", //2014-09-23 20:30:46 in +0h time zone
 	"salt": "",
 	"sig": "",}
+```
 
 ### partially encrypted message
 `gamma` represents the encryption teir
@@ -56,4 +58,4 @@
 	"dt": "7de917.", //2014-09-23 20:30:46
 	"salt": "",
 	"sig": "",}
-
+```
