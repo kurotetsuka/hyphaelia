@@ -1,12 +1,12 @@
 {
-	"dttpv":    "0.0.1",
-	"meta":     "test test :)",
-	"class":    "markdown",
-	"auth":     "kurotetsuka <kurotetsuka@gmail.com> :: 0a1a20c0",
-	"dt": "7de.150.2932e00",
-	"salt":     "cac3f6a6ce8ca2eb",
-	"data":     "dGVzdCB0ZXN0IHlvIHlvIGJybw==",
-	"sig":      "AAAAAAAAAAA="}
+	"dttpv": "0.0.1",
+	"meta":  "test test :)",
+	"class": "markdown",
+	"auth":  "kurotetsuka <kurotetsuka@gmail.com> :: 0a1a20c0",
+	"dt":    "7de.150.2932e00",
+	"salt":  "cac3f6a6ce8ca2eb",
+	"data":  "dGVzdCB0ZXN0IHlvIHlvIGJybw==",
+	"sig":   "AAAAAAAAAAA="}
 
 {
 	// dttp version / extension
