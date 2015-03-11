@@ -1,0 +1,35 @@
+{
+	// dttp version / extension
+	// dttp version 0.0.1 plain
+	// dttp version 0.0.1 plain
+	"dttpv": "0.0.1",
+
+	// title, subject, etc.
+	"meta": "awesome site bros",
+
+	// 
+	"class": "markdown", //alternatively mimetype:"text/markdown"
+
+	// auth or author?
+	//  name (comment) <address> :: fingerprint
+	//  name (comment) <address> [fingerprint] instead ?
+	"auth": "kurotetsuka <kurotetsuka@gmail.com> :: 1234abcd",
+
+	// dt, datetime, date, or time?
+	//  2014-09-23 20:30:46 in +0h time zone
+	//  ( ( ( 20 * 60 + 30) * 60) + 46) * 1000 = 73,846,000
+	//  73,846,000 in hex = 466ccf0
+	"dt": "7de917.10a.466ccf0",
+
+	// 64-bit uint salt (is that big enough?)
+	"salt": "a3f0a3f0a3f0a3f0",
+
+	// the raw data, b64-encoded
+	//  $ echo "hey guys, check this out: [cool site](www.cool-site.com)" | base64
+	//  aGV5IGd1eXMsIGNoZWNrIHRoaXMgb3V0OiBbY29vbCBzaXRlXSh3d3cuY29vbC1zaXRlLmNvbSkK
+	"data": "aGV5IGd1eXMsIGNoZWNrIHRoaXMgb3V0OiBbY29vbCBzaXRlXSh3d3cuY29vbC1zaXRlLmNvbSkK",
+
+	//pgp signature of [ meta, data, dt, salt]
+	// with pgp id key
+	// key may or may not match known id key of user ( auth field )
+	"sig": "",}
