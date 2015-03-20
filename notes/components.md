@@ -17,6 +17,7 @@
  - dttp-shell : client shell frontend
  - name? : fancy client cli frontend
  - hyphic : minimal client gui frontend ( gtk? qt? vala? )
+ - dttp-rest-adapter : rest api for accessing a hub
  - hyphaelia-web : web front-end to a hub
 
 ### user (client) stuff
