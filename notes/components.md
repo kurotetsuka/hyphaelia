@@ -11,6 +11,7 @@
  - dttpd : hub daemon
  - dttpdctl : hub cli frontend
  - dttpdctl-ui : hub gui frontend
+ - hyphd : hyphaelia-specialized hub daemon
 
 ### user (client) stuff
  - dttpc : minimal client cli frontend
