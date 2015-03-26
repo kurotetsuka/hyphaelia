@@ -1,43 +1,52 @@
 # general tasks
 task :default => [ :build ]
-task :freshen => [ :clean, :build]
+task :freshen => [ :clean, :build ]
 
 # vars
 version = "0.2.0"
 
 # clean
 task :clean => [
-	:clean_libdttp, :clean_dttpc, :clean_dttpd,
-	:clean_web, :clean_pkg]
+	"clean:libdttp",
+	"clean:dttpc",
+	"clean:dttpd",
+	"clean:web",
+	"clean:pkg"]
 
-task :clean_libdttp do
-	%x[ cd libdttp && cargo clean ]
-end
-task :clean_dttpc do
-	%x[ cd dttpc && cargo clean ]
-end
-task :clean_dttpd do
-	%x[ cd dttpd && cargo clean ]
-end
-task :clean_web do
-	%x[ cd web && rake clean ]
-end
-task :clean_pkg do
-	%x[ rm -rf pkg/*.tar.gz ]
+namespace :clean do
+	task :libdttp do
+		%x[ cd libdttp && cargo clean ]
+	end
+	task :dttpc do
+		%x[ cd dttpc && cargo clean ]
+	end
+	task :dttpd do
+		%x[ cd dttpd && cargo clean ]
+	end
+	task :web do
+		%x[ cd web && rake clean ]
+	end
+	task :pkg do
+		%x[ rm -rf pkg/*.tar.gz ]
+	end
 end
 
 # build
 task :build => [
-	:build_libdttp, :build_dttpc, :build_dttpd]
+	"build:libdttp",
+	"build:dttpc",
+	"build:dttpd"]
 
-task :build_libdttp do
-	%x[ cd libdttp && cargo build ]
-end
-task :build_dttpc do
-	%x[ cd dttpc && cargo build ]
-end
-task :build_dttpd do
-	%x[ cd dttpd && cargo build ]
+namespace :build do
+	task :libdttp do
+		%x[ cd libdttp && cargo build ]
+	end
+	task :dttpc do
+		%x[ cd dttpc && cargo build ]
+	end
+	task :dttpd do
+		%x[ cd dttpd && cargo build ]
+	end
 end
 
 # package
