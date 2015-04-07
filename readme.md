@@ -1,4 +1,4 @@
-## Hyphaelia :: a Decentralized Trustable Message-Thread Platform ##
+## Hyphaelia :: The Decentralized Trustable Message-Thread Platform ##
 
 Original Author: [Kurotetsuka](https://github.com/kurotetsuka)  
 License info: [license.md](

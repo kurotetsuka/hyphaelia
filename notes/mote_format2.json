@@ -21,9 +21,6 @@
 	//  73,846,000 in hex = 466ccf0
 	"dt": "7de917.10a.466ccf0",
 
-	// 64-bit uint salt (is that big enough?)
-	"salt": "a3f0a3f0a3f0a3f0",
-
 	// the raw data, b64-encoded
 	//  $ echo "hey guys, check this out: [cool site](www.cool-site.com)" | base64
 	//  aGV5IGd1eXMsIGNoZWNrIHRoaXMgb3V0OiBbY29vbCBzaXRlXSh3d3cuY29vbC1zaXRlLmNvbSkK

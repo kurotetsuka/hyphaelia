@@ -1,8 +1,8 @@
-# the communication protocols by which hubs communicate
+# The protocol by which hubs communicate
 
 ## terms
-`client` = local hub  
-`remote` = some other hub  
+`$client` = local hub  
+`$remote` = some other hub  
 
 ## tracking stuff
 
@@ -43,7 +43,7 @@ $remote:'no.'
 
 ### registration
 ```
-$client:'hi:<self remote spec>.'
+$client:'self:<self remote spec>.'
 $remote:'ok.'
 ```
 

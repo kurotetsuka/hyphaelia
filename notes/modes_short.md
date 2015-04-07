@@ -1,6 +1,6 @@
 ## Metadata modes
- - Tracking
  - Bootstrapping
+ - Tracking
  - Profiling
 
 ## Data modes
@@ -25,4 +25,3 @@
  - Thread reconstruction
  - Thread ranking
  - Thread serving
- - Trust analysis

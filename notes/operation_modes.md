@@ -28,7 +28,7 @@ These modes all perform operations on motes.
  - Grabbing new or desired motes off of other hubs.
 
 ### Fetching
- - Searching through the network for a specific desired mote.
+ - Querying the network for a specific desired mote.
 
 ### Serving
  - Responding to pushes, pulls and fetches.
@@ -44,10 +44,9 @@ Hub owners may wish to remove junk, spam, or old motes from their servers. Addit
 ## Other modes
 
 ### Pollination
- - Assisting initial mote distribution process.
-	 - informing trackers of new mote
-	 - seeding : pushing to initial hub(s)
-	 - dispersion : hubs pushing to other hubs
+ - Assisting mote distribution process
+	 - seeding : pushing tracking info around
+	 - dispersion : pushing the actual mote around
 
 ### Daisy-chain serving
  - Acting as a step in an indirect pull.
@@ -56,7 +55,7 @@ Hub owners may wish to remove junk, spam, or old motes from their servers. Addit
  - Acting as a step in onion routing of pulls.
 
 
-## Hyphaelia extensions
+## Other extensions
 These modes are all solely intended to serve data to end-users of the Hyphaelia network. They are not expected to be useful to other dttp networks nor other hubs on the Hyphaelia network.
 
 ### Encrypted mote serving

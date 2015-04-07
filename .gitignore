@@ -1,4 +1,14 @@
+#spec repos
+dttp-spec
+hyphaelia-spec
+
+#library repos
 libdttp
+
+#binary repos
 dttpc
 dttpd
+hyphd
+
+#web repos
 web
