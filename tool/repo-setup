@@ -8,21 +8,25 @@ upstream_base="git@github.com:kurotetsuka"
 [ $# -gt 1 ] && upstream_base="$2"
 #echo "origin base: $origin_base"
 #echo "upstream base: $upstream_base"
+repos="\
+	dttp-spec \
+	hyphaelia-spec \
+	libdttp \
+	libhyphae \
+	dttpd \
+	hyphd \
+	dttpc \
+	hyph-web"
 
 # clone source repos
 echo "cloning component repositories"
-git clone ${origin_base}/libdttp libdttp
-git clone ${origin_base}/libhyphae libhyphae
-git clone ${origin_base}/dttpd dttpd
-git clone ${origin_base}/hyphd hyphd
-git clone ${origin_base}/dttpc dttpc
-git clone ${origin_base}/hyphaelia-web web
+for repo in ${repos}; do
+	git clone ${origin_base}/${repo} ${repo}
+done
 
 # add upstream remotes
 echo "adding upstream remotes"
-( cd libdttp && git remote add upstream ${upstream_base}/libdttp )
-( cd libhyphae && git remote add upstream ${upstream_base}/libhyphae )
-( cd dttpd && git remote add upstream ${upstream_base}/dttpd )
-( cd hyphd && git remote add upstream ${upstream_base}/hyphd )
-( cd dttpc && git remote add upstream ${upstream_base}/dttpc )
-( cd web && git remote add upstream ${upstream_base}/hyphaelia-web )
+for repo in ${repos}; do
+	git clone ${origin_base}/${repo} ${repo}
+	( cd ${repo} && git remote add upstream ${upstream_base}/${repo} )
+done
