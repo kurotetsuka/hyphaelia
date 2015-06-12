@@ -27,6 +27,5 @@ done
 # add upstream remotes
 echo "adding upstream remotes"
 for repo in ${repos}; do
-	git clone ${origin_base}/${repo} ${repo}
 	( cd ${repo} && git remote add upstream ${upstream_base}/${repo} )
 done
