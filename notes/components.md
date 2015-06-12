@@ -1,36 +1,35 @@
-## components of this project
+## Components of This Project
 
-### spec stuff
- - [ ] dttp-spec : distrubuted trustnet transmission protocols
+### Spec Stuff
+ - [ ] dttp-spec : distrubuted trustnet transmission protocols specification
  - [ ] hyphaelia-spec : leveraging of dttp to create a message-thread protocol
 
-### library stuff
+### Library Stuff
  - [ ] libdttp : rust library for dealing with dttp
 
-### hub stuff
+### Hub Stuff
  - [ ] dttpd : plain hub daemon
  - [ ] dttpdctl : hub cli frontend
- - [ ] dttpdctl-ui : hub gui frontend
+ - [ ] dttpdctl-[qt,gtk] : hub gui frontend
  - [ ] hyphd : hyphaelia-specialized hub daemon
 
-### user (client) stuff
- - [ ] hyphic : hyphaelia cli frontend?
- - [ ] dttpc : minimal client cli frontend
+### User (Client) Stuff
+ - [ ] dttp : minimal client cli frontend
  - [ ] dttp-shell : client shell frontend
- - [ ] name? : fancy client cli frontend
- - [ ] hyphic-? : minimal client gui frontend ( gtk? qt? vala? )
+ - [ ] hyphic : hyphaelia cli frontend?
+ - [ ] hyphic-[qt,gtk] : hyphaelia gui frontends
 
-### web stuff
+### Web Stuff
  - [ ] dttp-rest : rest api for accessing a hub
  - [ ] dttp-rest-adapter : rest api for accessing a hub
  - [ ] hyphaelia-web : web front-end to a hub
- - [ ] name? : browser extension for mote signing
+ - [ ] name? : browser extension for mote creation (and signing)
 
-### rfc stuff
+### Rfc Stuff
  - [ ] dttp-rfcs : rfcs for the design of dttp
  - [ ] hyphaelia-rfcs : rfcs for the architecture of hyphaelia
 
-### future ideas and stuff
+### Future Ideas and Stuff
  - [ ] package manager that uses dttp instead of http
 	 - dependency information uses votes for the min/max version of a dependency
  - [ ] cryptocoin-based marketplace

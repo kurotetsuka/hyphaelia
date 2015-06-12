@@ -1,5 +1,5 @@
 #!/bin/bash
-## little script for getting the repository all set up
+# little script for getting the repository all set up
 
 # parse remote base from args
 origin_base="git@github.com:kurotetsuka"
@@ -12,13 +12,17 @@ upstream_base="git@github.com:kurotetsuka"
 # clone source repos
 echo "cloning component repositories"
 git clone ${origin_base}/libdttp libdttp
+git clone ${origin_base}/libhyphae libhyphae
 git clone ${origin_base}/dttpd dttpd
+git clone ${origin_base}/hyphd hyphd
 git clone ${origin_base}/dttpc dttpc
 git clone ${origin_base}/hyphaelia-web web
 
 # add upstream remotes
 echo "adding upstream remotes"
 ( cd libdttp && git remote add upstream ${upstream_base}/libdttp )
+( cd libhyphae && git remote add upstream ${upstream_base}/libhyphae )
 ( cd dttpd && git remote add upstream ${upstream_base}/dttpd )
+( cd hyphd && git remote add upstream ${upstream_base}/hyphd )
 ( cd dttpc && git remote add upstream ${upstream_base}/dttpc )
 ( cd web && git remote add upstream ${upstream_base}/hyphaelia-web )

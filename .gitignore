@@ -1,14 +1,15 @@
-#spec repos
+# spec repos
 dttp-spec
 hyphaelia-spec
 
-#library repos
+# library repos
 libdttp
+libhyphae
 
-#binary repos
+# binary repos
 dttpc
 dttpd
 hyphd
 
-#web repos
+# web repos
 web

@@ -10,8 +10,10 @@ task :clean => [
 	"clean:libdttp",
 	"clean:dttpc",
 	"clean:dttpd",
+	"clean:libhyphae",
+	"clean:hyphd",
 	"clean:web",
-	"clean:pkg"]
+	"clean:pkg" ]
 
 namespace :clean do
 	task :libdttp do
@@ -20,8 +22,11 @@ namespace :clean do
 	task :dttpc do
 		%x[ cd dttpc && cargo clean ]
 	end
-	task :dttpd do
-		%x[ cd dttpd && cargo clean ]
+	task :libhyphae do
+		%x[ cd libhyphae && cargo clean ]
+	end
+	task :hyphd do
+		%x[ cd hyphd && cargo clean ]
 	end
 	task :web do
 		%x[ cd web && rake clean ]
@@ -35,17 +40,30 @@ end
 task :build => [
 	"build:libdttp",
 	"build:dttpc",
-	"build:dttpd"]
+	"build:dttpd",
+	"build:libhyphae",
+	"build:hyphd" ]
 
 namespace :build do
 	task :libdttp do
+		printf( "building libdttp...\n");
 		%x[ cd libdttp && cargo build ]
 	end
 	task :dttpc do
+		printf( "building dttpc...\n");
 		%x[ cd dttpc && cargo build ]
 	end
 	task :dttpd do
+		printf( "building dttpd...\n");
 		%x[ cd dttpd && cargo build ]
+	end
+	task :libhyphae do
+		printf( "building libhyphae...\n");
+		%x[ cd libhyphae && cargo build ]
+	end
+	task :hyphd do
+		printf( "building hyphd...\n");
+		%x[ cd hyphd && cargo build ]
 	end
 end
 
@@ -64,3 +82,33 @@ end
 #task :deploy do
 #
 #end
+
+task :push => [
+	"push:libdttp",
+	"push:dttpc",
+	"push:dttpd",
+	"push:libhyphae",
+	"push:hyphd" ]
+
+namespace :push do
+	task :libdttp do
+		printf( "pushing libdttp...\n");
+		%x[ cd libdttp && git push ]
+	end
+	task :dttpc do
+		printf( "pushing dttpc...\n");
+		%x[ cd dttpc && git push ]
+	end
+	task :dttpd do
+		printf( "pushing dttpd...\n");
+		%x[ cd dttpd && git push ]
+	end
+	task :libhyphae do
+		printf( "pushing libhyphae...\n");
+		%x[ cd libhyphae && git push ]
+	end
+	task :hyphd do
+		printf( "pushing hyphd...\n");
+		%x[ cd hyphd && git push ]
+	end
+end
