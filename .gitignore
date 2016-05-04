@@ -1,15 +1,16 @@
 # spec repos
 dttp-spec
-hyphaelia-spec
+hyph-spec
 
 # library repos
-libdttp
-libhyphae
+dttp
+hyphae
 
-# binary repos
-dttpc
-dttpd
-hyphd
+# executable repos
+hyphic
 
 # web repos
 hyph-web
+
+# other
+paper

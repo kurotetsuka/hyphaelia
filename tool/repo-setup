@@ -9,13 +9,11 @@ upstream_base="git@github.com:kurotetsuka"
 #echo "origin base: $origin_base"
 #echo "upstream base: $upstream_base"
 repos="\
+	dttp \
 	dttp-spec \
-	hyphaelia-spec \
-	libdttp \
-	libhyphae \
-	dttpd \
-	hyphd \
-	dttpc \
+	hyphae \
+	hyph-spec \
+	hyphic \
 	hyph-web"
 
 # clone source repos

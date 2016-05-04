@@ -3,30 +3,21 @@ task :default => [ :build ]
 task :freshen => [ :clean, :build ]
 
 # vars
-version = "0.2.0"
+version = "0.3.0"
 
 # clean
 task :clean => [
-	"clean:libdttp",
-	"clean:dttpc",
-	"clean:dttpd",
-	"clean:libhyphae",
-	"clean:hyphd",
+	"clean:dttp",
+	"clean:hyphae",
 	"clean:web",
 	"clean:pkg" ]
 
 namespace :clean do
-	task :libdttp do
-		%x[ cd libdttp && cargo clean ]
+	task :dttp do
+		%x[ cd dttp && cargo clean ]
 	end
-	task :dttpc do
-		%x[ cd dttpc && cargo clean ]
-	end
-	task :libhyphae do
-		%x[ cd libhyphae && cargo clean ]
-	end
-	task :hyphd do
-		%x[ cd hyphd && cargo clean ]
+	task :hyphae do
+		%x[ cd hyphae && cargo clean ]
 	end
 	task :web do
 		%x[ cd web && rake clean ]
@@ -38,77 +29,42 @@ end
 
 # build
 task :build => [
-	"build:libdttp",
-	"build:dttpc",
-	"build:dttpd",
-	"build:libhyphae",
-	"build:hyphd" ]
+	"build:dttp",
+	"build:hyphae"]
 
 namespace :build do
-	task :libdttp do
-		printf( "building libdttp...\n");
-		%x[ cd libdttp && cargo build ]
+	task :dttp do
+		printf( "building dttp...\n");
+		%x[ cd dttp && cargo build ]
 	end
-	task :dttpc do
-		printf( "building dttpc...\n");
-		%x[ cd dttpc && cargo build ]
-	end
-	task :dttpd do
-		printf( "building dttpd...\n");
-		%x[ cd dttpd && cargo build ]
-	end
-	task :libhyphae do
-		printf( "building libhyphae...\n");
-		%x[ cd libhyphae && cargo build ]
-	end
-	task :hyphd do
-		printf( "building hyphd...\n");
-		%x[ cd hyphd && cargo build ]
+	task :hyphae do
+		printf( "building hyphae...\n");
+		%x[ cd hyphae && cargo build ]
 	end
 end
 
 # package
 task :package do
-	%x[ tar -zcvf pkg/hyphaelia-#{version}.tar.gz \
-		dttpc dttpd libdttp legal notes tool web \
+	%x[ tar -zcvf pkg/hyphaelia-#{version}.tgz \
+		dttp hyphae legal notes tool web \
 		license.md rakefile readme.md pkg/.gitignore]
 end
 
 # deployment/testing
-#task :test => [ :gen, :deploy]
-#task :undeploy do
-#
-#end
-#task :deploy do
-#
-#end
+task :deploy do
+end
 
 task :push => [
-	"push:libdttp",
-	"push:dttpc",
-	"push:dttpd",
-	"push:libhyphae",
-	"push:hyphd" ]
+	"push:dttp",
+	"push:hyphae"]
 
 namespace :push do
-	task :libdttp do
-		printf( "pushing libdttp...\n");
-		%x[ cd libdttp && git push ]
+	task :dttp do
+		printf( "pushing dttp...\n");
+		%x[ cd dttp && git-push-all ]
 	end
-	task :dttpc do
-		printf( "pushing dttpc...\n");
-		%x[ cd dttpc && git push ]
-	end
-	task :dttpd do
-		printf( "pushing dttpd...\n");
-		%x[ cd dttpd && git push ]
-	end
-	task :libhyphae do
-		printf( "pushing libhyphae...\n");
-		%x[ cd libhyphae && git push ]
-	end
-	task :hyphd do
-		printf( "pushing hyphd...\n");
-		%x[ cd hyphd && git push ]
+	task :hyphae do
+		printf( "pushing hyphae...\n");
+		%x[ cd hyphae && git-push-all ]
 	end
 end
